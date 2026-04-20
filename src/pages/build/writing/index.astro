@@ -1,0 +1,28 @@
+---
+import BuildLayout from '@/layouts/BuildLayout.astro';
+---
+
+<BuildLayout title="Writing — Build — Leigh Bertelsen">
+  <div class="placeholder">
+    <h1>Writing</h1>
+  </div>
+</BuildLayout>
+
+<style>
+  .placeholder {
+    max-width: 860px;
+    margin-inline: auto;
+    padding: 6rem 2rem 4rem;
+  }
+  @media (max-width: 767px) {
+    .placeholder { padding: 2rem 1.5rem 6rem; }
+  }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+</style>

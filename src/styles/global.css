@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   Tailwind theme — shared tokens (fonts, radius, etc.)
+   Colors live as raw CSS custom properties below, since they
+   cascade via [data-theme] / [data-season] overrides.
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Fragment Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-serif-breathe: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-serif-be: "Lora", ui-serif, Georgia, serif;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Membrane — shared base tokens on :root
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --color-bg: #FAFAF8;
+  --color-bg-dark: #141412;
+  --color-text: #1C1C1A;
+  --color-text-dark: #F0F0EC;
+  --color-text-muted: #5C5C58;
+  --color-text-muted-dark: #A0A09C;
+  --color-border: #C8C8C0;
+  --color-border-dark: #3C3C38;
+}
+
+/* Auto-swap membrane tokens to their -dark counterparts under dark mode.
+   Worlds ([data-theme]) get the same treatment below. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #141412;
+    --color-text: #F0F0EC;
+    --color-text-muted: #A0A09C;
+    --color-border: #3C3C38;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Build — focused, analytical, blue-cool
+   ───────────────────────────────────────────────────────────── */
+[data-theme="build"] {
+  --color-bg: #F7F9FC;
+  --color-surface: #EEF3F9;
+  --color-text-primary: #0A2540;
+  --color-text-secondary: #2D5F8A;
+  --color-accent: #1A6FBF;
+  --color-border: #C2D8EE;
+  --color-tab-dim: #2D5080;
+
+  --color-bg-dark: #0A1628;
+  --color-surface-dark: #111F38;
+  --color-text-primary-dark: #E8F0FA;
+  --color-text-secondary-dark: #7AABCC;
+  --color-accent-dark: #5BA8E0;
+  --color-tab-dim-dark: #7AABCC;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Breathe — editorial, seasonal. Autumn is the base.
+   Seasonal overrides shift accent + bg only.
+   ───────────────────────────────────────────────────────────── */
+[data-theme="breathe"] {
+  --color-bg: #FDF7F2;
+  --color-surface: #F8EFE6;
+  --color-text-primary: #4A1F0A;
+  --color-text-secondary: #8B3A1A;
+  --color-accent: #C45A2A;
+  --color-border: #EDD8C8;
+  --color-tab-dim: #7A4020;
+
+  --color-bg-dark: #1E0E06;
+  --color-surface-dark: #2C1408;
+  --color-text-primary-dark: #F5E8DC;
+  --color-text-secondary-dark: #C49070;
+  --color-accent-dark: #E8845A;
+  --color-tab-dim-dark: #A06040;
+}
+
+[data-theme="breathe"][data-season="spring"] {
+  --color-bg: #F5FAF2;
+  --color-accent: #5A9040;
+  --color-tab-dim: #5C7850;
+
+  --color-bg-dark: #0C140A;
+  --color-accent-dark: #90D070;
+  --color-tab-dim-dark: #507840;
+}
+
+[data-theme="breathe"][data-season="summer"] {
+  --color-bg: #FDF8EE;
+  --color-accent: #B07820;
+  --color-tab-dim: #7A6030;
+
+  --color-bg-dark: #140E02;
+  --color-accent-dark: #E0B840;
+  --color-tab-dim-dark: #806828;
+}
+
+[data-theme="breathe"][data-season="winter"] {
+  --color-bg: #F2F5FA;
+  --color-accent: #4060A0;
+  --color-tab-dim: #4A5878;
+
+  --color-bg-dark: #0A0E18;
+  --color-accent-dark: #7090D0;
+  --color-tab-dim-dark: #405070;
+}
+
+/* autumn uses the [data-theme="breathe"] base — no override needed */
+
+/* ─────────────────────────────────────────────────────────────
+   Be — quiet, grounded, green-grey
+   ───────────────────────────────────────────────────────────── */
+[data-theme="be"] {
+  --color-bg: #F0F2F0;
+  --color-surface: #E2E6E2;
+  --color-text-primary: #1A211C;
+  --color-text-secondary: #3C4A40;
+  --color-accent: #3A6050;
+  --color-border: #C8D4C8;
+  --color-tab-dim: #5C7060;
+
+  --color-bg-dark: #111614;
+  --color-surface-dark: #1A2018;
+  --color-text-primary-dark: #E4EDE6;
+  --color-text-secondary-dark: #8AA090;
+  --color-accent-dark: #6AAA88;
+  --color-tab-dim-dark: #607868;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Base element defaults
+   ───────────────────────────────────────────────────────────── */
+html {
+  background: var(--color-bg);
+  color: var(--color-text-primary, var(--color-text));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100dvh;
+}

@@ -1,0 +1,55 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} theme="be">
+  <slot name="nav" slot="nav" />
+  <slot />
+  <slot name="footer" slot="footer" />
+</BaseLayout>
+
+<style is:global>
+  [data-theme="be"] .display {
+    font-family: var(--font-serif-be);
+    font-weight: 400;
+    font-style: italic;
+    /* Hero quote component at 26px, scaling to 36–48px on wide screens. */
+    font-size: clamp(1.625rem, 3.2vw, 3rem);
+    line-height: 1.25;
+  }
+  [data-theme="be"] h2 {
+    font-family: var(--font-serif-be);
+    font-weight: 500;
+    font-size: 1.625rem;
+  }
+  [data-theme="be"] h3 {
+    font-family: var(--font-serif-be);
+    font-weight: 400;
+    font-size: 1.25rem;
+  }
+  [data-theme="be"] p {
+    font-family: var(--font-serif-be);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  [data-theme="be"] nav,
+  [data-theme="be"] .ui {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 0.8125rem;
+  }
+  [data-theme="be"] .cta,
+  [data-theme="be"] button {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+  }
+</style>

@@ -1,0 +1,16 @@
+---
+import BreatheLayout from '@/layouts/BreatheLayout.astro';
+import { getSeason } from '@/utils/season';
+
+const season = getSeason();
+---
+
+<BreatheLayout title="Breathe — Leigh Bertelsen" description="Essays, slower writing, seasonal things.">
+  <section style="padding: 3rem 1.5rem; max-width: 52rem; margin-inline: auto;">
+    <span class="season-label">{season}</span>
+    <h1 class="display" style="margin-top: 1rem;">A slower room.</h1>
+    <p style="margin-top: 1.5rem; max-width: 54ch; color: var(--color-text-secondary);">
+      Placeholder copy. Essays and seasonal notes will live here.
+    </p>
+  </section>
+</BreatheLayout>

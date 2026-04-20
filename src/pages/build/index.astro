@@ -1,0 +1,181 @@
+---
+import BuildLayout from '@/layouts/BuildLayout.astro';
+
+const tags = [
+  'React', 'TypeScript', 'Astro', 'Node',
+  'WCAG 2.2', 'Accessibility', 'Fintech',
+];
+---
+
+<BuildLayout
+  title="Work — Leigh Bertelsen"
+  description="Senior web developer. Fintech, accessibility, and 14 years of making the web better."
+>
+  <div class="page">
+    <section class="hero" aria-label="Introduction">
+      <p class="eyebrow">// senior web developer · accessibility</p>
+
+      <h1 class="headline">
+        Building things that<br />
+        work for <span class="emph">everyone</span>.
+      </h1>
+
+      <p class="subline">
+        Fintech, accessibility, and 14 years of making the web better —
+        for every user, on every device.
+      </p>
+
+      <ul class="tags" role="list">
+        {tags.map((t) => <li class="tag">{t}</li>)}
+      </ul>
+    </section>
+
+    <section class="featured" aria-label="Featured work">
+      <h2 class="sr-only">Featured work</h2>
+
+      <article class="card">
+        <p class="card-label">featured work</p>
+        <h3 class="card-title">Accessibility implementation</h3>
+        <p class="card-desc">
+          Leading WCAG 2.2 AA compliance across a fintech platform —
+          from audit to component library.
+        </p>
+        <a class="card-link" href="/build/projects">Read case study →</a>
+      </article>
+
+      <article class="card">
+        <p class="card-label">built in public</p>
+        <h3 class="card-title">leighbertelsen.com</h3>
+        <p class="card-desc">
+          Astro 5, GSAP, three worlds, one URL. The site you're on right now.
+        </p>
+        <a class="card-link" href="/build/projects">How it's built →</a>
+      </article>
+    </section>
+  </div>
+</BuildLayout>
+
+<style>
+  .page {
+    max-width: 860px;
+    margin-inline: auto;
+    padding: 6rem 2rem 4rem;
+  }
+  @media (max-width: 767px) {
+    .page {
+      /* mobile: nav is at the bottom, not the top */
+      padding: 2rem 1.5rem 6rem;
+    }
+  }
+
+  /* ── hero ─────────────────────────────── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-accent);
+    margin: 0;
+  }
+  .headline {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+  .emph { font-weight: 500; }
+  .subline {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 54ch;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    border-radius: 99px;
+    padding: 3px 10px;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── featured cards ───────────────────── */
+  .featured {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  @media (max-width: 640px) {
+    .featured { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .card-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-accent);
+    margin: 0;
+  }
+  .card-title {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+  .card-desc {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .card-link {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--color-accent);
+    text-decoration: none;
+    margin-top: 0.25rem;
+  }
+  .card-link:hover { text-decoration: underline; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
