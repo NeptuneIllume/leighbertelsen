@@ -60,13 +60,13 @@ const right = items.slice(2);
 </nav>
 
 <script>
-  // Toggle .scrolled on the desktop nav once the page is scrolled past a threshold.
-  // Re-bound on every Astro view transition so it survives soft navigations.
-  const THRESHOLD = 8;
+  import gsap from 'gsap';
 
+  // ── scroll state ────────────────────────────────
+  const THRESHOLD = 8;
   let currentHandler: (() => void) | null = null;
 
-  function setup() {
+  function setupScroll() {
     if (currentHandler) window.removeEventListener('scroll', currentHandler);
     const nav = document.querySelector<HTMLElement>('.nav-desktop');
     if (!nav) { currentHandler = null; return; }
@@ -78,13 +78,83 @@ const right = items.slice(2);
     window.addEventListener('scroll', apply, { passive: true });
   }
 
-  // Run immediately — script is deferred so DOM is ready by now.
-  setup();
-  // Re-bind after every view transition so the new nav element gets the class.
-  document.addEventListener('astro:page-load', setup);
+  // ── bloom animation ─────────────────────────────
+  let ctx: any = null;
+
+  function setupBloom() {
+    ctx?.revert();
+    const desktop = document.querySelector('.nav-desktop');
+    const mobileSigil = document.querySelector('.mobile-sigil');
+    if (!desktop && !mobileSigil) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    ctx = gsap.context(() => {
+      const leftLinks  = gsap.utils.toArray<HTMLElement>('.nav-desktop .side.left .link');
+      const leftSeps   = gsap.utils.toArray<HTMLElement>('.nav-desktop .side.left .sep');
+      const rightLinks = gsap.utils.toArray<HTMLElement>('.nav-desktop .side.right .link');
+      const rightSeps  = gsap.utils.toArray<HTMLElement>('.nav-desktop .side.right .sep');
+      const sigils     = gsap.utils.toArray<HTMLElement>('.nav-desktop .sigil-pill, .mobile-sigil');
+
+      const leftAll  = [...leftLinks, ...leftSeps];
+      const rightAll = [...rightLinks, ...rightSeps];
+
+      if (prefersReduced) {
+        gsap.set([...leftAll, ...rightAll, ...sigils], { opacity: 1, x: 0, scale: 1 });
+      } else {
+        // Lock starting state before paint to avoid flash.
+        gsap.set(sigils,   { opacity: 0, scale: 0.9, transformOrigin: '50% 50%' });
+        gsap.set(leftAll,  { opacity: 0, x: 20 });
+        gsap.set(rightAll, { opacity: 0, x: -20 });
+
+        const tl = gsap.timeline();
+        // Sigil first.
+        tl.to(sigils,   { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }, 0);
+        // Nav items bloom out symmetrically after a 100ms delay.
+        tl.to(leftAll,  { opacity: 1, x: 0, duration: 0.48, stagger: 0.06, ease: 'power2.out' }, 0.1);
+        tl.to(rightAll, { opacity: 1, x: 0, duration: 0.48, stagger: 0.06, ease: 'power2.out' }, 0.1);
+      }
+
+      // Sigil-pill click → collapse nav, then navigate home.
+      const onSigilClick = (ev: MouseEvent, el: HTMLElement) => {
+        if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey || ev.button !== 0) return;
+        if (prefersReduced) return; // default navigation
+
+        ev.preventDefault();
+        const href = el.getAttribute('href') ?? '/';
+
+        gsap.timeline({ onComplete: () => window.location.assign(href) })
+          .to(leftAll,  { opacity: 0, x: 20,  duration: 0.3, stagger: 0.04, ease: 'power2.in' }, 0)
+          .to(rightAll, { opacity: 0, x: -20, duration: 0.3, stagger: 0.04, ease: 'power2.in' }, 0);
+      };
+
+      sigils.forEach((s) => {
+        s.addEventListener('click', (e) => onSigilClick(e as MouseEvent, s));
+      });
+    });
+  }
+
+  function init() {
+    setupScroll();
+    setupBloom();
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:before-swap', () => { ctx?.revert(); ctx = null; });
 </script>
 
 <style>
+  /* Hide animated elements by default so they don't flash before GSAP's
+     .set() runs on slow connections. GSAP overrides these immediately,
+     or the prefers-reduced-motion branch sets opacity: 1. */
+  .nav-desktop .link,
+  .nav-desktop .sep,
+  .nav-desktop .sigil-pill,
+  .mobile-sigil {
+    opacity: 0;
+  }
+
   /* ── desktop ───────────────────────────── */
   .nav-desktop {
     position: fixed;
@@ -122,6 +192,7 @@ const right = items.slice(2);
   .side.right { justify-content: flex-end; }
 
   .link {
+    display: inline-block;
     font-family: var(--font-sans);
     font-weight: 400;
     font-size: 13px;
