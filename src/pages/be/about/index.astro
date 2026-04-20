@@ -1,0 +1,29 @@
+---
+import BeLayout from '@/layouts/BeLayout.astro';
+---
+
+<BeLayout title="About — Be — Leigh Bertelsen">
+  <div class="placeholder">
+    <h1>About</h1>
+  </div>
+</BeLayout>
+
+<style>
+  .placeholder {
+    max-width: 720px;
+    margin-inline: auto;
+    padding: 7rem 2rem 4rem;
+  }
+  @media (max-width: 767px) {
+    .placeholder { padding: 2rem 1.5rem 6rem; }
+  }
+  h1 {
+    font-family: var(--font-serif-be);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+</style>

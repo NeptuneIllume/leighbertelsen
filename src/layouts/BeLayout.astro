@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import BeNav from '@/components/be/BeNav.astro';
 
 interface Props {
   title: string;
@@ -9,17 +10,36 @@ const { title, description } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} theme="be">
-  <slot name="nav" slot="nav" />
+  <BeNav slot="header" />
   <slot />
   <slot name="footer" slot="footer" />
 </BaseLayout>
 
 <style is:global>
+  /* ── Be dark mode token swap ───────────────────── */
+  @media (prefers-color-scheme: dark) {
+    [data-theme="be"] {
+      --color-bg: var(--color-bg-dark);
+      --color-surface: var(--color-surface-dark);
+      --color-text-primary: var(--color-text-primary-dark);
+      --color-text-secondary: var(--color-text-secondary-dark);
+      --color-accent: var(--color-accent-dark);
+      --color-border: var(--color-border-dark);
+      --color-tab-dim: var(--color-tab-dim-dark);
+    }
+  }
+
+  [data-theme="be"] {
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+  }
+
+  /* ── Typography scale ──────────────────────────── */
   [data-theme="be"] .display {
     font-family: var(--font-serif-be);
     font-weight: 400;
     font-style: italic;
-    /* Hero quote component at 26px, scaling to 36–48px on wide screens. */
     font-size: clamp(1.625rem, 3.2vw, 3rem);
     line-height: 1.25;
   }
