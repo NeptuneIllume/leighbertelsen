@@ -1,9 +1,11 @@
 ---
 import BreatheLayout from '@/layouts/BreatheLayout.astro';
 import SeasonalIllustration from '@/components/breathe/SeasonalIllustration.astro';
-import { getSeason } from '@/utils/season';
+import { getSeason, type Season } from '@/utils/season';
 
-const season = getSeason();
+// Single source of truth for this page's season. Change this one line to
+// force a season (e.g. for testing): `const season: Season = 'winter';`
+const season: Season = getSeason();
 
 const sabbats = {
   spring: 'Beltane season',
@@ -19,6 +21,7 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
 <BreatheLayout
   title="Breathe — Leigh Bertelsen"
   description="Private sessions, seasonal gatherings, and the turning of the year — together."
+  season={season}
 >
   <div class="page">
     <section class="hero" aria-label="Welcome">
