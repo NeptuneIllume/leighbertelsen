@@ -1,0 +1,295 @@
+---
+import Sigil from '@/components/ui/Sigil.astro';
+
+const raw = Astro.url.pathname;
+const path = raw.length > 1 && raw.endsWith('/') ? raw.slice(0, -1) : raw;
+
+type Item = { label: string; href: string; match: (p: string) => boolean };
+
+const items: Item[] = [
+  { label: 'Practice', href: '/breathe',         match: (p) => p === '/breathe' },
+  { label: 'Writing',  href: '/breathe/writing', match: (p) => p === '/breathe/writing' || p.startsWith('/breathe/writing/') },
+  { label: 'About',    href: '/breathe/about',   match: (p) => p === '/breathe/about'   || p.startsWith('/breathe/about/')   },
+];
+
+const left  = items.slice(0, 1);
+const right = items.slice(1);
+---
+
+{/* Desktop: fixed top bar, three zones */}
+<nav class="nav-desktop" aria-label="Breathe">
+  <div class="nav-inner">
+    <ul class="side left">
+      {left.map((it) => (
+        <li>
+          <a href={it.href} class:list={['link', { active: it.match(path) }]}>{it.label}</a>
+        </li>
+      ))}
+    </ul>
+
+    <a href="/" class="sigil-pill" aria-label="Home">
+      <Sigil size={18} />
+    </a>
+
+    <ul class="side right">
+      {right.map((it, i) => (
+        <>
+          <li>
+            <a href={it.href} class:list={['link', { active: it.match(path) }]}>{it.label}</a>
+          </li>
+          {i < right.length - 1 && <li class="sep" aria-hidden="true">·</li>}
+        </>
+      ))}
+    </ul>
+  </div>
+
+  {/* Season label — fixed at top-right; populated client-side from data-season */}
+  <span class="season-tag" aria-hidden="true" data-season-tag></span>
+</nav>
+
+{/* Mobile: centered sigil (top) + bottom tab bar */}
+<a href="/" class="mobile-sigil sigil-pill" aria-label="Home">
+  <Sigil size={16} />
+</a>
+
+<nav class="nav-mobile" aria-label="Breathe">
+  {items.map((it) => (
+    <a href={it.href} class:list={['tab', { active: it.match(path) }]}>{it.label}</a>
+  ))}
+</nav>
+
+<script>
+  import gsap from 'gsap';
+
+  // ── scroll state ────────────────────────────────
+  const THRESHOLD = 8;
+  let currentHandler: (() => void) | null = null;
+
+  function setupScroll() {
+    if (currentHandler) window.removeEventListener('scroll', currentHandler);
+    const nav = document.querySelector<HTMLElement>('.nav-desktop');
+    if (!nav) { currentHandler = null; return; }
+    const apply = () => {
+      nav.classList.toggle('scrolled', window.scrollY > THRESHOLD);
+    };
+    apply();
+    currentHandler = apply;
+    window.addEventListener('scroll', apply, { passive: true });
+  }
+
+  // ── season label ────────────────────────────────
+  function setupSeasonTag() {
+    const tag = document.querySelector<HTMLElement>('[data-season-tag]');
+    if (!tag) return;
+    const s = document.documentElement.dataset.season ?? '';
+    tag.textContent = s;
+  }
+
+  // ── bloom animation ─────────────────────────────
+  let ctx: any = null;
+
+  function setupBloom() {
+    ctx?.revert();
+    const desktop = document.querySelector('.nav-desktop');
+    const mobileSigil = document.querySelector('.mobile-sigil');
+    if (!desktop && !mobileSigil) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    ctx = gsap.context(() => {
+      const leftLinks  = gsap.utils.toArray<HTMLElement>('.nav-desktop .side.left .link');
+      const leftSeps   = gsap.utils.toArray<HTMLElement>('.nav-desktop .side.left .sep');
+      const rightLinks = gsap.utils.toArray<HTMLElement>('.nav-desktop .side.right .link');
+      const rightSeps  = gsap.utils.toArray<HTMLElement>('.nav-desktop .side.right .sep');
+      const sigils     = gsap.utils.toArray<HTMLElement>('.nav-desktop .sigil-pill, .mobile-sigil');
+      const seasonTag  = gsap.utils.toArray<HTMLElement>('.season-tag');
+
+      const leftAll  = [...leftLinks, ...leftSeps];
+      const rightAll = [...rightLinks, ...rightSeps];
+
+      if (prefersReduced) {
+        gsap.set([...leftAll, ...rightAll, ...sigils, ...seasonTag], { opacity: 1, x: 0, scale: 1 });
+      } else {
+        gsap.set(sigils,     { opacity: 0, scale: 0.9, transformOrigin: '50% 50%' });
+        gsap.set(leftAll,    { opacity: 0, x: 20 });
+        gsap.set(rightAll,   { opacity: 0, x: -20 });
+        gsap.set(seasonTag,  { opacity: 0 });
+
+        const tl = gsap.timeline();
+        tl.to(sigils,    { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }, 0);
+        tl.to(leftAll,   { opacity: 1, x: 0, duration: 0.48, stagger: 0.06, ease: 'power2.out' }, 0.1);
+        tl.to(rightAll,  { opacity: 1, x: 0, duration: 0.48, stagger: 0.06, ease: 'power2.out' }, 0.1);
+        tl.to(seasonTag, { opacity: 1, duration: 0.4 }, 0.5);
+      }
+
+      // Sigil click → collapse nav, then navigate home.
+      const onSigilClick = (ev: MouseEvent, el: HTMLElement) => {
+        if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey || ev.button !== 0) return;
+        if (prefersReduced) return;
+
+        ev.preventDefault();
+        const href = el.getAttribute('href') ?? '/';
+
+        gsap.timeline({ onComplete: () => window.location.assign(href) })
+          .to(leftAll,   { opacity: 0, x: 20,  duration: 0.3, stagger: 0.04, ease: 'power2.in' }, 0)
+          .to(rightAll,  { opacity: 0, x: -20, duration: 0.3, stagger: 0.04, ease: 'power2.in' }, 0)
+          .to(seasonTag, { opacity: 0, duration: 0.2 }, 0);
+      };
+
+      sigils.forEach((s) => {
+        s.addEventListener('click', (e) => onSigilClick(e as MouseEvent, s));
+      });
+    });
+  }
+
+  function init() {
+    setupScroll();
+    setupSeasonTag();
+    setupBloom();
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:before-swap', () => { ctx?.revert(); ctx = null; });
+</script>
+
+<style>
+  /* Hide animated elements by default to avoid flash before GSAP's .set() runs. */
+  .nav-desktop .link,
+  .nav-desktop .sep,
+  .nav-desktop .sigil-pill,
+  .season-tag,
+  .mobile-sigil {
+    opacity: 0;
+  }
+
+  /* ── desktop ───────────────────────────── */
+  .nav-desktop {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border-bottom: 0.5px solid var(--color-border);
+    transition: background 200ms ease, backdrop-filter 200ms ease;
+  }
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+  }
+  .nav-desktop.scrolled {
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+  }
+
+  .side {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .side.left  { justify-content: flex-start; }
+  .side.right { justify-content: flex-end; }
+
+  .link {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--color-tab-dim);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid transparent;
+    transition: color 200ms ease, border-color 200ms ease;
+  }
+  .link:hover { color: var(--color-text-primary); }
+  .link.active {
+    color: var(--color-text-primary);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .sep {
+    font-family: var(--font-serif-breathe);
+    font-size: 14px;
+    color: var(--color-tab-dim);
+    opacity: 0.6;
+    user-select: none;
+  }
+
+  .sigil-pill {
+    display: inline-flex;
+    align-items: center;
+    border: 0.5px solid var(--color-border);
+    border-radius: 99px;
+    padding: 4px 14px;
+    color: var(--color-text-primary);
+    transition: color 200ms ease;
+  }
+  .sigil-pill:hover { color: var(--color-accent); }
+
+  .season-tag {
+    position: absolute;
+    top: 50%;
+    right: 1.5rem;
+    transform: translateY(-50%);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-tab-dim);
+    pointer-events: none;
+  }
+
+  /* ── mobile ────────────────────────────── */
+  .mobile-sigil {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    padding: 4px 14px;
+    color: var(--color-text-primary);
+  }
+
+  .nav-mobile {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    background: var(--color-bg);
+    border-top: 0.5px solid var(--color-border);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem 0.25rem;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--color-tab-dim);
+    text-decoration: none;
+    border-top: 1.5px solid transparent;
+    transition: color 200ms ease, border-color 200ms ease;
+  }
+  .tab.active {
+    color: var(--color-text-primary);
+    border-top-color: var(--color-accent);
+  }
+
+  @media (min-width: 768px) {
+    .nav-desktop { display: flex; }
+    .nav-mobile  { display: none; }
+    .mobile-sigil { display: none; }
+  }
+</style>

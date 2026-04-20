@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import BreatheNav from '@/components/breathe/BreatheNav.astro';
 import { getSeason, type Season } from '@/utils/season';
 
 interface Props {
@@ -9,17 +10,36 @@ interface Props {
 }
 
 const { title, description, season: seasonOverride } = Astro.props;
-// Detected at build time in static output; SSR-safe if we later flip to server output.
 const season: Season = seasonOverride ?? getSeason();
 ---
 
 <BaseLayout title={title} description={description} theme="breathe" season={season}>
-  <slot name="nav" slot="nav" />
+  <BreatheNav slot="header" />
   <slot />
   <slot name="footer" slot="footer" />
 </BaseLayout>
 
 <style is:global>
+  /* ── Breathe dark mode token swap ───────────────────── */
+  @media (prefers-color-scheme: dark) {
+    [data-theme="breathe"] {
+      --color-bg: var(--color-bg-dark);
+      --color-surface: var(--color-surface-dark);
+      --color-text-primary: var(--color-text-primary-dark);
+      --color-text-secondary: var(--color-text-secondary-dark);
+      --color-accent: var(--color-accent-dark);
+      --color-border: var(--color-border-dark);
+      --color-tab-dim: var(--color-tab-dim-dark);
+    }
+  }
+
+  [data-theme="breathe"] {
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+  }
+
+  /* ── Typography scale ──────────────────────────────── */
   [data-theme="breathe"] .display {
     font-family: var(--font-serif-breathe);
     font-weight: 300;

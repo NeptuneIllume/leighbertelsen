@@ -1,16 +1,296 @@
 ---
 import BreatheLayout from '@/layouts/BreatheLayout.astro';
+import SeasonalIllustration from '@/components/breathe/SeasonalIllustration.astro';
 import { getSeason } from '@/utils/season';
 
 const season = getSeason();
+
+const sabbats = {
+  spring: 'Beltane season',
+  summer: 'Litha season',
+  autumn: 'Mabon season',
+  winter: 'Yule season',
+} as const;
+
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const initialLabel = `${cap(season)} · ${sabbats[season]}`;
 ---
 
-<BreatheLayout title="Breathe — Leigh Bertelsen" description="Essays, slower writing, seasonal things.">
-  <section style="padding: 3rem 1.5rem; max-width: 52rem; margin-inline: auto;">
-    <span class="season-label">{season}</span>
-    <h1 class="display" style="margin-top: 1rem;">A slower room.</h1>
-    <p style="margin-top: 1.5rem; max-width: 54ch; color: var(--color-text-secondary);">
-      Placeholder copy. Essays and seasonal notes will live here.
-    </p>
-  </section>
+<BreatheLayout
+  title="Breathe — Leigh Bertelsen"
+  description="Private sessions, seasonal gatherings, and the turning of the year — together."
+>
+  <div class="page">
+    <section class="hero" aria-label="Welcome">
+      <div class="hero-text">
+        <span class="season-eyebrow" data-season-eyebrow>{initialLabel}</span>
+        <h1 class="headline">Come as you are.<br />Leave different.</h1>
+        <p class="subline">
+          Private sessions, seasonal gatherings, and the turning of the year — together.
+        </p>
+      </div>
+
+      <div class="hero-illustration">
+        <SeasonalIllustration season={season} size={140} />
+      </div>
+    </section>
+
+    <section class="offer" aria-label="Practice and gather">
+      <h2 class="sr-only">Practice and gather</h2>
+
+      <article class="card">
+        <span class="card-label">practice together</span>
+        <h3 class="card-title">Private sessions</h3>
+        <p class="card-body">
+          Yin, Yoga Nidra, and restorative practice — online, at your pace.
+        </p>
+        <a class="card-link" href="/breathe/about">Get in touch →</a>
+      </article>
+
+      <article class="card">
+        <span class="card-label">gather</span>
+        <h3 class="card-title">Seasonal circles</h3>
+        <p class="card-body">
+          Online gatherings marking the Wheel of the Year — open to all, rooted in ritual.
+        </p>
+        <a class="card-link" href="/breathe/about">See what's coming →</a>
+      </article>
+    </section>
+
+    <section class="newsletter" aria-label="Stay connected">
+      <p class="news-heading">Want to know when the next circle is?</p>
+      <p class="news-sub">Join the list — no noise, just signal and seasons.</p>
+      <form class="news-form" onsubmit="event.preventDefault()">
+        <label class="sr-only" for="news-email">Email address</label>
+        <input id="news-email" type="email" placeholder="your@email" autocomplete="email" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+  </div>
 </BreatheLayout>
+
+<script>
+  // Re-sync the season eyebrow with <html data-season> on load and soft nav.
+  const sabbats: Record<string, string> = {
+    spring: 'Beltane season',
+    summer: 'Litha season',
+    autumn: 'Mabon season',
+    winter: 'Yule season',
+  };
+  function syncEyebrow() {
+    const el = document.querySelector<HTMLElement>('[data-season-eyebrow]');
+    if (!el) return;
+    const s = document.documentElement.dataset.season;
+    if (!s || !sabbats[s]) return;
+    el.textContent = `${s.charAt(0).toUpperCase()}${s.slice(1)} · ${sabbats[s]}`;
+  }
+  syncEyebrow();
+  document.addEventListener('astro:page-load', syncEyebrow);
+</script>
+
+<style>
+  .page {
+    max-width: 800px;
+    margin-inline: auto;
+    padding: 6rem 2rem 4rem;
+  }
+
+  /* ── hero ────────────────────────────────── */
+  .hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+  }
+  .hero-text { max-width: 56ch; }
+
+  .season-eyebrow {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .headline {
+    font-family: var(--font-serif-breathe);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(48px, 7vw, 72px);
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .subline {
+    font-family: var(--font-serif-breathe);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 1.5rem 0 0;
+    max-width: 48ch;
+  }
+
+  .hero-illustration {
+    opacity: 0.35;
+    flex-shrink: 0;
+    align-self: start;
+    padding-top: 0.5rem;
+  }
+
+  /* ── offer ───────────────────────────────── */
+  .offer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 3.5rem;
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .card-label {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .card-title {
+    font-family: var(--font-serif-breathe);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .card-body {
+    font-family: var(--font-serif-breathe);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .card-link {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--color-accent);
+    text-decoration: none;
+    align-self: flex-start;
+    transition: opacity 200ms ease;
+  }
+  .card-link:hover { opacity: 0.75; }
+
+  /* ── newsletter ──────────────────────────── */
+  .newsletter {
+    margin-top: 3.5rem;
+    margin-inline: calc(-1 * 2rem);
+    background: var(--color-surface);
+    border-top: 0.5px solid var(--color-border);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .news-heading {
+    font-family: var(--font-serif-breathe);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .news-sub {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0.5rem 0 1.25rem;
+  }
+
+  .news-form {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .news-form input {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    padding: 0.5rem 0.75rem;
+    border: 0.5px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    min-width: 220px;
+  }
+  .news-form input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .news-form button {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    padding: 0.5rem 1rem;
+    border: 0.5px solid var(--color-accent);
+    border-radius: 6px;
+    background: var(--color-accent);
+    color: var(--color-bg);
+    cursor: pointer;
+    transition: opacity 200ms ease;
+  }
+  .news-form button:hover { opacity: 0.9; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── mobile ───────────────────────────────── */
+  @media (max-width: 767px) {
+    .page { padding: 2rem 1.5rem 6rem; }
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .hero-illustration {
+      order: -1;
+      justify-self: flex-start;
+    }
+    .offer {
+      grid-template-columns: 1fr;
+    }
+    .newsletter {
+      margin-inline: calc(-1 * 1.5rem);
+    }
+  }
+</style>

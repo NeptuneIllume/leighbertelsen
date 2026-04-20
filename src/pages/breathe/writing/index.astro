@@ -1,0 +1,29 @@
+---
+import BreatheLayout from '@/layouts/BreatheLayout.astro';
+---
+
+<BreatheLayout title="Writing — Breathe — Leigh Bertelsen">
+  <div class="placeholder">
+    <h1>Writing</h1>
+  </div>
+</BreatheLayout>
+
+<style>
+  .placeholder {
+    max-width: 800px;
+    margin-inline: auto;
+    padding: 6rem 2rem 4rem;
+  }
+  @media (max-width: 767px) {
+    .placeholder { padding: 2rem 1.5rem 6rem; }
+  }
+  h1 {
+    font-family: var(--font-serif-breathe);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(48px, 7vw, 72px);
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+</style>
