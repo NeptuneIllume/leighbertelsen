@@ -168,3 +168,77 @@ html {
 body {
   min-height: 100dvh;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   View Transitions — world-specific content animations
+   ───────────────────────────────────────────────────────────── */
+::view-transition-old(root) {
+  animation: none;
+}
+::view-transition-new(root) {
+  animation: none;
+}
+
+/* Build — slide up + fade (precise, clean) */
+::view-transition-old(build-content) {
+  animation: 200ms ease-in both build-fade-out;
+}
+::view-transition-new(build-content) {
+  animation: 350ms ease-out both build-fade-in;
+}
+@keyframes build-fade-out {
+  to { opacity: 0; transform: translateY(-8px); }
+}
+@keyframes build-fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+}
+
+/* Breathe — slow drift up + fade (organic) */
+::view-transition-old(breathe-content) {
+  animation: 250ms ease-in both breathe-fade-out;
+}
+::view-transition-new(breathe-content) {
+  animation: 500ms ease-out both breathe-fade-in;
+}
+@keyframes breathe-fade-out {
+  to { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes breathe-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+}
+
+/* Be — settle from below (grounded) */
+::view-transition-old(be-content) {
+  animation: 200ms ease-in both be-fade-out;
+}
+::view-transition-new(be-content) {
+  animation: 400ms ease-out both be-fade-in;
+}
+@keyframes be-fade-out {
+  to { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes be-fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+}
+
+/* Membrane — simple fade only */
+::view-transition-old(membrane-content) {
+  animation: 200ms ease-in both membrane-fade-out;
+}
+::view-transition-new(membrane-content) {
+  animation: 400ms ease-out both membrane-fade-in;
+}
+@keyframes membrane-fade-out {
+  to { opacity: 0; }
+}
+@keyframes membrane-fade-in {
+  from { opacity: 0; }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

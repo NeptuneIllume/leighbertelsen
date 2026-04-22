@@ -14,8 +14,12 @@ const season: Season = seasonOverride ?? getSeason();
 ---
 
 <BaseLayout title={title} description={description} theme="breathe" season={season}>
-  <BreatheNav slot="header" />
-  <slot />
+  <div slot="header" transition:name="breathe-nav">
+    <BreatheNav />
+  </div>
+  <div transition:name="breathe-content">
+    <slot />
+  </div>
   <slot name="footer" slot="footer" />
 </BaseLayout>
 
