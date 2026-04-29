@@ -63,11 +63,11 @@ const tags = [
   }
   @media (max-width: 767px) {
     .page {
-      /* mobile: clear the fixed sigil pill at top:1.5rem (~68px tall with
-         44px min-target) plus breathing room; bottom tab bar lives at
-         the bottom of the viewport. */
+      /* mobile: clear the fixed sigil pill (top: 1.5rem + 44px min-target
+         = 68px) with ~12px breathing room. Going much beyond pushes
+         the hero below the fold. */
       max-width: 100%;
-      padding: 7rem 1.25rem 6rem;
+      padding: 5rem 1.25rem 6rem;
     }
     /* Tighten the gap between stacked featured cards on mobile. */
     .featured { gap: 1rem; }

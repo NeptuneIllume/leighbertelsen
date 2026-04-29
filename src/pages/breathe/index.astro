@@ -25,16 +25,19 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
 >
   <div class="page">
     <section class="hero" aria-label="Welcome">
+      {/* Eyebrow is a direct child of .hero (not inside .hero-text) so the
+          mobile grid can place it inline with the illustration icon. */}
+      <span class="season-eyebrow" data-season-eyebrow>{initialLabel}</span>
+
+      <div class="hero-illustration">
+        <SeasonalIllustration season={season} size={140} />
+      </div>
+
       <div class="hero-text">
-        <span class="season-eyebrow" data-season-eyebrow>{initialLabel}</span>
         <h1 class="headline">Come as you are.<br />Leave different.</h1>
         <p class="subline">
           Private sessions, seasonal gatherings, and the turning of the year — together.
         </p>
-      </div>
-
-      <div class="hero-illustration">
-        <SeasonalIllustration season={season} size={140} />
       </div>
     </section>
 
@@ -103,12 +106,17 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
     position: relative;
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 2rem;
+    grid-template-areas:
+      "eyebrow illust"
+      "text    illust";
+    column-gap: 2rem;
     align-items: start;
   }
-  .hero-text { max-width: 56ch; }
+  .hero-text { grid-area: text; max-width: 56ch; }
+  .hero-illustration { grid-area: illust; }
 
   .season-eyebrow {
+    grid-area: eyebrow;
     display: inline-block;
     font-family: var(--font-sans);
     font-weight: 300;
@@ -280,17 +288,32 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
 
   /* ── mobile ───────────────────────────────── */
   @media (max-width: 767px) {
-    .page { padding: 7rem 1.5rem 6rem; }
+    .page { padding: 5rem 1.5rem 6rem; }
+
+    /* Icon + eyebrow share the first row; headline + subline span full
+       width below. Trims a full row of vertical space vs stacking them. */
     .hero {
-      grid-template-columns: 1fr;
-      gap: 1rem;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "illust  eyebrow"
+        "text    text";
+      column-gap: 0.75rem;
+      row-gap: 1rem;
+      align-items: center;
     }
     .hero-illustration {
-      order: -1;
-      justify-self: flex-start;
+      grid-area: illust;
       /* Smaller, quieter on mobile — less visual noise. */
       opacity: 0.25;
     }
+    .season-eyebrow {
+      grid-area: eyebrow;
+      /* No bottom margin needed — row-gap handles the space below. */
+      margin-bottom: 0;
+      align-self: center;
+    }
+    .hero-text { grid-area: text; }
+
     /* Override the 140px size set via the SeasonalIllustration prop. */
     .hero-illustration :global(svg) {
       width: 80px;
