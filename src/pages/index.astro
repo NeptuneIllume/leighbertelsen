@@ -240,8 +240,17 @@ const choices = [
   /* Stack vertically on narrow viewports — three 40px italic words plus
      separators won't fit horizontally below ~640px without crowding. */
   @media (max-width: 640px) {
+    .membrane {
+      /* Reserve room at the top for the absolute sigil pill (sits at
+         top: 2rem and is ~44px tall) so vertically centered content
+         doesn't ride up underneath it on short viewports. */
+      padding: 6rem 1.5rem 4rem;
+      justify-content: flex-start;
+      gap: 3rem;
+    }
     .choices {
       flex-direction: column;
+      align-items: center;
       gap: 2.5rem;
     }
     .sep { display: none; }

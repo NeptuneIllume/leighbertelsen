@@ -5,7 +5,7 @@ import { getSeason, type Season } from '@/utils/season';
 
 // Single source of truth for this page's season. Change this one line to
 // force a season (e.g. for testing): `const season: Season = 'winter';`
-const season: Season = 'winter';
+const season: Season = getSeason();
 
 const sabbats = {
   spring: 'Beltane season',
@@ -280,7 +280,7 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
 
   /* ── mobile ───────────────────────────────── */
   @media (max-width: 767px) {
-    .page { padding: 5rem 1.5rem 6rem; }
+    .page { padding: 7rem 1.5rem 6rem; }
     .hero {
       grid-template-columns: 1fr;
       gap: 1rem;
