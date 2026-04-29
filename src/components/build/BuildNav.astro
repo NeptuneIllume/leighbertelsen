@@ -248,7 +248,11 @@ const right = items.slice(2);
     left: 50%;
     transform: translateX(-50%);
     z-index: 50;
+    /* WCAG 2.2 SC 2.5.8 — minimum target 24x24, recommended 44x44. */
+    min-width: 44px;
+    min-height: 44px;
     padding: 4px 14px;
+    justify-content: center;
     color: var(--color-text-primary);
   }
 
@@ -263,8 +267,13 @@ const right = items.slice(2);
   }
   .tab {
     flex: 1;
+    /* WCAG 2.2 SC 2.5.8 — 44px min target. */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 0.75rem 0.25rem;
+    padding: 0.75rem 1rem;
     font-family: var(--font-sans);
     font-weight: 400;
     font-size: 11px;

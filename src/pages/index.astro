@@ -242,10 +242,12 @@ const choices = [
   @media (max-width: 640px) {
     .choices {
       flex-direction: column;
-      gap: 2.25rem;
+      gap: 2.5rem;
     }
     .sep { display: none; }
     .sub {
+      /* Slightly larger for readability on mobile (was 11px). */
+      font-size: 13px;
       max-width: 28ch;
     }
   }

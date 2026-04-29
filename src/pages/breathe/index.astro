@@ -133,7 +133,7 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
     font-family: var(--font-serif-breathe);
     font-weight: 400;
     font-style: normal;
-    font-size: 18px;
+    font-size: clamp(15px, 2vw, 18px);
     line-height: 1.6;
     color: var(--color-text-secondary);
     margin: 1.5rem 0 0;
@@ -280,7 +280,7 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
 
   /* ── mobile ───────────────────────────────── */
   @media (max-width: 767px) {
-    .page { padding: 2rem 1.5rem 6rem; }
+    .page { padding: 5rem 1.5rem 6rem; }
     .hero {
       grid-template-columns: 1fr;
       gap: 1rem;
@@ -288,12 +288,21 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
     .hero-illustration {
       order: -1;
       justify-self: flex-start;
+      /* Smaller, quieter on mobile — less visual noise. */
+      opacity: 0.25;
+    }
+    /* Override the 140px size set via the SeasonalIllustration prop. */
+    .hero-illustration :global(svg) {
+      width: 80px;
+      height: 80px;
     }
     .offer {
       grid-template-columns: 1fr;
+      gap: 1rem;
     }
     .newsletter {
       margin-inline: calc(-1 * 1.5rem);
+      padding: 1.5rem;
     }
   }
 </style>

@@ -63,9 +63,12 @@ const tags = [
   }
   @media (max-width: 767px) {
     .page {
-      /* mobile: nav is at the bottom, not the top */
-      padding: 2rem 1.5rem 6rem;
+      /* mobile: top sigil pill + breathing room (top), bottom tab bar (bottom) */
+      max-width: 100%;
+      padding: 5rem 1.25rem 6rem;
     }
+    /* Tighten the gap between stacked featured cards on mobile. */
+    .featured { gap: 1rem; }
   }
 
   /* ── hero ─────────────────────────────── */
@@ -93,7 +96,7 @@ const tags = [
   .subline {
     font-family: var(--font-sans);
     font-weight: 300;
-    font-size: 17px;
+    font-size: clamp(15px, 2vw, 17px);
     line-height: 1.5;
     color: var(--color-text-secondary);
     margin: 0;

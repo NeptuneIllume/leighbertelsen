@@ -112,7 +112,7 @@ import BeLayout from '@/layouts/BeLayout.astro';
     font-family: var(--font-serif-be);
     font-weight: 400;
     font-style: normal;
-    font-size: 18px;
+    font-size: clamp(15px, 2vw, 18px);
     line-height: 1.75;
     color: var(--color-text-secondary);
     max-width: 480px;
@@ -238,12 +238,13 @@ import BeLayout from '@/layouts/BeLayout.astro';
 
   /* ── mobile ──────────────────────────────── */
   @media (max-width: 767px) {
-    .page { padding: 2rem 1.5rem 4rem; }
+    .page { padding: 5.5rem 1.5rem 4rem; }
+    .rule { width: 40px; }
     .offerings { grid-template-columns: 1fr; }
     .kind-words { padding: 2.5rem 1.5rem; margin-bottom: 4rem; }
     .kind-words-inner {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.5rem;
     }
   }
 </style>
