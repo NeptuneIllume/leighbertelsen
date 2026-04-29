@@ -1,0 +1,15 @@
+---
+title: "Adding Authentication To A React App"
+date: 2022-05-26
+world: build
+excerpt: "Do you need authentication in your React app? Only if your website has content that should be protected. A practical guide to auth tokens, protected routes, and server-side sessions."
+featured: true
+---
+
+Do you need authentication in your React app? Only if your website has content that should be protected.
+
+Authentication is a two-step process — think of it like a lock and a key. You log in with credentials (the key), which gets sent to a server and verified against a database (the lock). If valid, that permission persists as you navigate the site.
+
+There are two main approaches: server-side sessions and authentication tokens. Server-side sessions store the user state on the server; tokens (like JWTs) store it client-side in a signed, tamper-proof format. Each has trade-offs around scalability, security, and complexity.
+
+For most React apps, a token-based approach with a library like Auth0 or Supabase Auth is the fastest path to production-grade authentication without rolling your own.
