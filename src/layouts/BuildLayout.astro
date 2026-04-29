@@ -10,9 +10,7 @@ const { title, description } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} theme="build">
-  <div slot="header" transition:name="build-nav">
-    <BuildNav />
-  </div>
+  <BuildNav slot="header" />
   <div transition:name="build-content">
     <slot />
   </div>

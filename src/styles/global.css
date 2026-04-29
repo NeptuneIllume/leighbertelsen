@@ -163,6 +163,10 @@ html {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Reserve the vertical scrollbar's width on every page so the viewport
+     doesn't change size when navigating between long pages (with scrollbar)
+     and short ones (without). Prevents fixed nav from shifting horizontally. */
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -241,4 +245,19 @@ body {
   ::view-transition-new(*) {
     animation: none !important;
   }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Nav flicker fix — after first bloom, nav stays visible across
+   soft navigations. The class is set by each nav script on
+   astro:after-swap (before the view-transition snapshot), and
+   overrides the per-component `opacity: 0` CSS fallback.
+   !important is required to beat scoped-component specificity.
+   ───────────────────────────────────────────────────────────── */
+html.nav-ready .nav-desktop .link,
+html.nav-ready .nav-desktop .sep,
+html.nav-ready .nav-desktop .sigil-pill,
+html.nav-ready .mobile-sigil,
+html.nav-ready .season-tag {
+  opacity: 1 !important;
 }

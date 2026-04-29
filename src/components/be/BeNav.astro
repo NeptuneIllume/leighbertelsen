@@ -85,6 +85,11 @@ const right = items.slice(2);
 
   // ── bloom animation ─────────────────────────────
   let ctx: any = null;
+  let bloomedOnce = false;
+
+  function markNavReady() {
+    document.documentElement.classList.add('nav-ready');
+  }
 
   function setupBloom() {
     ctx?.revert();
@@ -93,6 +98,7 @@ const right = items.slice(2);
     if (!desktop && !mobileSigil) return;
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const animate = !prefersReduced && !bloomedOnce;
 
     ctx = gsap.context(() => {
       const leftLinks  = gsap.utils.toArray<HTMLElement>('.nav-desktop .side.left .link');
@@ -104,14 +110,17 @@ const right = items.slice(2);
       const leftAll  = [...leftLinks, ...leftSeps];
       const rightAll = [...rightLinks, ...rightSeps];
 
-      if (prefersReduced) {
+      if (!animate) {
         gsap.set([...leftAll, ...rightAll, ...sigils], { opacity: 1, x: 0, scale: 1 });
+        markNavReady();
       } else {
         gsap.set(sigils,   { opacity: 0, scale: 0.9, transformOrigin: '50% 50%' });
         gsap.set(leftAll,  { opacity: 0, x: 20 });
         gsap.set(rightAll, { opacity: 0, x: -20 });
 
-        const tl = gsap.timeline();
+        const tl = gsap.timeline({
+          onComplete: () => { bloomedOnce = true; markNavReady(); },
+        });
         tl.to(sigils,   { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }, 0);
         tl.to(leftAll,  { opacity: 1, x: 0, duration: 0.48, stagger: 0.06, ease: 'power2.out' }, 0.1);
         tl.to(rightAll, { opacity: 1, x: 0, duration: 0.48, stagger: 0.06, ease: 'power2.out' }, 0.1);
@@ -142,6 +151,9 @@ const right = items.slice(2);
 
   init();
   document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:after-swap', () => {
+    if (bloomedOnce) markNavReady();
+  });
   document.addEventListener('astro:before-swap', () => { ctx?.revert(); ctx = null; });
 </script>
 
