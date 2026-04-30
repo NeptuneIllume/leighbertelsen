@@ -2,11 +2,11 @@
 import BuildLayout from '@/layouts/BuildLayout.astro';
 
 const tags = [
-  'Shopify', 'Liquid', 'React', 'TypeScript', 'Next.js', 'Astro',
+  'React', 'TypeScript', 'Next.js', 'Astro',
   'Node', 'PHP', 'C# / ASP.NET', 'SQL', 'REST', 'GraphQL',
   'HTML5', 'CSS3', 'Tailwind', 'Azure DevOps', 'CI/CD',
   'WCAG 2.2', 'Accessibility', 'Optimizely', 'Google Analytics',
-  'Contentful', 'HubSpot', 'Magento', 'WordPress',
+  'Contentful', 'HubSpot', 'Magento', 'WordPress', 'Shopify', 'Liquid',
 ];
 
 const quotes = [
@@ -53,7 +53,13 @@ const experience = [
     company: 'Neptune Illume',
     role: 'Founder and Senior Web Developer',
     period: 'June 2007 to present · Remote',
-    body: `End-to-end digital product studio serving clients in wellness, education, and nonprofit. Selected work includes the Himalayan Institute platform rebuild (new brand identity, tiered subscription membership, multimedia library, and event calendar, with full UX research and front-end build), a multilingual DE/EN Shopify store for Rinchenshop.com including event registration, GDPR-compliant analytics, and a WordPress content feed, two Magento stores for City Bird Registry and Mega Supply Store, and ongoing web strategy and development for Yoga International, Chattra Yoga, Nikki Estrada, Pacific Yoga, and others.`,
+    body: `Full-stack web development and design studio serving clients across wellness, education, and nonprofit sectors. Services span user research, content strategy, UX/UI design, wireframing, build, database integration, and hosting, alongside email and social media marketing, SEO, brand development, and analytics. Selected clients include Rinchenshop.com (multilingual DE/EN Shopify store with event registration, GDPR-compliant analytics, and WordPress content feed), Yoga International, Chattra Yoga, Nikki Estrada, Pacific Yoga, and others across the wellness and education space.`,
+  },
+  {
+    company: 'Himalayan Institute',
+    role: 'Web Development Manager, Creative Services',
+    period: 'October 2015 to January 2017 · Honesdale, PA',
+    body: `Led the planning and execution of a complete rebuild of the Himalayan Institute's website and Global Humanitarian Projects website. Directed content, branding strategy, implementation, and QA testing across all web projects, working with the Creative Services department, department heads, and the broader community. Revitalised the branding of all digital and print materials with a new style guide based on customer-driven marketing strategy. Built front-end interfaces and data-driven interactive elements including the Wisdom Library subscription service. Also built the website for the Institute's health centre, PureRejuv, and ran technology training within the Creative Services department.`,
   },
   {
     company: 'Yoga International',
@@ -65,13 +71,25 @@ const experience = [
     company: 'SystemArchitecture.NET',
     role: 'Software Developer and UX Consultant',
     period: 'August 2017 to January 2019 · Remote',
-    body: `Built and evolved application and website platforms for multiple clients across full-stack .NET, C#, SQL, and PHP/WordPress, with direct stakeholder collaboration on requirements, UX, and delivery.`,
+    body: `Built and evolved application and website platforms for multiple clients across full-stack .NET, C#, SQL, and PHP/WordPress. Designed user experiences, engaged with clients to collect conceptual framework and business needs, and led marketing and branding strategy projects.`,
+  },
+  {
+    company: 'Bristol-Myers Squibb',
+    role: 'Senior Developer, Marketing',
+    period: 'November 2010 to May 2012 · Princeton, NJ',
+    body: `Lead developer on BMStudio's first in-house touchscreen presentation, which the sales team described as the best presentation they had ever seen. Developed touchscreen closed-loop promotions for PC and iPad using Exploria's e-detailing platform, 3D graphics and animations, ActionScript 3, JavaScript, XHTML, and CSS.`,
   },
   {
     company: 'Health Advocate',
     role: 'Senior Interactive Developer, Marketing',
     period: 'August 2013 to October 2015 · Plymouth Meeting, PA',
-    body: `Developed marketing websites and interactive tools for a healthcare benefits company serving major corporate clients including Merck and Bristol-Myers Squibb.`,
+    body: `Developed marketing websites, a custom blog, interactive tools, and animations, as well as established metric reporting for a healthcare benefits company.`,
+  },
+  {
+    company: 'General Physics',
+    role: 'Developer',
+    period: 'May 2010 to October 2010 · Pottstown, PA',
+    body: `Designed and developed custom eLearning solutions including GUI shells, web-based courses, simulations, online games, and quizzes. Developed style guides and templates.`,
   },
 ];
 ---
@@ -196,6 +214,21 @@ const experience = [
           </li>
         ))}
       </ol>
+    </section>
+
+    {/* ── Awards ───────────────────────────────────────────── */}
+    <section class="section" aria-label="Awards">
+      <p class="section-label">awards</p>
+      <ul class="awards-list" role="list">
+        <li class="award-item">
+          <span class="award-year">2015</span>
+          Platinum Hermes Creative Award, Category: Blog (overall)
+        </li>
+        <li class="award-item">
+          <span class="award-year">2015</span>
+          Gold Hermes Creative Award, Category: Pro Bono
+        </li>
+      </ul>
     </section>
 
     {/* ── Skills ───────────────────────────────────────────── */}
@@ -464,6 +497,33 @@ const experience = [
     color: var(--color-text-secondary);
     margin: 0;
     max-width: 72ch;
+  }
+
+  /* ── awards ──────────────────────────── */
+  .awards-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .award-item {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .award-year {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
   }
 
   /* ── skills tag cloud ─────────────────── */
