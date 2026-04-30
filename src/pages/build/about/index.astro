@@ -1,18 +1,134 @@
 ---
 import BuildLayout from '@/layouts/BuildLayout.astro';
 import Sigil from '@/components/ui/Sigil.astro';
+
+const education = [
+  {
+    institution: 'Drexel University',
+    detail: 'B.S. Digital Media, Fine Art Minor, Graduated with Honors',
+    period: 'September 2005 to June 2009 · Philadelphia, PA',
+  },
+  {
+    institution: 'She Leads',
+    detail: 'ICF-Accredited Coach Certification',
+    period: '',
+  },
+  {
+    institution: 'FreeCodeCamp',
+    detail: 'Responsive Web Design · JavaScript Algorithms and Data Structures · Front End Libraries',
+    period: 'January to March 2020',
+  },
+  {
+    institution: 'Marie Forleo',
+    detail: 'B-School, Marketing Certification · The Copy Cure, Copywriting Certification',
+    period: 'March to June 2020',
+  },
+];
 ---
 
 <BuildLayout title="About — Build — Leigh Bertelsen">
-  <div class="placeholder">
-    <h1>About</h1>
+  <div class="page">
 
+    {/* ── Intro ──────────────────────────────────────────── */}
+    <section class="intro" aria-label="Introduction">
+      <p class="body">
+        I'm a senior web developer based in Copenhagen, and I've been building things on
+        the internet for 17 years, across fintech, e-commerce, nonprofits, wellness,
+        healthcare, and education. I genuinely love this work. Getting a high-level overview
+        of what a business needs and then running with it from planning to execution, that's
+        where I'm happiest and where I do my best work.
+      </p>
+      <p class="body">
+        Right now I'm at Netcompany Banking Services, where I'm part of the team building
+        and evolving a core banking platform across 50+ Nordic financial institutions. Within
+        that I led the company-wide accessibility initiative, which is something I'm
+        particularly proud of, both for the reach of its impact and for how we integrated it
+        into the team's workflow without adding friction. Before that I spent years
+        freelancing through my studio Neptune Illume, working with clients in yoga,
+        meditation, nonprofit, and wellness, which gave me a foundation in listening
+        carefully, moving fast, and building things that actually sound and feel like the
+        people they're for.
+      </p>
+    </section>
+
+    {/* ── Working with me ────────────────────────────────── */}
+    <section class="section" aria-label="Working with me">
+      <p class="section-label">working with me</p>
+      <p class="body">
+        I'm calm, focused, and I care a lot about people's time. Colleagues consistently
+        describe me as someone who lifts the quality and mood of a team without making a big
+        deal of it. I think that's because I genuinely enjoy the work and enjoy the people I
+        do it with.
+      </p>
+      <p class="body">
+        I thrive at being an expert in tandem with helping others. That means I'm as
+        comfortable presenting architectural decisions to a CTO as I am walking a first-time
+        client through what a website actually needs to do for their business. I find working
+        with non-technical people particularly rewarding, partly because what I do genuinely
+        seems like magic to them, which never gets old, and partly because they tend to bring
+        less ego to the process and more openness to what might actually work.
+      </p>
+      <p class="body">
+        When I say something, I've usually already thought it through. I process internally
+        before I speak, which means my contributions tend to be considered rather than
+        reactive, and I plan for the long term rather than the next sprint.
+      </p>
+    </section>
+
+    {/* ── Beyond the work ────────────────────────────────── */}
+    <section class="section" aria-label="Beyond the work">
+      <p class="section-label">beyond the work</p>
+      <p class="body">
+        I'm also a 500hr-certified yoga teacher, an ICF-accredited coach, and someone who
+        has spent a significant part of her life in serious study of contemplative practice,
+        from monasteries in Nepal and India to academic Buddhist studies in Germany. I
+        mention this not because it's unusual, but because it's part of how I approach
+        everything: with patience, with genuine attention, and with a long view. If you're
+        curious about that side of things, you can find it at{' '}
+        <a class="inline-link" href="/breathe">Breathe</a> and{' '}
+        <a class="inline-link" href="/be">Be</a>.
+      </p>
+      <p class="body">
+        I live in Copenhagen with my husband Mads. I have a small garden, I knit mostly
+        socks, and I mark the turning of the year.
+      </p>
+    </section>
+
+    {/* ── Education ──────────────────────────────────────── */}
+    <section class="section" aria-label="Education">
+      <p class="section-label">education</p>
+      <ul class="edu-list" role="list">
+        {education.map((e) => (
+          <li class="edu-entry">
+            <span class="edu-institution">{e.institution}</span>
+            <span class="edu-detail">{e.detail}</span>
+            {e.period && <span class="edu-period">{e.period}</span>}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {/* ── Contact ────────────────────────────────────────── */}
+    <section class="section" aria-label="Get in touch">
+      <p class="section-label">get in touch</p>
+      <p class="body">
+        If you're looking for a senior developer with depth in accessibility, platform
+        thinking, and a genuine interest in the people on the other end of the screen, I'd
+        love to hear from you.
+      </p>
+      <a class="email-cta" href="mailto:leigh.bertelsen@gmail.com">
+        leigh.bertelsen@gmail.com
+      </a>
+    </section>
+
+    {/* ── Easter egg ─────────────────────────────────────── */}
     <div class="easter-egg-area">
       <button class="egg-sigil" aria-label="Sigil" data-egg-sigil>
         <Sigil size={28} />
       </button>
       <p class="hint">linger here a moment</p>
     </div>
+
   </div>
 </BuildLayout>
 
@@ -26,16 +142,12 @@ import Sigil from '@/components/ui/Sigil.astro';
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function navigate() {
-      if (prefersReduced) {
-        window.location.assign('/personal');
-        return;
-      }
+      if (prefersReduced) { window.location.assign('/personal'); return; }
       gsap.timeline({ onComplete: () => window.location.assign('/personal') })
         .to(btn, { scale: 1.15, duration: 0.2, ease: 'power2.out' })
         .to(btn, { scale: 1,    duration: 0.2, ease: 'power2.in' });
     }
 
-    // Desktop — slow double-click (100–600ms between clicks)
     let lastClick = 0;
     btn.addEventListener('click', () => {
       const now = Date.now();
@@ -44,7 +156,6 @@ import Sigil from '@/components/ui/Sigil.astro';
       if (gap >= 100 && gap <= 600) navigate();
     });
 
-    // Mobile — long press (600ms)
     let pressTimer: ReturnType<typeof setTimeout> | null = null;
     btn.addEventListener('touchstart', (e) => {
       e.preventDefault();
@@ -63,24 +174,102 @@ import Sigil from '@/components/ui/Sigil.astro';
 </script>
 
 <style>
-  .placeholder {
-    max-width: 860px;
+  .page {
+    max-width: 720px;
     margin-inline: auto;
-    padding: 6rem 2rem 4rem;
+    padding: 6rem 2rem 5rem;
   }
   @media (max-width: 767px) {
-    .placeholder { padding: 5rem 1.5rem 6rem; }
-  }
-  h1 {
-    font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: clamp(36px, 5vw, 56px);
-    letter-spacing: -0.02em;
-    color: var(--color-text-primary);
-    margin: 0 0 4rem;
+    .page { padding: 5rem 1.5rem 6rem; }
   }
 
-  /* ── easter egg ── */
+  /* ── shared body text ─────────────────── */
+  .body {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-text-primary);
+    margin: 0 0 1.25em;
+    max-width: 66ch;
+  }
+  .body:last-of-type { margin-bottom: 0; }
+
+  /* ── section chrome ───────────────────── */
+  .section {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 0.5px solid var(--color-border);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 1.25rem;
+  }
+
+  .inline-link {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .inline-link:hover { text-decoration: underline; }
+
+  /* ── education ────────────────────────── */
+  .edu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .edu-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .edu-institution {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-text-primary);
+  }
+
+  .edu-detail {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+  }
+
+  .edu-period {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: var(--color-text-secondary);
+    margin-top: 0.1rem;
+  }
+
+  /* ── contact ──────────────────────────── */
+  .email-cta {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-accent);
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: opacity 200ms ease;
+  }
+  .email-cta:hover { opacity: 0.75; }
+
+  /* ── easter egg ───────────────────────── */
   .easter-egg-area {
     display: flex;
     flex-direction: column;
