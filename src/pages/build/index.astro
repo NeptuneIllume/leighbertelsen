@@ -2,34 +2,101 @@
 import BuildLayout from '@/layouts/BuildLayout.astro';
 
 const tags = [
-  'React', 'TypeScript', 'Astro', 'Node',
-  'WCAG 2.2', 'Accessibility', 'Fintech',
+  'Shopify', 'Liquid', 'React', 'TypeScript', 'Next.js', 'Astro',
+  'Node', 'PHP', 'C# / ASP.NET', 'SQL', 'REST', 'GraphQL',
+  'HTML5', 'CSS3', 'Tailwind', 'Azure DevOps', 'CI/CD',
+  'WCAG 2.2', 'Accessibility', 'Optimizely', 'Google Analytics',
+  'Contentful', 'HubSpot', 'Magento', 'WordPress',
+];
+
+const quotes = [
+  {
+    text: 'She has a unique ability to see the big picture while being incredibly thorough and detail-oriented in her daily work. This combination makes her both reliable and highly effective.',
+    name: 'Pernille Thyssen',
+    role: 'Senior Test Specialist, Netcompany Banking Services',
+  },
+  {
+    text: 'She not only thinks at a high level but also delivers concrete results.',
+    name: 'Jesper Mårtensson',
+    role: 'Former manager, Netcompany Banking Services',
+  },
+  {
+    text: 'Finding a developer with a keen sense of design and user experience is very rare and important. I think Leigh is a diamond in the rough as far as developers are concerned. She brings more than programming to the table.',
+    name: 'Ann Meneses',
+    role: 'Senior Designer, Himalayan Institute',
+  },
+  {
+    text: 'I trust her because she took the time to understand me and my work. She did it all with love, and I really felt that.',
+    name: 'Evey Kochanek',
+    role: 'Nutritionist and Business Owner',
+  },
+  {
+    text: 'Her passion for accessibility isn't just talk either; she truly builds with everyone in mind.',
+    name: 'Elvis Carlos Pesconi Junior',
+    role: 'Senior Developer, Netcompany Banking Services',
+  },
+  {
+    text: 'Leigh operates on integrity, transparency, and punctuality. Exactly what was missing in my other website projects.',
+    name: 'Trina Truong',
+    role: 'Entrepreneur and Business Owner',
+  },
+];
+
+const experience = [
+  {
+    company: 'Netcompany Banking Services',
+    role: 'Senior Web Developer, Platform and Website Lead',
+    period: 'September 2023 to present · Copenhagen',
+    body: `I'm part of the team building and evolving a core banking platform that spans more than 50 financial institutions across the Nordic region, touching the online banking experience of over 2 million end users. Within that, I led the company-wide accessibility initiative from start to finish: defining the WCAG 2.2 compliance standards, architecting and implementing automated accessibility testing into the Azure DevOps CI/CD pipeline at every stage from IDE to unit tests to integration tests to end-to-end to CI, training the team, and guiding implementation across all digital products. The goal was to make accessibility a required and painless part of how the team already works, and that's what it has become. Beyond that initiative, I consistently perform among the highest in the team across architecture, delivery, code quality, and mentoring.`,
+  },
+  {
+    company: 'Neptune Illume',
+    role: 'Founder and Senior Web Developer',
+    period: 'June 2007 to present · Remote',
+    body: `End-to-end digital product studio serving clients in wellness, education, and nonprofit. Selected work includes the Himalayan Institute platform rebuild (new brand identity, tiered subscription membership, multimedia library, and event calendar, with full UX research and front-end build), a multilingual DE/EN Shopify store for Rinchenshop.com including event registration, GDPR-compliant analytics, and a WordPress content feed, two Magento stores for City Bird Registry and Mega Supply Store, and ongoing web strategy and development for Yoga International, Chattra Yoga, Nikki Estrada, Pacific Yoga, and others.`,
+  },
+  {
+    company: 'Yoga International',
+    role: 'Marketing Specialist',
+    period: 'July 2020 to September 2021 · Remote',
+    body: `Drove a 73% increase in paid memberships through data-driven course creation and conversion-focused email campaigns to an audience of 800,000 to 1,000,000 subscribers. Produced approximately 50 online courses in Contentful, built corresponding landing pages in HubSpot with A/B-tested copy and CTAs, and analysed acquisition and conversion data in Google Analytics to inform ongoing strategy. Role ended following company acquisition and restructuring.`,
+  },
+  {
+    company: 'SystemArchitecture.NET',
+    role: 'Software Developer and UX Consultant',
+    period: 'August 2017 to January 2019 · Remote',
+    body: `Built and evolved application and website platforms for multiple clients across full-stack .NET, C#, SQL, and PHP/WordPress, with direct stakeholder collaboration on requirements, UX, and delivery.`,
+  },
+  {
+    company: 'Health Advocate',
+    role: 'Senior Interactive Developer, Marketing',
+    period: 'August 2013 to October 2015 · Plymouth Meeting, PA',
+    body: `Developed marketing websites and interactive tools for a healthcare benefits company serving major corporate clients including Merck and Bristol-Myers Squibb.`,
+  },
 ];
 ---
 
 <BuildLayout
   title="Work — Leigh Bertelsen"
-  description="Senior web developer. Fintech, accessibility, and 14 years of making the web better."
+  description="Senior web developer with 17 years of experience across fintech, e-commerce, nonprofits, and wellness."
 >
   <div class="page">
-    <section class="hero" aria-label="Introduction">
-      <p class="eyebrow">// senior web developer · accessibility</p>
 
-      <h1 class="headline">
-        Building things that<br />
-        work for <span class="emph">everyone</span>.
-      </h1>
+    {/* ── Hero ─────────────────────────────────────────────── */}
+    <section class="hero" aria-label="Introduction">
+      <p class="eyebrow">// senior web developer · principal-level · accessibility</p>
+
+      <h1 class="headline">Building things that work for everyone.</h1>
 
       <p class="subline">
-        Fintech, accessibility, and 14 years of making the web better —
-        for every user, on every device.
+        17 years of full-stack experience across fintech, e-commerce, nonprofits,
+        and wellness. I love getting a high-level overview of what a business needs
+        and then running with it from planning to execution, because that amount of
+        ownership and responsibility is where I do my best work.
       </p>
-
-      <ul class="tags" role="list">
-        {tags.map((t) => <li class="tag">{t}</li>)}
-      </ul>
     </section>
 
+    {/* ── Featured cards ───────────────────────────────────── */}
     <section class="featured" aria-label="Featured work">
       <h2 class="sr-only">Featured work</h2>
 
@@ -52,24 +119,108 @@ const tags = [
         <a class="card-link" href="/build/projects">How it's built →</a>
       </article>
     </section>
+
+    {/* ── Current role ─────────────────────────────────────── */}
+    <section class="section" aria-label="Current role">
+      <p class="section-label">currently</p>
+      <h2 class="section-title">Senior Web Developer, Platform and Website Lead</h2>
+      <p class="section-meta">Netcompany Banking Services · Copenhagen · September 2023 to present</p>
+      <p class="section-body">
+        I'm part of the team building and evolving a core banking platform that spans more
+        than 50 financial institutions across the Nordic region, touching the online banking
+        experience of over 2 million end users. Within that, I led the company-wide
+        accessibility initiative from start to finish: defining the WCAG 2.2 compliance
+        standards, architecting and implementing automated accessibility testing into the
+        Azure DevOps CI/CD pipeline at every stage from IDE to unit tests to integration
+        tests to end-to-end to CI, training the team, and guiding implementation across
+        all digital products. The goal was to make accessibility a required and painless
+        part of how the team already works, and that's what it has become. Beyond that
+        initiative, I consistently perform among the highest in the team across
+        architecture, delivery, code quality, and mentoring.
+      </p>
+    </section>
+
+    {/* ── For clients ──────────────────────────────────────── */}
+    <section class="section" aria-label="For clients">
+      <p class="section-label">for clients</p>
+      <h2 class="section-title">
+        You don't need to know how it works.<br class="title-break" /> You just need to know what you want.
+      </h2>
+      <p class="section-body">
+        I've spent much of my career working with business owners, yoga teachers, authors,
+        nonprofits, and wellness practitioners — people who had a clear sense of what they
+        wanted their web presence to feel like but no idea how to get there technically.
+        That's the gap I close. Tell me the vibe, the goals, the audience you're trying to
+        reach, and I'll translate that into something that works beautifully, performs well,
+        and actually sounds like you. The number one thing clients tell me afterward is that
+        I delivered more than they expected, faster than they thought possible. That's not
+        an accident. I have a knack for immediately gathering the information that matters,
+        and I care deeply about people's time.
+      </p>
+      <p class="section-body">
+        A recent example: <a class="inline-link" href="https://yogasoleil.dk" target="_blank" rel="noopener">yogasoleil.dk</a>,
+        a site for a practitioner who does massage, yoga, and youth mentoring. She knew it
+        was important to have a web presence but had no idea where to start technically. We
+        worked through what her business needed, and what came out was a site that works as
+        a real marketing tool, is easy for her to navigate and update, and genuinely sounds
+        like her. We're still building on it together.
+      </p>
+    </section>
+
+    {/* ── Recommendations ──────────────────────────────────── */}
+    <section class="section" aria-label="Recommendations">
+      <p class="section-label">what people say</p>
+      <ul class="quotes-grid" role="list">
+        {quotes.map((q) => (
+          <li class="quote-card">
+            <blockquote class="quote-text">"{q.text}"</blockquote>
+            <footer class="quote-attr">
+              <span class="quote-name">{q.name}</span>
+              <span class="quote-role">{q.role}</span>
+            </footer>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {/* ── Experience ───────────────────────────────────────── */}
+    <section class="section" aria-label="Experience">
+      <p class="section-label">experience</p>
+      <ol class="timeline" role="list">
+        {experience.map((e) => (
+          <li class="timeline-entry">
+            <p class="timeline-period">{e.period}</p>
+            <h3 class="timeline-company">{e.company}</h3>
+            <p class="timeline-role">{e.role}</p>
+            <p class="timeline-body">{e.body}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    {/* ── Skills ───────────────────────────────────────────── */}
+    <section class="section" aria-label="Skills and tools">
+      <p class="section-label">skills and tools</p>
+      <ul class="tags" role="list">
+        {tags.map((t) => <li class="tag">{t}</li>)}
+      </ul>
+    </section>
+
   </div>
 </BuildLayout>
 
 <style>
+  /* ── page wrapper ──────────────────────── */
   .page {
     max-width: 860px;
     margin-inline: auto;
-    padding: 6rem 2rem 4rem;
+    padding: 6rem 2rem 5rem;
   }
   @media (max-width: 767px) {
     .page {
-      /* mobile: clear the fixed sigil pill (top: 1.5rem + 44px min-target
-         = 68px) with ~12px breathing room. Going much beyond pushes
-         the hero below the fold. */
       max-width: 100%;
       padding: 5rem 1.25rem 6rem;
     }
-    /* Tighten the gap between stacked featured cards on mobile. */
     .featured { gap: 1rem; }
   }
 
@@ -94,38 +245,19 @@ const tags = [
     color: var(--color-text-primary);
     margin: 0;
   }
-  .emph { font-weight: 500; }
   .subline {
     font-family: var(--font-sans);
     font-weight: 300;
     font-size: clamp(15px, 2vw, 17px);
-    line-height: 1.5;
+    line-height: 1.65;
     color: var(--color-text-secondary);
     margin: 0;
-    max-width: 54ch;
-  }
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    list-style: none;
-    padding: 0;
-    margin: 0.5rem 0 0;
-  }
-  .tag {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    background: var(--color-surface);
-    border: 0.5px solid var(--color-border);
-    border-radius: 99px;
-    padding: 3px 10px;
-    color: var(--color-text-secondary);
-    letter-spacing: 0.02em;
+    max-width: 64ch;
   }
 
   /* ── featured cards ───────────────────── */
   .featured {
-    margin-top: 4rem;
+    margin-top: 3.5rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
@@ -174,6 +306,187 @@ const tags = [
   }
   .card-link:hover { text-decoration: underline; }
 
+  /* ── shared section chrome ────────────── */
+  .section {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 0.5px solid var(--color-border);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(18px, 2.5vw, 22px);
+    line-height: 1.3;
+    color: var(--color-text-primary);
+    margin: 0 0 0.5rem;
+  }
+  .title-break { display: inline; }
+  @media (max-width: 560px) {
+    .title-break { display: none; }
+  }
+
+  .section-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: var(--color-text-secondary);
+    margin: 0 0 1.25rem;
+  }
+
+  .section-body {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(14px, 1.8vw, 15px);
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin: 0 0 1em;
+    max-width: 72ch;
+  }
+  .section-body:last-child { margin-bottom: 0; }
+
+  .inline-link {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .inline-link:hover { text-decoration: underline; }
+
+  /* ── recommendations ──────────────────── */
+  .quotes-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .quotes-grid { grid-template-columns: 1fr; }
+  }
+
+  .quote-card {
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .quote-text {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .quote-attr {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .quote-name {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+  .quote-role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  /* ── experience timeline ──────────────── */
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timeline-entry {
+    padding: 1.75rem 0;
+    border-bottom: 0.5px solid var(--color-border);
+  }
+  .timeline-entry:first-child { padding-top: 0; }
+  .timeline-entry:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-period {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin: 0 0 0.35rem;
+  }
+
+  .timeline-company {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--color-text-primary);
+    margin: 0 0 0.2rem;
+  }
+
+  .timeline-role {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin: 0 0 0.75rem;
+  }
+
+  .timeline-body {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 72ch;
+  }
+
+  /* ── skills tag cloud ─────────────────── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    border-radius: 99px;
+    padding: 3px 10px;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── utilities ────────────────────────── */
   .sr-only {
     position: absolute;
     width: 1px; height: 1px;
