@@ -1,18 +1,133 @@
 ---
 import BreatheLayout from '@/layouts/BreatheLayout.astro';
 import Sigil from '@/components/ui/Sigil.astro';
+
+const quotes = [
+  {
+    text: "Through working with Leigh, I've achieved challenging personal and career objectives, improving my relationship with my community, and found greater balance in my life. Leigh masterfully cultivates a peaceful and welcoming space in which you feel heard, seen and validated.",
+    attr: 'Client, career and personal growth',
+  },
+  {
+    text: "Leigh's coaching session was a treasure. With Leigh's guidance we reached important soul inspired answers. Leigh held space for me to find my truth and my soul's voice.",
+    attr: 'Client, clarity and direction',
+  },
+];
 ---
 
 <BreatheLayout title="About — Breathe — Leigh Bertelsen">
-  <div class="placeholder">
-    <h1>About</h1>
+  <div class="page">
 
+    {/* ── Opening ────────────────────────────────────────── */}
+    <section class="intro" aria-label="Introduction">
+      <p class="body">
+        I've been practicing yoga for most of my adult life and teaching for over a decade.
+        My path into it was never straight, which is probably why I teach the way I do.
+      </p>
+      <p class="body">
+        I've taught in Denmark, Laos, Thailand, Nepal, Austria, India, and the US — in
+        studios, at universities, in corporate settings, and online. The common thread has
+        always been the same: meeting people where they are, and offering something that's
+        actually useful.
+      </p>
+    </section>
+
+    {/* ── The foundation ─────────────────────────────────── */}
+    <section class="section" aria-label="Training">
+      <p class="section-label">training</p>
+      <h2 class="section-title">The foundation</h2>
+      <p class="body">
+        My formal training began with a 250-hour Vinyasa certification and a 40-hour Yin
+        training with Corina Benner at Wake Up Yoga in Philadelphia. I added an Ayurveda
+        Yoga Specialist certification with Kathryn Templeton, a Restorative Yoga Teacher
+        Training with Cyndi Lee, a Yoga Nidra Teacher Training with Hilary Jackendoff, and
+        a Reiki Level 1 attunement. In 2016 I completed the 500-hour Hatha yoga teacher
+        training with the Himalayan Institute faculty: Pandit Rajmani Tigunait, Rolf Sovik,
+        Sandra Anderson, Shari Friedrichsen, and Judy Moulton, along with separate
+        programmes in Yoga Nidra, Samkhya philosophy, and Ashtanga fundamentals with David
+        Swenson. I hold the Yoga Alliance RYT-500 certification.
+      </p>
+      <p class="body">
+        From 2025 to 2026 I completed the Priestess Facilitation Training with Sianna
+        Sherman, a nine-month container exploring the Wheel of the Year, dream temples,
+        sacred circles, ritual facilitation, moon and zodiac magic, and more. This training
+        is the direct source of the seasonal gatherings I offer.
+      </p>
+    </section>
+
+    {/* ── Going further ──────────────────────────────────── */}
+    <section class="section" aria-label="The study">
+      <p class="section-label">the study</p>
+      <h2 class="section-title">Going further</h2>
+      <p class="body">
+        The formal training was only the beginning. I've spent years in serious study of
+        contemplative practice across traditions: a three-month accredited summer course at
+        Gomde Germany-Austria through the Rangjung Yeshe Institute, where I studied with
+        Chökyi Nyima Rinpoche and faculty from Harvard, Oxford, and beyond; a 30-day course
+        at Kopan Monastery in Kathmandu taught by Venerable Robina Courtin; and courses at
+        Tushita Meditation Centre in Dharamshala with Venerable Drolma. I've also studied
+        Yoga and Shamanism with Ray Crist at Kripalu, and the Psychology of the Chakras
+        with Anodea Judith.
+      </p>
+      <p class="body">
+        I've been reading tarot for 25 years, and have studied witchcraft, paganism,
+        Gnosticism, Mahayana Buddhism, and Hindu Tantra in the Sri Vidya lineage. After
+        years of looking for the definitive teacher or the definitive practice, I eventually
+        stopped looking and started weaving. What I teach comes from everything I've
+        absorbed, filtered through what I've actually found to be true.
+      </p>
+    </section>
+
+    {/* ── What to expect ─────────────────────────────────── */}
+    <section class="section" aria-label="How I work">
+      <p class="section-label">how I work</p>
+      <h2 class="section-title">What to expect</h2>
+      <p class="body">
+        I work one-to-one, online, with people looking for something more personalised than
+        a class setting offers. Some come for the physical practice. Some come for Yoga
+        Nidra or meditation. Some want Ayurvedic guidance or tarot woven in. Some are at a
+        crossroads and yoga is part of how they think. We figure it out together.
+      </p>
+      <p class="body">
+        I'm also an ICF-certified coach — trained through She Leads (formerly The Clique
+        Method) — and that informs how I hold sessions. I ask questions, I listen carefully,
+        and I follow what's actually needed rather than a fixed curriculum. The Wheel of the
+        Year gatherings are a different kind of offering: communal, ritual, open, and rooted
+        in the Priestess training. They're for people who want to mark the turning of the
+        seasons with others who take that seriously.
+      </p>
+    </section>
+
+    {/* ── Kind words ─────────────────────────────────────── */}
+    <section class="section" aria-label="Kind words">
+      <p class="section-label">kind words</p>
+      <ul class="quotes-grid" role="list">
+        {quotes.map((q) => (
+          <li class="quote-card">
+            <blockquote class="quote-text">"{q.text}"</blockquote>
+            <footer class="quote-attr">— {q.attr}</footer>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {/* ── Contact ────────────────────────────────────────── */}
+    <section class="section" aria-label="Get in touch">
+      <p class="section-label">get in touch</p>
+      <p class="body">If any of this resonates, I'd love to hear from you.</p>
+      {/* Entity-encoded mailto: leigh.bertelsen@gmail.com */}
+      <a class="contact-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#105;&#103;&#104;&#46;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
+        get in touch
+      </a>
+    </section>
+
+    {/* ── Easter egg ─────────────────────────────────────── */}
     <div class="easter-egg-area">
       <button class="egg-sigil" aria-label="Sigil" data-egg-sigil>
         <Sigil size={28} />
       </button>
       <p class="hint">linger here a moment</p>
     </div>
+
   </div>
 </BreatheLayout>
 
@@ -26,16 +141,12 @@ import Sigil from '@/components/ui/Sigil.astro';
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function navigate() {
-      if (prefersReduced) {
-        window.location.assign('/personal');
-        return;
-      }
+      if (prefersReduced) { window.location.assign('/personal'); return; }
       gsap.timeline({ onComplete: () => window.location.assign('/personal') })
         .to(btn, { scale: 1.15, duration: 0.2, ease: 'power2.out' })
         .to(btn, { scale: 1,    duration: 0.2, ease: 'power2.in' });
     }
 
-    // Desktop — slow double-click (100–600ms between clicks)
     let lastClick = 0;
     btn.addEventListener('click', () => {
       const now = Date.now();
@@ -44,7 +155,6 @@ import Sigil from '@/components/ui/Sigil.astro';
       if (gap >= 100 && gap <= 600) navigate();
     });
 
-    // Mobile — long press (600ms)
     let pressTimer: ReturnType<typeof setTimeout> | null = null;
     btn.addEventListener('touchstart', (e) => {
       e.preventDefault();
@@ -63,25 +173,110 @@ import Sigil from '@/components/ui/Sigil.astro';
 </script>
 
 <style>
-  .placeholder {
-    max-width: 800px;
+  .page {
+    max-width: 760px;
     margin-inline: auto;
-    padding: 6rem 2rem 4rem;
+    padding: 6rem 2rem 5rem;
   }
   @media (max-width: 767px) {
-    .placeholder { padding: 5rem 1.5rem 6rem; }
+    .page { padding: 5rem 1.5rem 6rem; }
   }
-  h1 {
+
+  /* ── body prose ───────────────────────── */
+  .body {
+    font-family: var(--font-serif-breathe);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--color-text-primary);
+    margin: 0 0 1.25em;
+    max-width: 62ch;
+  }
+  .body:last-of-type { margin-bottom: 0; }
+
+  /* ── section chrome ───────────────────── */
+  .section {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 0.5px solid var(--color-border);
+  }
+
+  .section-label {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .section-title {
     font-family: var(--font-serif-breathe);
     font-weight: 300;
     font-style: italic;
-    font-size: clamp(48px, 7vw, 72px);
-    line-height: 1.1;
+    font-size: 28px;
+    line-height: 1.2;
     color: var(--color-text-primary);
-    margin: 0 0 4rem;
+    margin: 0 0 1.5rem;
   }
 
-  /* ── easter egg ── */
+  /* ── kind words ───────────────────────── */
+  .quotes-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .quotes-grid { grid-template-columns: 1fr; }
+  }
+
+  .quote-card {
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .quote-text {
+    font-family: var(--font-serif-breathe);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .quote-attr {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  /* ── contact ──────────────────────────── */
+  .contact-link {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-accent);
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: opacity 200ms ease;
+  }
+  .contact-link:hover { opacity: 0.75; }
+
+  /* ── easter egg ───────────────────────── */
   .easter-egg-area {
     display: flex;
     flex-direction: column;

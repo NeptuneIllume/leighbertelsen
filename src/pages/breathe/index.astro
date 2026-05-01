@@ -48,24 +48,32 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
         <span class="card-label">practice together</span>
         <h3 class="card-title">Private sessions</h3>
         <p class="card-body">
-          Yin, Yoga Nidra, and restorative practice — online, at your pace.
+          One-to-one sessions online, built around where you are and what you need. I teach
+          Yin, Vinyasa, Hatha, Restorative, Yoga Nidra, and Gentle yoga, alongside Ayurvedic
+          guidance, meditation, and tarot — or a combination of whatever feels right. We start
+          with a conversation to work out what makes sense. Sessions can be combined with
+          coaching if that feels useful.
         </p>
-        <a class="card-link" href="/breathe/about">Get in touch →</a>
+        {/* Entity-encoded mailto: leigh.bertelsen@gmail.com */}
+        <a class="card-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#105;&#103;&#104;&#46;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">Get in touch →</a>
       </article>
 
       <article class="card">
         <span class="card-label">gather</span>
         <h3 class="card-title">Seasonal circles</h3>
         <p class="card-body">
-          Online gatherings marking the Wheel of the Year — open to all, rooted in ritual.
+          Online gatherings marking the Wheel of the Year, from Imbolc to Samhain and the
+          solstices and equinoxes in between. Open to all. Rooted in ritual, held with care.
+          Join the list to hear when the next one is coming.
         </p>
-        <a class="card-link" href="/breathe/about">See what's coming →</a>
+        {/* Entity-encoded mailto: leigh.bertelsen@gmail.com */}
+        <a class="card-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#105;&#103;&#104;&#46;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">Join the list →</a>
       </article>
     </section>
 
     <section class="newsletter" aria-label="Stay connected">
       <p class="news-heading">Want to know when the next circle is?</p>
-      <p class="news-sub">Join the list — no noise, just signal and seasons.</p>
+      <p class="news-sub">I send word when something is happening, and occasionally write about the season we're in. No noise, just signal and seasons.</p>
       <form class="news-form" onsubmit="event.preventDefault()">
         <label class="sr-only" for="news-email">Email address</label>
         <input id="news-email" type="email" placeholder="your@email" autocomplete="email" />
