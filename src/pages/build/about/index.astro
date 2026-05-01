@@ -7,21 +7,25 @@ const education = [
     institution: 'Drexel University',
     detail: 'B.S. Digital Media, Fine Art Minor, Graduated with Honors',
     period: 'September 2005 to June 2009 · Philadelphia, PA',
+    description: 'A liberal arts curriculum grounded in 3D modelling and animation, human-computer interaction, web development, programming principles, design, new media theory, and photo, audio, and video processing. This is where I learned to think about technology and design as inseparable disciplines.',
   },
   {
     institution: 'She Leads',
     detail: 'ICF-Accredited Coach Certification',
     period: '',
+    description: 'Coach training grounded in ICF methodology, feminine leadership, somatic and nervous system approaches, and self-worth as a foundation for change. This training deepened what I already knew from years of yoga and contemplative study and gave it a practical coaching framework.',
   },
   {
     institution: 'FreeCodeCamp',
     detail: 'Responsive Web Design · JavaScript Algorithms and Data Structures · Front End Libraries',
     period: 'January to March 2020',
+    description: '',
   },
   {
     institution: 'Marie Forleo',
     detail: 'B-School, Marketing Certification · The Copy Cure, Copywriting Certification',
     period: 'March to June 2020',
+    description: '',
   },
 ];
 ---
@@ -79,7 +83,7 @@ const education = [
     <section class="section" aria-label="Beyond the work">
       <p class="section-label">beyond the work</p>
       <p class="body">
-        I'm also a 500hr-certified yoga teacher, an ICF-accredited coach, and someone who
+        I'm also a 500-hour certified yoga teacher, an ICF-accredited coach, and someone who
         has spent a significant part of her life in serious study of contemplative practice,
         from monasteries in Nepal and India to academic Buddhist studies in Germany. I
         mention this not because it's unusual, but because it's part of how I approach
@@ -89,8 +93,9 @@ const education = [
         <a class="inline-link" href="/be">Be</a>.
       </p>
       <p class="body">
-        I live in Copenhagen with my husband Mads. I have a small garden, I knit mostly
-        socks, and I mark the turning of the year.
+        I live by a forest outside of Copenhagen with my husband Mads and our dog Nighteyes.
+        I have a small garden, I'm a maker in the broadest sense of the word, from building
+        things with Raspberry Pi to crochet to watercolour, and I mark the turning of the year.
       </p>
     </section>
 
@@ -103,6 +108,7 @@ const education = [
             <span class="edu-institution">{e.institution}</span>
             <span class="edu-detail">{e.detail}</span>
             {e.period && <span class="edu-period">{e.period}</span>}
+            {e.description && <span class="edu-description">{e.description}</span>}
           </li>
         ))}
       </ul>
@@ -116,8 +122,11 @@ const education = [
         thinking, and a genuine interest in the people on the other end of the screen, I'd
         love to hear from you.
       </p>
-      <a class="email-cta" href="mailto:leigh.bertelsen@gmail.com">
-        leigh.bertelsen@gmail.com
+      {/* HTML entity encoding — reduces harvesting by email spam bots
+          while remaining fully functional for human visitors and screen
+          readers. Encodes: mailto:leigh.bertelsen@gmail.com */}
+      <a class="email-cta" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#105;&#103;&#104;&#46;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
+        get in touch
       </a>
     </section>
 
@@ -254,6 +263,15 @@ const education = [
     letter-spacing: 0.04em;
     color: var(--color-text-secondary);
     margin-top: 0.1rem;
+  }
+
+  .edu-description {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
   }
 
   /* ── contact ──────────────────────────── */
