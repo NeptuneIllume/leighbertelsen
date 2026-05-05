@@ -33,6 +33,8 @@ const education = [
 <BuildLayout title="About — Build — Leigh Bertelsen">
   <div class="page">
 
+    <h1 class="headline">Calm, focused, kind.</h1>
+
     {/* ── Intro ──────────────────────────────────────────── */}
     <section class="intro" aria-label="Introduction">
       <p class="body">
@@ -205,6 +207,16 @@ const education = [
   .body:last-of-type { margin-bottom: 0; }
 
   /* ── section chrome ───────────────────── */
+  .headline {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin-bottom: 1.25rem;
+  }
+
   .section {
     margin-top: 3rem;
     padding-top: 3rem;
@@ -313,7 +325,6 @@ const education = [
     font-size: 11px;
     letter-spacing: 0.06em;
     color: var(--color-tab-dim);
-    opacity: 0.6;
     margin: 0;
     user-select: none;
   }
