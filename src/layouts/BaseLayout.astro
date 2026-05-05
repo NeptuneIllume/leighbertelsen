@@ -8,6 +8,8 @@ interface Props {
   description?: string;
   theme?: 'membrane' | 'build' | 'breathe' | 'be' | 'personal';
   season?: 'spring' | 'summer' | 'autumn' | 'winter';
+  footerHint?: string;
+  footerTarget?: string;
 }
 
 const {
@@ -15,6 +17,8 @@ const {
   description = 'Leigh Bertelsen — Build · Breathe · Be',
   theme = 'membrane',
   season,
+  footerHint = 'linger here a moment',
+  footerTarget = '/personal',
 } = Astro.props;
 
 // Only apply data-theme for the three public worlds (membrane stays bare).
@@ -60,7 +64,50 @@ const themeAttr = theme === 'membrane' ? undefined : theme;
       <slot />
     </main>
 
-    <slot name="footer" />
+    <slot name="footer">
+      <footer class="site-footer">
+        <button class="footer-signature" aria-label="Sigil" data-egg-sigil data-egg-target={footerTarget}>
+          <Sigil size={20} />
+          <span class="footer-text">{footerHint}</span>
+        </button>
+      </footer>
+    </slot>
+
+    <script>
+      function init() {
+        const btn = document.querySelector<HTMLElement>('[data-egg-sigil]');
+        if (!btn) return;
+
+        const target = btn.dataset.eggTarget || '/personal';
+
+        function navigate() {
+          window.location.assign(target);
+        }
+
+        let lastClick = 0;
+        btn.addEventListener('click', () => {
+          const now = Date.now();
+          const gap = now - lastClick;
+          lastClick = now;
+          if (gap >= 100 && gap <= 600) navigate();
+        });
+
+        let pressTimer: ReturnType<typeof setTimeout> | null = null;
+        btn.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          pressTimer = setTimeout(navigate, 600);
+        }, { passive: false });
+        btn.addEventListener('touchend', () => {
+          if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+        });
+        btn.addEventListener('touchmove', () => {
+          if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+        });
+      }
+
+      init();
+      document.addEventListener('astro:page-load', init);
+    </script>
 
     <style>
       .site-header {
@@ -72,6 +119,36 @@ const themeAttr = theme === 'membrane' ? undefined : theme;
       .sigil-link {
         display: inline-flex;
         color: var(--color-accent, var(--color-text));
+      }
+      .site-footer {
+        padding: 3rem 1.5rem 2rem;
+        display: flex;
+        justify-content: center;
+      }
+      .footer-signature {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        opacity: 0.6;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        margin: -0.5rem;
+        cursor: pointer;
+        transition: opacity 200ms ease;
+        transform-origin: center;
+      }
+      .footer-signature:hover {
+        opacity: 0.85;
+      }
+      .footer-text {
+        font-family: var(--font-sans);
+        font-size: 0.875rem;
+        font-weight: 300;
+        font-style: italic;
+        letter-spacing: 0.02em;
+        color: var(--color-text-secondary, var(--color-text));
+        user-select: none;
       }
       .sr-only {
         position: absolute;

@@ -5,8 +5,6 @@ import Sigil from '@/components/ui/Sigil.astro';
 import { getCollection } from 'astro:content';
 import leighSketching from '@/assets/images/personal/leigh-sketching-nepal.jpg';
 import leighPokhara from '@/assets/images/personal/leigh-pokhara-overlook.jpg';
-import leighCaveTemple from '@/assets/images/personal/leigh-cave-temple.jpg';
-import leighStreetDog from '@/assets/images/personal/leigh-street-dog.jpg';
 
 // Personal posts — empty gracefully if none exist.
 const allPosts = await getCollection('posts', ({ data }) => data.world === 'personal');
@@ -29,6 +27,8 @@ const interests = [
   title="The Garden — Leigh Bertelsen"
   description="You found the garden."
   theme="membrane"
+  footerHint="breathe in, breathe out"
+  footerTarget="/"
 >
   {/* Suppress default header — personal page has its own sigil. */}
   <Fragment slot="header" />
@@ -66,15 +66,7 @@ const interests = [
       <Image src={leighPokhara}
         alt="Leigh overlooking Pokhara city and lake from a hilltop"
         widths={[400, 600]} sizes="33vw"
-        class="strip-photo" />
-      <Image src={leighCaveTemple}
-        alt="Leigh Bertelsen at a cave temple in Southeast Asia"
-        widths={[400, 600]} sizes="33vw"
-        class="strip-photo" />
-      <Image src={leighStreetDog}
-        alt="Leigh with a street dog on a rooftop in Nepal, prayer flags in the background"
-        widths={[400, 600]} sizes="33vw"
-        class="strip-photo" />
+        class="strip-photo strip-photo-right" />
     </section>
 
     {posts.length > 0 && (
@@ -95,10 +87,6 @@ const interests = [
         </ol>
       </section>
     )}
-
-    <footer class="garden-footer">
-      <a href="/" class="back-link">← back to the beginning</a>
-    </footer>
   </div>
 </BaseLayout>
 
@@ -110,11 +98,11 @@ const interests = [
     min-height: 100dvh;
     max-width: 720px;
     margin-inline: auto;
-    padding: 4rem 2rem 5rem;
+    padding: 4rem 2rem 2rem;
     font-family: var(--font-sans);
   }
   @media (max-width: 767px) {
-    .garden { padding: 3rem 1.5rem 4rem; }
+    .garden { padding: 3rem 1.5rem 1.5rem; }
   }
 
   /* ── sigil ───────────────────────────────────── */
@@ -207,6 +195,9 @@ const interests = [
     aspect-ratio: 3/4;
     object-fit: cover;
   }
+  .strip-photo-right {
+    object-position: right center;
+  }
 
   /* ── personal writing ────────────────────────── */
   .writing { margin-bottom: 3.5rem; }
@@ -258,17 +249,4 @@ const interests = [
     color: #7A6040;
     margin: 0;
   }
-
-  /* ── footer ──────────────────────────────────── */
-  .garden-footer { margin-top: 4rem; text-align: center; }
-  .back-link {
-    font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: 11px;
-    color: #7A6040;
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 200ms ease;
-  }
-  .back-link:hover { color: #8B6914; }
 </style>

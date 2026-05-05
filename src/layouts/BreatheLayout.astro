@@ -19,7 +19,6 @@ const season: Season = seasonOverride ?? getSeason();
   <div transition:name="breathe-content">
     <slot />
   </div>
-  <slot name="footer" slot="footer" />
 </BaseLayout>
 
 <style is:global>
@@ -47,7 +46,7 @@ const season: Season = seasonOverride ?? getSeason();
     font-family: var(--font-serif-breathe);
     font-weight: 300;
     font-style: italic;
-    font-size: clamp(3.5rem, 6vw, 4.5rem);
+    font-size: clamp(56px, 7vw, 96px);
     line-height: 1.1;
   }
   [data-theme="breathe"] h2 {

@@ -14,7 +14,6 @@ const { title, description } = Astro.props;
   <div transition:name="build-content">
     <slot />
   </div>
-  <slot name="footer" slot="footer" />
 </BaseLayout>
 
 <style is:global>
@@ -43,7 +42,7 @@ const { title, description } = Astro.props;
   [data-theme="build"] .display {
     font-family: var(--font-sans);
     font-weight: 300;
-    font-size: clamp(3rem, 5vw, 4rem);
+    font-size: clamp(48px, 6vw, 80px);
     letter-spacing: -0.02em;
     line-height: 1.05;
   }
