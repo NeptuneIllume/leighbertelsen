@@ -302,3 +302,49 @@ html.nav-ready .mobile-sigil,
 html.nav-ready .season-tag {
   opacity: 1 !important;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Image filtering — subtle analog warmth
+   Applied site-wide: desaturate slightly, warm micro bias,
+   lift contrast. Cheap, reversible, uniform.
+   ───────────────────────────────────────────────────────────── */
+img {
+  filter: saturate(0.88) sepia(0.04) contrast(1.03);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Image size constraints
+   ───────────────────────────────────────────────────────────── */
+.hero-image,
+.hero-photo {
+  max-height: 70vh;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Photo captions — italic, small, dated, place-named
+   World-specific typefaces: Cormorant (Breathe), Lora (Be),
+   Fragment Mono (Build).
+   ───────────────────────────────────────────────────────────── */
+.photo-caption {
+  margin-top: 0.5rem;
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--color-text-secondary, var(--color-text-muted));
+}
+
+[data-theme='breathe'] .photo-caption {
+  font-family: var(--font-serif-breathe);
+  font-size: 0.8125rem; /* 13px — slightly larger for serif legibility */
+}
+
+[data-theme='be'] .photo-caption {
+  font-family: var(--font-serif-be);
+  font-size: 0.8125rem; /* 13px */
+}
+
+[data-theme='build'] .photo-caption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; /* 12px — mono reads larger */
+  letter-spacing: 0.01em;
+}
