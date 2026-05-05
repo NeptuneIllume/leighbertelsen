@@ -1,21 +1,41 @@
 ---
+import { Image, getImage } from 'astro:assets';
 import BreatheLayout from '@/layouts/BreatheLayout.astro';
 import Sigil from '@/components/ui/Sigil.astro';
+import leighBali from '@/assets/images/breathe/leigh-bali-temple.jpg';
+import leighNepal from '@/assets/images/breathe/leigh-nepal-shiva.jpg';
+import leighTeaching from '@/assets/images/breathe/leigh-teaching-triangle.jpg';
+import leighWarrior from '@/assets/images/breathe/leigh-hi-warrior.jpg';
+import leighMeditationShrine from '@/assets/images/be/leigh-meditation-shrine.jpg';
+import leighMekong from '@/assets/images/breathe/leigh-mekong-boat.jpg';
+
+const preloadBali = await getImage({ src: leighBali, width: 1200, format: 'webp' });
 
 const quotes = [
   {
-    text: "Through working with Leigh, I've achieved challenging personal and career objectives, improving my relationship with my community, and found greater balance in my life. Leigh masterfully cultivates a peaceful and welcoming space in which you feel heard, seen and validated.",
-    attr: 'Client, career and personal growth',
+    text: "I took your Sunday classes at NOR: a while ago and I loved your style of teaching Yin. It felt relaxing, meditative and flowy.",
+    attr: 'Katrine, student',
   },
   {
-    text: "Leigh's coaching session was a treasure. With Leigh's guidance we reached important soul inspired answers. Leigh held space for me to find my truth and my soul's voice.",
-    attr: 'Client, clarity and direction',
+    text: "You are incredibly language-oriented, from computers, to the body, to the soul, and to the soil.",
+    attr: 'Siobhan',
   },
 ];
 ---
 
+<link rel="preload" as="image" href={preloadBali.src} slot="head" />
+
 <BreatheLayout title="About — Breathe — Leigh Bertelsen">
   <div class="page">
+
+    {/* 1. Hero — Bali temple ─────────────────────────────── */}
+    <Image
+      src={leighBali}
+      alt="Leigh Bertelsen sitting at a temple doorway in Bali with a koi pond in the foreground"
+      widths={[800, 1200, 1600]}
+      sizes="100vw"
+      class="hero-photo"
+    />
 
     {/* ── Opening ────────────────────────────────────────── */}
     <section class="intro" aria-label="Introduction">
@@ -30,6 +50,15 @@ const quotes = [
         actually useful.
       </p>
     </section>
+
+    {/* 2. Nepal/Shiva — after opening ─────────────────────── */}
+    <Image
+      src={leighNepal}
+      alt="Leigh Bertelsen in Pokhara Nepal with the Annapurna range and a Shiva statue behind her"
+      widths={[400, 800]}
+      sizes="(max-width: 768px) 100vw, 560px"
+      class="section-photo"
+    />
 
     {/* ── The foundation ─────────────────────────────────── */}
     <section class="section" aria-label="Training">
@@ -54,6 +83,24 @@ const quotes = [
       </p>
     </section>
 
+    {/* 3. Teaching pair — after training ──────────────────── */}
+    <div class="photo-pair">
+      <Image
+        src={leighTeaching}
+        alt="Leigh Bertelsen teaching triangle pose outdoors at the Himalayan Institute"
+        widths={[400, 700]}
+        sizes="(max-width: 768px) 100vw, 45vw"
+        class="pair-photo"
+      />
+      <Image
+        src={leighWarrior}
+        alt="Leigh Bertelsen and another teacher in warrior pose at the Himalayan Institute in autumn"
+        widths={[400, 700]}
+        sizes="(max-width: 768px) 100vw, 45vw"
+        class="pair-photo"
+      />
+    </div>
+
     {/* ── Going further ──────────────────────────────────── */}
     <section class="section" aria-label="The study">
       <p class="section-label">the study</p>
@@ -77,6 +124,15 @@ const quotes = [
       </p>
     </section>
 
+    {/* 4. Meditation shrine — after going further ─────────── */}
+    <Image
+      src={leighMeditationShrine}
+      alt="Leigh Bertelsen sitting in meditation in front of a shrine"
+      widths={[400, 800]}
+      sizes="(max-width: 768px) 100vw, 560px"
+      class="section-photo"
+    />
+
     {/* ── What to expect ─────────────────────────────────── */}
     <section class="section" aria-label="How I work">
       <p class="section-label">how I work</p>
@@ -96,6 +152,15 @@ const quotes = [
         seasons with others who take that seriously.
       </p>
     </section>
+
+    {/* 5. Mekong atmospheric divider — before kind words ──── */}
+    <Image
+      src={leighMekong}
+      alt="View from the bow of a slow boat on the Mekong river in Laos, looking toward green mountains"
+      widths={[800, 1200]}
+      sizes="100vw"
+      class="wide-photo"
+    />
 
     {/* ── Kind words ─────────────────────────────────────── */}
     <section class="section" aria-label="Kind words">
@@ -180,6 +245,60 @@ const quotes = [
   }
   @media (max-width: 767px) {
     .page { padding: 5rem 1.5rem 6rem; }
+  }
+
+  /* ── photos ──────────────────────────── */
+  .hero-photo {
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto 3rem;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+
+  .section-photo {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 2rem auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
+  .photo-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 2rem auto;
+    max-width: 760px;
+  }
+  @media (max-width: 640px) {
+    .photo-pair { grid-template-columns: 1fr; }
+  }
+  .pair-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
+  .wide-photo {
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 2.5rem auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center 40%;
   }
 
   /* ── body prose ───────────────────────── */

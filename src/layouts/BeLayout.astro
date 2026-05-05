@@ -10,6 +10,7 @@ const { title, description } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} theme="be">
+  <slot name="head" slot="head" />
   <BeNav slot="header" />
   <div transition:name="be-content">
     <slot />

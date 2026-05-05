@@ -119,6 +119,8 @@ const experience = [
       <h2 class="sr-only">Featured work</h2>
 
       <article class="card">
+        {/* Replace with actual project screenshot when available */}
+        <div class="project-image-placeholder" aria-hidden="true"></div>
         <p class="card-label">featured work</p>
         <h3 class="card-title">Accessibility implementation</h3>
         <p class="card-desc">
@@ -129,6 +131,8 @@ const experience = [
       </article>
 
       <article class="card">
+        {/* Replace with actual project screenshot when available */}
+        <div class="project-image-placeholder" aria-hidden="true"></div>
         <p class="card-label">built in public</p>
         <h3 class="card-title">leighbertelsen.com</h3>
         <p class="card-desc">
@@ -286,6 +290,16 @@ const experience = [
     color: var(--color-text-secondary);
     margin: 0;
     max-width: 64ch;
+  }
+
+  /* ── project image placeholder ────────── */
+  .project-image-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--color-surface);
+    border-radius: 6px;
+    border: 0.5px solid var(--color-border);
+    margin-bottom: 0.75rem;
   }
 
   /* ── featured cards ───────────────────── */

@@ -42,6 +42,7 @@ const themeAttr = theme === 'membrane' ? undefined : theme;
     />
 
     <ClientRouter />
+    <slot name="head" />
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only">Skip to content</a>

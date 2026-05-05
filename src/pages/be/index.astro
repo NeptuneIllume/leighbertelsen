@@ -1,5 +1,28 @@
 ---
+import { Image } from 'astro:assets';
 import BeLayout from '@/layouts/BeLayout.astro';
+import leighGolden from '@/assets/images/be/leigh-golden-hour.jpg';
+import leighCacaoRitual from '@/assets/images/breathe/leigh-cacao-ritual.jpg';
+import leighTarotCrystals from '@/assets/images/breathe/leigh-tarot-crystals.jpg';
+
+const quotes = [
+  {
+    text: "Leigh helped me find the focal point and made me feel comfortable during the process.",
+    attr: 'Cat Beck, after a Clarity Coaching session',
+  },
+  {
+    text: "Her coaching is helpful for anyone needing clarity and direction. Leigh held space for me to find my truth and my soul's voice.",
+    attr: 'Kristina Tranckino, after a Clarity Coaching session',
+  },
+  {
+    text: "It was incredibly fulfilling working with Leigh. Her questions and our conversations helped reveal the areas in my life which needed attention — she helped create an accountable action plan, though quite gentle, to bring energy to those areas and inspire growth.",
+    attr: 'Sara Goodberlet, after an ICF coaching session',
+  },
+  {
+    text: "She taught me how to accomplish my professional goals but also take time for spiritual and fun activities that I tend to pay less attention to but need more of in my life.",
+    attr: 'Nadine, coaching client',
+  },
+];
 ---
 
 <BeLayout
@@ -7,6 +30,8 @@ import BeLayout from '@/layouts/BeLayout.astro';
   description="ICF-certified coaching for women in tech who are good at everything except knowing what comes next."
 >
   <div class="page">
+
+    {/* ── Hero — kept exactly as-is ─────────────────────── */}
     <section class="hero" aria-label="Introduction">
       <blockquote class="quote">
         You don't need to burn it all down.
@@ -19,74 +44,115 @@ import BeLayout from '@/layouts/BeLayout.astro';
       <a class="cta" href="#offerings">Work with me →</a>
     </section>
 
+    <Image
+      src={leighGolden}
+      alt="Leigh Bertelsen in a sunlit field outside Copenhagen"
+      widths={[400, 800]}
+      sizes="(max-width: 768px) 100vw, 480px"
+      class="be-portrait"
+    />
+
+    {/* ── Offerings ────────────────────────────────────── */}
     <section class="offerings" id="offerings" aria-label="Ways to work together">
       <h2 class="sr-only">Ways to work together</h2>
 
       <article class="card">
         <span class="card-label">1:1 coaching</span>
-        <h3 class="card-title">Individual sessions</h3>
+        <h3 class="card-title">A series of sessions</h3>
         <p class="card-body">
-          Six or twelve sessions. Space to think, feel, and figure out what you
-          actually want.
+          Five or ten sessions, held online. We use self-inquiry, mindfulness, and practices
+          drawn from yoga and somatic work to help you get clear on what you actually want
+          and move toward it. Sessions can be mixed: coaching, yoga, or tarot, depending on
+          where you are and what you need.
         </p>
-        <a class="card-link" href="/be/about">Learn more →</a>
+        <a class="card-link" href="/be/method">Learn more →</a>
       </article>
 
       <article class="card">
         <span class="card-label">deep dive</span>
-        <h3 class="card-title">Intensive</h3>
+        <h3 class="card-title">Half-day intensive</h3>
         <p class="card-body">
-          A half-day session for when you need clarity fast and you're done waiting
-          for it.
+          For when you need clarity and you're done waiting for it. We go deep in one
+          focused session, useful when you're at a crossroads and slow isn't an option.
         </p>
-        <a class="card-link" href="/be/about">Learn more →</a>
+        <a class="card-link" href="/be/method">Learn more →</a>
       </article>
 
       <article class="card">
         <span class="card-label">first step</span>
-        <h3 class="card-title">Discovery call</h3>
+        <h3 class="card-title">A free conversation</h3>
         <p class="card-body">
-          A free 30-minute conversation to see if we're a good fit. No pressure,
-          no pitch.
+          Before anything else, we talk. Thirty minutes to see if this feels right for both
+          of us. No pitch, no pressure, just an honest conversation about where you are and
+          whether I can actually help.
         </p>
-        <a class="card-link card-link-strong" href="/be/about">Book a call →</a>
+        <a class="card-link card-link-strong" href="https://calendly.com/leigh-olesen/coaching-discovery-session" target="_blank" rel="noopener">Book a call →</a>
       </article>
     </section>
-  </div>
 
-  <section class="kind-words" aria-label="Kind words">
-    <h2 class="sr-only">Kind words</h2>
-    <div class="kind-words-inner">
-      <figure class="quote-block">
-        <blockquote>
-          Working with Leigh changed how I think about my career entirely. I finally
-          feel like I'm making decisions for myself.
-        </blockquote>
-        <figcaption>— Software engineer, Copenhagen</figcaption>
-      </figure>
+    {/* ── Pricing ──────────────────────────────────────── */}
+    <section class="pricing" aria-label="Investment">
+      <p class="section-label">investment</p>
+      <h2 class="pricing-title">Pricing</h2>
+      <p class="pricing-body">
+        Sessions are available in packs of five or ten. A pack of five sessions is $1,100
+        or 7,750 kr. A pack of ten sessions is $2,000 or 14,100 kr. Sessions are not sold
+        individually — in my experience, real change needs time to take root.
+      </p>
+      <p class="pricing-body">
+        It is possible to combine session types across a pack, for example five coaching
+        sessions, four yoga sessions, and one tarot reading. Sessions are held online and
+        in English. A free discovery call is required before purchase, so we can make sure
+        this is the right fit.
+      </p>
+      <a class="pricing-cta" href="https://calendly.com/leigh-olesen/coaching-discovery-session" target="_blank" rel="noopener">
+        Book your free call →
+      </a>
+    </section>
 
-      <figure class="quote-block">
-        <blockquote>
-          Working with Leigh changed how I think about my career entirely. I finally
-          feel like I'm making decisions for myself.
-        </blockquote>
-        <figcaption>— Software engineer, Copenhagen</figcaption>
-      </figure>
+    {/* ── Kind words ───────────────────────────────────── */}
+    <section class="kind-words" aria-label="Kind words">
+      <h2 class="sr-only">Kind words</h2>
+      <ul class="quotes-grid" role="list">
+        {quotes.map((q) => (
+          <li class="quote-card">
+            <blockquote class="quote-text">"{q.text}"</blockquote>
+            <footer class="quote-attr">— {q.attr}</footer>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {/* ── Ritual pair ──────────────────────────────────── */}
+    <div class="photo-pair">
+      <Image
+        src={leighCacaoRitual}
+        alt="Cacao ceremony setup with candle and palo santo on a turquoise table"
+        widths={[400, 700]}
+        sizes="(max-width: 640px) 100vw, 45vw"
+        class="pair-photo"
+      />
+      <Image
+        src={leighTarotCrystals}
+        alt="Tarot cards and crystals including the Three of Cups"
+        widths={[400, 700]}
+        sizes="(max-width: 640px) 100vw, 45vw"
+        class="pair-photo"
+      />
     </div>
-  </section>
+
+  </div>
 </BeLayout>
 
 <style>
   .page {
     max-width: 720px;
     margin-inline: auto;
-    padding: 7rem 2rem 4rem;
+    padding: 7rem 2rem 5rem;
   }
 
   /* ── hero ────────────────────────────────── */
-  .hero {
-    text-align: center;
-  }
+  .hero { text-align: center; }
 
   /* NOTE: page-arrival content fade-in will be added in Phase 3b
      (View Transitions pass). No change needed here — reminder only. */
@@ -131,6 +197,19 @@ import BeLayout from '@/layouts/BeLayout.astro';
     transition: opacity 200ms ease;
   }
   .cta:hover { opacity: 0.75; }
+
+  /* ── portrait ───────────────────────────── */
+  .be-portrait {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 2.5rem auto;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: right center;
+  }
 
   /* ── offerings ───────────────────────────── */
   .offerings {
@@ -191,41 +270,121 @@ import BeLayout from '@/layouts/BeLayout.astro';
   .card-link:hover { opacity: 0.75; }
   .card-link-strong { font-weight: 500; }
 
+  /* ── pricing ─────────────────────────────── */
+  .pricing {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 0.5px solid var(--color-border);
+  }
+
+  .section-label {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .pricing-title {
+    font-family: var(--font-serif-be);
+    font-weight: 500;
+    font-style: normal;
+    font-size: 22px;
+    color: var(--color-text-primary);
+    margin: 0 0 1.25rem;
+  }
+
+  .pricing-body {
+    font-family: var(--font-serif-be);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin: 0 0 1em;
+    max-width: 60ch;
+  }
+  .pricing-body:last-of-type { margin-bottom: 0; }
+
+  .pricing-cta {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: opacity 200ms ease;
+  }
+  .pricing-cta:hover { opacity: 0.75; }
+
+  /* ── ritual pair ─────────────────────────── */
+  .photo-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 3rem auto;
+    max-width: 720px;
+  }
+  @media (max-width: 640px) {
+    .photo-pair { grid-template-columns: 1fr; }
+  }
+  .pair-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+
   /* ── kind words ──────────────────────────── */
   .kind-words {
-    margin-top: 4rem;
-    background: var(--color-surface);
+    margin-top: 3rem;
+    padding-top: 3rem;
     border-top: 0.5px solid var(--color-border);
-    border-bottom: 0.5px solid var(--color-border);
-    padding: 3rem 2rem;
   }
 
-  .kind-words-inner {
-    max-width: 860px;
-    margin-inline: auto;
+  .quotes-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
+    gap: 1rem;
   }
 
-  .quote-block { margin: 0; }
-  .quote-block blockquote {
+  .quote-card {
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .quote-text {
     font-family: var(--font-serif-be);
     font-weight: 400;
     font-style: italic;
-    font-size: 17px;
-    line-height: 1.7;
+    font-size: 16px;
+    line-height: 1.75;
     color: var(--color-text-primary);
-    margin: 0 0 1rem;
+    margin: 0;
   }
-  .quote-block figcaption {
+
+  .quote-attr {
     font-family: var(--font-sans);
     font-weight: 300;
-    font-size: 12px;
-    letter-spacing: 0.06em;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--color-text-secondary);
   }
 
+  /* ── utilities ───────────────────────────── */
   .sr-only {
     position: absolute;
     width: 1px; height: 1px;
@@ -238,13 +397,9 @@ import BeLayout from '@/layouts/BeLayout.astro';
 
   /* ── mobile ──────────────────────────────── */
   @media (max-width: 767px) {
-    .page { padding: 5rem 1.5rem 4rem; }
+    .page { padding: 5rem 1.5rem 5rem; }
     .rule { width: 40px; }
     .offerings { grid-template-columns: 1fr; }
-    .kind-words { padding: 2.5rem 1.5rem; margin-bottom: 4rem; }
-    .kind-words-inner {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
+    .quotes-grid { grid-template-columns: 1fr; }
   }
 </style>

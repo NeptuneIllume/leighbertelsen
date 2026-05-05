@@ -1,7 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import BreatheLayout from '@/layouts/BreatheLayout.astro';
 import SeasonalIllustration from '@/components/breathe/SeasonalIllustration.astro';
 import { getSeason, type Season } from '@/utils/season';
+import leighForestPath from '@/assets/images/breathe/leigh-forest-path.jpg';
+import leighTeaching from '@/assets/images/breathe/leigh-teaching-triangle.jpg';
 
 // Single source of truth for this page's season. Change this one line to
 // force a season (e.g. for testing): `const season: Season = 'winter';`
@@ -24,6 +27,18 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
   season={season}
 >
   <div class="page">
+
+    {/* ── Hero image ───────────────────────────────────────── */}
+    <div class="hero-image-wrap">
+      <Image
+        src={leighForestPath}
+        alt="A forest path in autumn outside Copenhagen"
+        widths={[800, 1200, 1600]}
+        sizes="100vw"
+        class="hero-image"
+      />
+    </div>
+
     <section class="hero" aria-label="Welcome">
       {/* Eyebrow is a direct child of .hero (not inside .hero-text) so the
           mobile grid can place it inline with the illustration icon. */}
@@ -40,6 +55,14 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
         </p>
       </div>
     </section>
+
+    <Image
+      src={leighTeaching}
+      alt="Leigh Bertelsen teaching triangle pose outdoors at the Himalayan Institute"
+      widths={[600, 1000]}
+      sizes="(max-width: 768px) 100vw, 700px"
+      class="practice-photo"
+    />
 
     <section class="offer" aria-label="Practice and gather">
       <h2 class="sr-only">Practice and gather</h2>
@@ -103,6 +126,34 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
 </script>
 
 <style>
+  /* ── photos ──────────────────────────────── */
+  .hero-image-wrap {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 2.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  .practice-photo {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 2rem auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
   .page {
     max-width: 800px;
     margin-inline: auto;
