@@ -127,7 +127,7 @@ const experience = [
           Leading WCAG 2.2 AA compliance across a fintech platform,
           from audit to component library.
         </p>
-        <a class="card-link" href="/build/projects">Read case study →</a>
+        <a class="card-link" href="/build/projects">read case study</a>
       </article>
 
       <article class="card">
@@ -138,7 +138,7 @@ const experience = [
         <p class="card-desc">
           Astro 5, GSAP, three worlds, one URL. The site you're on right now.
         </p>
-        <a class="card-link" href="/build/projects">How it's built →</a>
+        <a class="card-link" href="/build/projects">how it's built</a>
       </article>
     </section>
 
@@ -289,7 +289,7 @@ const experience = [
     line-height: 1.65;
     color: var(--color-text-secondary);
     margin: 0;
-    max-width: 64ch;
+    max-width: 65ch;
   }
 
   /* ── project image placeholder ────────── */
@@ -344,14 +344,17 @@ const experience = [
     margin: 0;
   }
   .card-link {
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
     font-weight: 400;
-    font-size: 13px;
+    font-size: 12px;
+    letter-spacing: 0.02em;
     color: var(--color-accent);
     text-decoration: none;
     margin-top: 0.25rem;
   }
-  .card-link:hover { text-decoration: underline; }
+  .card-link::before { content: '[ '; }
+  .card-link::after  { content: ' ]'; }
+  .card-link:hover { opacity: 0.75; }
 
   /* ── shared section chrome ────────────── */
   .section {
@@ -397,7 +400,7 @@ const experience = [
     line-height: 1.75;
     color: var(--color-text-secondary);
     margin: 0 0 1em;
-    max-width: 72ch;
+    max-width: 65ch;
   }
   .section-body:last-child { margin-bottom: 0; }
 
@@ -510,7 +513,7 @@ const experience = [
     line-height: 1.7;
     color: var(--color-text-secondary);
     margin: 0;
-    max-width: 72ch;
+    max-width: 65ch;
   }
 
   /* ── awards ──────────────────────────── */

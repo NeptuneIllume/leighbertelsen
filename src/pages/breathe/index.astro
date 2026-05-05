@@ -78,7 +78,7 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
           coaching if that feels useful.
         </p>
         {/* Entity-encoded mailto: leigh.bertelsen@gmail.com */}
-        <a class="card-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#105;&#103;&#104;&#46;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">Get in touch →</a>
+        <a class="card-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#105;&#103;&#104;&#46;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">get in touch</a>
       </article>
 
       <article class="card">
@@ -90,7 +90,7 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
           Join the list to hear when the next one is coming.
         </p>
         {/* Entity-encoded mailto: leigh.bertelsen@gmail.com */}
-        <a class="card-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#105;&#103;&#104;&#46;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">Join the list →</a>
+        <a class="card-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#105;&#103;&#104;&#46;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">join the list</a>
       </article>
     </section>
 
@@ -100,7 +100,7 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
       <form class="news-form" onsubmit="event.preventDefault()">
         <label class="sr-only" for="news-email">Email address</label>
         <input id="news-email" type="email" placeholder="your@email" autocomplete="email" />
-        <button type="submit">Subscribe</button>
+        <button type="submit">subscribe</button>
       </form>
     </section>
   </div>
@@ -265,12 +265,17 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
     font-family: var(--font-sans);
     font-weight: 400;
     font-size: 13px;
+    font-style: italic;
     color: var(--color-accent);
     text-decoration: none;
     align-self: flex-start;
-    transition: opacity 200ms ease;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 350ms ease;
   }
-  .card-link:hover { opacity: 0.75; }
+  .card-link:hover { background-size: 100% 1px; }
 
   /* ── newsletter ──────────────────────────── */
   .newsletter {
@@ -325,15 +330,20 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
   .news-form button {
     font-family: var(--font-sans);
     font-size: 13px;
+    font-style: italic;
     padding: 0.5rem 1rem;
-    border: 0.5px solid var(--color-accent);
+    border: 1px solid color-mix(in oklch, var(--color-accent) 40%, transparent);
     border-radius: 6px;
-    background: var(--color-accent);
-    color: var(--color-bg);
+    background: transparent;
+    color: var(--color-accent);
     cursor: pointer;
-    transition: opacity 200ms ease;
+    background-image: linear-gradient(color-mix(in oklch, var(--color-accent) 12%, transparent), color-mix(in oklch, var(--color-accent) 12%, transparent));
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size 350ms ease;
   }
-  .news-form button:hover { opacity: 0.9; }
+  .news-form button:hover { background-size: 100% 100%; }
 
   .sr-only {
     position: absolute;
