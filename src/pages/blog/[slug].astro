@@ -37,7 +37,7 @@ const fmt = (d: Date) =>
       <a class="back" href={backLink}>← Writing</a>
       <time class="date" datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
       <h1 class="title">{post.data.title}</h1>
-      <div class="body">
+      <div class="body build-post">
         <Content />
       </div>
     </article>
@@ -114,6 +114,11 @@ const fmt = (d: Date) =>
     letter-spacing: 0.04em;
     color: var(--color-text-secondary);
     margin-bottom: 0.75rem;
+  }
+
+  /* Build date: Fragment Mono */
+  .build .date {
+    font-family: var(--font-mono);
   }
 
   /* ── title: world-specific fonts ───────────── */
@@ -207,5 +212,49 @@ const fmt = (d: Date) =>
     border: 0.5px solid var(--color-border);
     border-radius: 3px;
     padding: 0.1em 0.35em;
+  }
+
+  /* ── build post gutter counter ─────────────────── */
+  .build-post {
+    counter-reset: gutter;
+    padding-left: 3.5rem;
+  }
+
+  .build-post :global(> p),
+  .build-post :global(> h2),
+  .build-post :global(> h3),
+  .build-post :global(> ul),
+  .build-post :global(> ol),
+  .build-post :global(> blockquote),
+  .build-post :global(> pre) {
+    counter-increment: gutter;
+    position: relative;
+  }
+
+  .build-post :global(> p)::before,
+  .build-post :global(> h2)::before,
+  .build-post :global(> h3)::before,
+  .build-post :global(> ul)::before,
+  .build-post :global(> ol)::before,
+  .build-post :global(> blockquote)::before,
+  .build-post :global(> pre)::before {
+    content: counter(gutter, decimal-leading-zero);
+    position: absolute;
+    left: -3rem;
+    top: 0.4em;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    .build-post {
+      padding-left: 0;
+    }
+    .build-post :global(> *)::before {
+      display: none;
+    }
   }
 </style>

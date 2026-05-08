@@ -1,24 +1,17 @@
 ---
 import BuildLayout from '@/layouts/BuildLayout.astro';
 
-const tags = [
-  'React', 'TypeScript', 'Next.js', 'Astro',
-  'Node', 'PHP', 'C# / ASP.NET', 'SQL', 'REST', 'GraphQL',
-  'HTML5', 'CSS3', 'Tailwind', 'Azure DevOps', 'CI/CD',
-  'WCAG 2.2', 'Accessibility', 'Optimizely', 'Google Analytics',
-  'Contentful', 'HubSpot', 'Magento', 'WordPress', 'Shopify', 'Liquid',
-];
+const heroQuote = {
+  text: 'She not only thinks at a high level but also delivers concrete results.',
+  name: 'Jesper Mårtensson',
+  role: 'former manager, Netcompany Banking Services',
+};
 
 const quotes = [
   {
     text: 'She has a unique ability to see the big picture while being incredibly thorough and detail-oriented in her daily work. This combination makes her both reliable and highly effective.',
     name: 'Pernille Thyssen',
     role: 'Senior Test Specialist, Netcompany Banking Services',
-  },
-  {
-    text: 'She not only thinks at a high level but also delivers concrete results.',
-    name: 'Jesper Mårtensson',
-    role: 'Former manager, Netcompany Banking Services',
   },
   {
     text: 'Finding a developer with a keen sense of design and user experience is very rare and important. I think Leigh is a diamond in the rough as far as developers are concerned. She brings more than programming to the table.',
@@ -34,11 +27,6 @@ const quotes = [
     text: "Her passion for accessibility isn't just talk either; she truly builds with everyone in mind.",
     name: 'Elvis Carlos Pesconi Junior',
     role: 'Senior Developer, Netcompany Banking Services',
-  },
-  {
-    text: 'Leigh operates on integrity, transparency, and punctuality. Exactly what was missing in my other website projects.',
-    name: 'Trina Truong',
-    role: 'Entrepreneur and Business Owner',
   },
 ];
 
@@ -119,8 +107,29 @@ const experience = [
       <h2 class="sr-only">Featured work</h2>
 
       <article class="card">
-        {/* Replace with actual project screenshot when available */}
-        <div class="project-image-placeholder" aria-hidden="true"></div>
+        <div class="card-ornament card-ornament--code" aria-hidden="true">
+          <div class="code-excerpt">
+            <div class="code-panel">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 600 140"
+                width="100%"
+                height="auto"
+                role="presentation"
+                aria-hidden="true"
+                focusable="false"
+                class="code-svg"
+              >
+                <text x="12" y="22"  font-family="'Fragment Mono', monospace" font-size="13" fill="var(--color-text-primary)">// CI: every PR runs axe-core against the</text>
+                <text x="12" y="44"  font-family="'Fragment Mono', monospace" font-size="13" fill="var(--color-text-primary)">// component library before merge.</text>
+                <text x="12" y="66"  font-family="'Fragment Mono', monospace" font-size="13" fill="var(--color-text-primary)">test('no a11y violations in production build', async () =&gt; &#123;</text>
+                <text x="12" y="88"  font-family="'Fragment Mono', monospace" font-size="13" fill="var(--color-text-primary)">  const violations = await runAxe(app);</text>
+                <text x="12" y="110" font-family="'Fragment Mono', monospace" font-size="13" fill="var(--color-text-primary)">  expect(violations).toEqual([]);</text>
+                <text x="12" y="132" font-family="'Fragment Mono', monospace" font-size="13" fill="var(--color-text-primary)">&#125;);</text>
+              </svg>
+            </div>
+          </div>
+        </div>
         <p class="card-label">featured work</p>
         <h3 class="card-title">Accessibility implementation</h3>
         <p class="card-desc">
@@ -131,8 +140,22 @@ const experience = [
       </article>
 
       <article class="card">
-        {/* Replace with actual project screenshot when available */}
-        <div class="project-image-placeholder" aria-hidden="true"></div>
+        <div class="card-ornament card-ornament--sigil" aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 64 64"
+            width="150"
+            height="150"
+            aria-hidden="true"
+            role="presentation"
+            class="sigil-centered"
+          >
+            <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="1" opacity="0.55" />
+            <path d="M32 8 L54 44 L10 44 Z" fill="none" stroke="currentColor" stroke-width="1" opacity="0.85" />
+            <circle cx="32" cy="34" r="10" fill="none" stroke="currentColor" stroke-width="1" />
+            <circle cx="32" cy="34" r="1.6" fill="currentColor" />
+          </svg>
+        </div>
         <p class="card-label">built in public</p>
         <h3 class="card-title">leighbertelsen.com</h3>
         <p class="card-desc">
@@ -147,10 +170,21 @@ const experience = [
       <p class="section-label">currently</p>
       <h2 class="section-title">Senior Web Developer, Platform and Website Lead</h2>
       <p class="section-meta">Netcompany Banking Services · Copenhagen · September 2023 to present</p>
+
+      <dl class="stat-block" aria-label="Platform scale">
+        <div class="stat">
+          <dd class="stat-value">50+</dd>
+          <dt class="stat-label">nordic financial institutions</dt>
+        </div>
+        <div class="stat">
+          <dd class="stat-value">2M+</dd>
+          <dt class="stat-label">end users on the platform</dt>
+        </div>
+      </dl>
+
       <p class="section-body">
-        I'm part of the team building and evolving a core banking platform that spans more
-        than 50 financial institutions across the Nordic region, touching the online banking
-        experience of over 2 million end users. Within that, I led the company-wide
+        I'm part of the team building and evolving a core banking platform across the Nordic
+        region. Within that, I led the company-wide
         accessibility initiative from start to finish: defining the WCAG 2.2 compliance
         standards, architecting and implementing automated accessibility testing into the
         Azure DevOps CI/CD pipeline at every stage from IDE to unit tests to integration
@@ -192,6 +226,17 @@ const experience = [
     {/* ── Recommendations ──────────────────────────────────── */}
     <section class="section" aria-label="Recommendations">
       <p class="section-label">what people say</p>
+
+      {/* Hero pull-quote */}
+      <div class="hero-pull-quote">
+        <span class="hero-quote-glyph" aria-hidden="true">&ldquo;</span>
+        <blockquote class="hero-quote-text">{heroQuote.text}</blockquote>
+        <footer class="hero-quote-attr">
+          <span class="hero-quote-name">— {heroQuote.name}</span>
+          <span class="hero-quote-role">{heroQuote.role}</span>
+        </footer>
+      </div>
+
       <ul class="quotes-grid" role="list">
         {quotes.map((q) => (
           <li class="quote-card">
@@ -238,9 +283,61 @@ const experience = [
     {/* ── Skills ───────────────────────────────────────────── */}
     <section class="section" aria-label="Skills and tools">
       <p class="section-label">skills and tools</p>
-      <ul class="tags" role="list">
-        {tags.map((t) => <li class="tag">{t}</li>)}
-      </ul>
+      <dl class="skill-groups">
+        <div class="skill-group">
+          <dt class="skill-group-label">frontend</dt>
+          <dd class="skill-group-chips">
+            <ul class="tags">
+              <li class="tag">React</li>
+              <li class="tag">TypeScript</li>
+              <li class="tag">Next.js</li>
+              <li class="tag">Astro</li>
+              <li class="tag">HTML5</li>
+              <li class="tag">CSS3</li>
+              <li class="tag">Tailwind</li>
+            </ul>
+          </dd>
+        </div>
+        <div class="skill-group">
+          <dt class="skill-group-label">backend &amp; data</dt>
+          <dd class="skill-group-chips">
+            <ul class="tags">
+              <li class="tag">Node</li>
+              <li class="tag">PHP</li>
+              <li class="tag">C# / ASP.NET</li>
+              <li class="tag">SQL</li>
+              <li class="tag">REST</li>
+              <li class="tag">GraphQL</li>
+            </ul>
+          </dd>
+        </div>
+        <div class="skill-group">
+          <dt class="skill-group-label">platform &amp; a11y</dt>
+          <dd class="skill-group-chips">
+            <ul class="tags">
+              <li class="tag">Azure DevOps</li>
+              <li class="tag">CI/CD</li>
+              <li class="tag">WCAG 2.2</li>
+              <li class="tag">Accessibility</li>
+            </ul>
+          </dd>
+        </div>
+        <div class="skill-group">
+          <dt class="skill-group-label">cms &amp; analytics</dt>
+          <dd class="skill-group-chips">
+            <ul class="tags">
+              <li class="tag">Optimizely</li>
+              <li class="tag">Google Analytics</li>
+              <li class="tag">Contentful</li>
+              <li class="tag">HubSpot</li>
+              <li class="tag">Magento</li>
+              <li class="tag">WordPress</li>
+              <li class="tag">Shopify</li>
+              <li class="tag">Liquid</li>
+            </ul>
+          </dd>
+        </div>
+      </dl>
     </section>
 
   </div>
@@ -292,21 +389,52 @@ const experience = [
     max-width: 65ch;
   }
 
-  /* ── project image placeholder ────────── */
-  .project-image-placeholder {
+  /* ── card ornaments (filled image areas) ── */
+  .card-ornament {
     width: 100%;
-    aspect-ratio: 16/9;
     background: var(--color-surface);
     border-radius: 6px;
     border: 0.5px solid var(--color-border);
     margin-bottom: 0.75rem;
+    position: relative;
+  }
+
+  /* Code fragment variant — height follows content */
+  .card-ornament--code {
+    overflow: hidden;
+  }
+  .code-excerpt {
+    width: 100%;
+  }
+  .code-panel {
+    background-color: var(--color-surface);
+    padding: 1.25rem 1.5rem;
+    border-radius: 4px;
+  }
+  .code-svg {
+    display: block;
+  }
+
+  /* Sigil variant — fixed height, centered */
+  .card-ornament--sigil {
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .sigil-centered {
+    color: color-mix(in srgb, var(--color-accent) 22%, transparent);
+    user-select: none;
+    pointer-events: none;
+    flex-shrink: 0;
   }
 
   /* ── featured cards ───────────────────── */
   .featured {
     margin-top: 3.5rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 1.25rem;
   }
   @media (max-width: 640px) {
@@ -393,6 +521,47 @@ const experience = [
     margin: 0 0 1.25rem;
   }
 
+  /* ── stat block ───────────────────────── */
+  .stat-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+    padding-top: 2rem;
+    margin: 2.5rem 0;
+    padding-left: 0;
+  }
+  @media (max-width: 640px) {
+    .stat-block {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .stat-value {
+    font-family: var(--font-sans);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--color-text-primary);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+    margin: 0;
+  }
+
   .section-body {
     font-family: var(--font-sans);
     font-weight: 300;
@@ -409,6 +578,63 @@ const experience = [
     text-decoration: none;
   }
   .inline-link:hover { text-decoration: underline; }
+
+  /* ── hero pull-quote ────────────────────── */
+  .hero-pull-quote {
+    position: relative;
+    padding: 3.5rem 0;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-quote-glyph {
+    position: absolute;
+    top: 2.5rem;
+    left: -0.25rem;
+    font-family: var(--font-sans);
+    font-size: 120px;
+    line-height: 1;
+    color: var(--color-text);
+    opacity: 0.15;
+    user-select: none;
+    pointer-events: none;
+    aria-hidden: true;
+  }
+
+  .hero-quote-text {
+    font-family: var(--font-sans);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 44px);
+    line-height: 1.25;
+    color: var(--color-text);
+    max-width: 35rem;
+    margin: 0;
+    padding-left: 0.5rem;
+  }
+
+  .hero-quote-attr {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 1.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .hero-quote-name {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: lowercase;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+  }
+
+  .hero-quote-role {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: lowercase;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+  }
 
   /* ── recommendations ──────────────────── */
   .quotes-grid {
@@ -561,6 +787,44 @@ const experience = [
     padding: 3px 10px;
     color: var(--color-text-secondary);
     letter-spacing: 0.02em;
+  }
+
+  /* ── skill groups ─────────────────────── */
+  .skill-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0;
+    margin: 0;
+  }
+  .skill-group {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+  }
+  .skill-group:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  .skill-group-label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+    margin: 0;
+  }
+  .skill-group-chips {
+    margin: 0;
+  }
+  @media (max-width: 720px) {
+    .skill-group {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
   }
 
   /* ── utilities ────────────────────────── */
