@@ -2,6 +2,8 @@
 import BuildLayout from '@/layouts/BuildLayout.astro';
 import Sigil from '@/components/ui/Sigil.astro';
 import { getLastModified } from '@/utils/lastModified';
+import JsonLd from '@/components/ui/JsonLd.astro';
+import { personSchema } from '@/utils/personSchema';
 
 const lastEdited = getLastModified('src/pages/build/about/index.astro');
 
@@ -33,7 +35,11 @@ const education = [
 ];
 ---
 
-<BuildLayout title="About — Build — Leigh Bertelsen">
+<BuildLayout
+  title="About | Build | Leigh Bertelsen"
+  description="Senior web developer based in Copenhagen, building for fintech, e-commerce, nonprofits, and wellness for 17 years."
+>
+  <JsonLd schema={personSchema} />
   <div class="page">
 
     <h1 class="headline">Calm, focused, kind.</h1>

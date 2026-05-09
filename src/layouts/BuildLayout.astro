@@ -9,7 +9,7 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} theme="build">
+<BaseLayout title={title} description={description} theme="build" world="build">
   <BuildNav slot="header" />
   <div transition:name="build-content">
     <slot />

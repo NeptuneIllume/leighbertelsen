@@ -4,6 +4,7 @@ import BuildLayout from '@/layouts/BuildLayout.astro';
 import BreatheLayout from '@/layouts/BreatheLayout.astro';
 import BeLayout from '@/layouts/BeLayout.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import JsonLd from '@/components/ui/JsonLd.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -29,10 +30,29 @@ const backLink = backLinks[world] ?? '/';
 
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+const postDescription = post.data.description ?? post.data.excerpt;
+
+const postSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.excerpt,
+  datePublished: post.data.date.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: 'Leigh Bertelsen',
+    url: 'https://leighbertelsen.com',
+  },
+  image: `https://leighbertelsen.com/og/${post.data.world}.png`,
+  url: `https://leighbertelsen.com/blog/${post.slug}`,
+};
 ---
 
+<JsonLd schema={postSchema} />
+
 {world === 'build' && (
-  <BuildLayout title={`${post.data.title} — Build`} description={post.data.excerpt}>
+  <BuildLayout title={`${post.data.title} | Build | Leigh Bertelsen`} description={postDescription}>
     <article class="post build">
       <a class="back" href={backLink}>← Writing</a>
       <time class="date" datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
@@ -45,7 +65,7 @@ const fmt = (d: Date) =>
 )}
 
 {world === 'breathe' && (
-  <BreatheLayout title={`${post.data.title} — Breathe`} description={post.data.excerpt}>
+  <BreatheLayout title={`${post.data.title} | Breathe | Leigh Bertelsen`} description={postDescription}>
     <article class="post breathe">
       <a class="back" href={backLink}>← Writing</a>
       <time class="date" datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
@@ -58,7 +78,7 @@ const fmt = (d: Date) =>
 )}
 
 {world === 'be' && (
-  <BeLayout title={`${post.data.title} — Be`} description={post.data.excerpt}>
+  <BeLayout title={`${post.data.title} | Be | Leigh Bertelsen`} description={postDescription}>
     <article class="post be">
       <a class="back" href={backLink}>← Writing</a>
       <time class="date" datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
@@ -71,7 +91,7 @@ const fmt = (d: Date) =>
 )}
 
 {world === 'personal' && (
-  <BaseLayout title={post.data.title} description={post.data.excerpt} theme="membrane">
+  <BaseLayout title={`${post.data.title} | Leigh Bertelsen`} description={postDescription} theme="membrane">
     <article class="post personal">
       <a class="back" href={backLink}>← back</a>
       <time class="date" datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>

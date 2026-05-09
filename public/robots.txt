@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /personal
+
+Sitemap: https://leighbertelsen.com/sitemap-index.xml

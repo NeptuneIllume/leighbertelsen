@@ -3,12 +3,19 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import netlify from '@astrojs/netlify';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://leighbertelsen.com',
   output: 'static',
   adapter: netlify(),
-  integrations: [react(), mdx()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/personal'),
+    }),
+    react(),
+    mdx(),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

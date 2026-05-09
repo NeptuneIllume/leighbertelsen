@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Sigil from '@/components/ui/Sigil.astro';
+import JsonLd from '@/components/ui/JsonLd.astro';
 
 const choices = [
   {
@@ -27,7 +28,19 @@ const choices = [
 ];
 ---
 
-<BaseLayout title="Leigh Bertelsen" description="One person, three worlds. Choose where to begin.">
+<BaseLayout title="Leigh Bertelsen" description="Three worlds, one person. Senior web developer, yoga teacher, and ICF-accredited coach based outside Copenhagen.">
+  <JsonLd schema={{
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Leigh Bertelsen',
+    url: 'https://leighbertelsen.com',
+    description: 'Three worlds, one person. Senior web developer, yoga teacher, and ICF-accredited coach based outside Copenhagen.',
+    author: {
+      '@type': 'Person',
+      name: 'Leigh Bertelsen',
+      url: 'https://leighbertelsen.com',
+    },
+  }} />
   {/* Suppress BaseLayout's default header — membrane positions its own sigil. */}
   <Fragment slot="header" />
 

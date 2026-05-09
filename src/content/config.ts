@@ -7,6 +7,7 @@ const posts = defineCollection({
     date: z.coerce.date(),
     world: z.enum(['build', 'breathe', 'be', 'personal']),
     excerpt: z.string(),
+    description: z.string().optional(),
     slug: z.string().optional(),
     featured: z.boolean().default(false),
   }),
