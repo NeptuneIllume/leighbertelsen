@@ -156,9 +156,17 @@ const heroPreload = await getImage({
   const status = document.querySelector<HTMLElement>('[data-newsletter-status]');
 
   if (form && status) {
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value;
+
+      // Loading state
+      btn.textContent = 'sending…';
+      btn.disabled = true;
+      status.hidden = true;
+
       try {
         await fetch(form.action, {
           method: 'POST',
@@ -173,6 +181,9 @@ const heroPreload = await getImage({
       } catch {
         status.textContent = 'Something went wrong. Try again?';
         status.hidden = false;
+      } finally {
+        btn.textContent = 'subscribe';
+        btn.disabled = false;
       }
     });
   }
@@ -427,6 +438,11 @@ const heroPreload = await getImage({
     transition: background-size 350ms ease;
   }
   .news-form button:hover { background-size: 100% 100%; }
+  .news-form button:disabled {
+    opacity: 0.5;
+    cursor: default;
+    background-size: 0% 100%;
+  }
 
   .news-status {
     font-family: var(--font-serif-breathe);
