@@ -241,7 +241,7 @@ const heroPreload = await getImage({
     font-style: italic;
     font-size: 12.5px;
     line-height: 1.4;
-    color: color-mix(in srgb, var(--color-text) 65%, transparent);
+    color: var(--color-text-secondary);
   }
   .card-photo + .card-label {
     margin-top: 1rem;
@@ -416,8 +416,9 @@ const heroPreload = await getImage({
     color: var(--color-text-primary);
     min-width: 220px;
   }
-  .news-form input:focus {
-    outline: none;
+  .news-form input:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 0;
     border-color: var(--color-accent);
   }
 
@@ -448,7 +449,7 @@ const heroPreload = await getImage({
     font-family: var(--font-serif-breathe);
     font-style: italic;
     font-size: 13px;
-    color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);
+    color: var(--color-text-secondary);
     margin-top: 0.75rem;
     text-align: center;
   }
