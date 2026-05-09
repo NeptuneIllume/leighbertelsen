@@ -35,6 +35,24 @@
     --color-text-muted: #a0a09c;
     --color-border: #3c3c38;
   }
+
+  /* Swap each world's active tokens to their -dark counterparts,
+     mirroring the :root swap above. Seasonal breathe variants are
+     covered by their own -dark values defined on each selector. */
+  [data-theme='build'],
+  [data-theme='breathe'],
+  [data-theme='breathe'][data-season='spring'],
+  [data-theme='breathe'][data-season='summer'],
+  [data-theme='breathe'][data-season='winter'],
+  [data-theme='be'] {
+    --color-bg: var(--color-bg-dark);
+    --color-surface: var(--color-surface-dark);
+    --color-text-primary: var(--color-text-primary-dark);
+    --color-text-secondary: var(--color-text-secondary-dark);
+    --color-accent: var(--color-accent-dark);
+    --color-border: var(--color-border-dark);
+    --color-tab-dim: var(--color-tab-dim-dark);
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -54,6 +72,7 @@
   --color-text-primary-dark: #e8f0fa;
   --color-text-secondary-dark: #7aabcc;
   --color-accent-dark: #5ba8e0;
+  --color-border-dark: #1e3a5c;
   --color-tab-dim-dark: #7aabcc;
 }
 
@@ -75,6 +94,7 @@
   --color-text-primary-dark: #f5e8dc;
   --color-text-secondary-dark: #c49070;
   --color-accent-dark: #e8845a;
+  --color-border-dark: #3d2010;
   --color-tab-dim-dark: #a06040;
 }
 
@@ -151,6 +171,7 @@
   --color-text-primary-dark: #e4ede6;
   --color-text-secondary-dark: #8aa090;
   --color-accent-dark: #6aaa88;
+  --color-border-dark: #283228;
   --color-tab-dim-dark: #607868;
 }
 
