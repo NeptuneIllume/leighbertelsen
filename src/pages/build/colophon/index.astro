@@ -1,0 +1,173 @@
+---
+import BuildLayout from '@/layouts/BuildLayout.astro';
+---
+
+<BuildLayout title="Colophon — Build — Leigh Bertelsen">
+  <div class="page">
+
+    {/* ── Hero ─────────────────────────────────────────────── */}
+    <section class="hero" aria-label="Colophon header">
+      <p class="eyebrow">// built in public · 2026</p>
+
+      <h1 class="headline">How this website was made</h1>
+
+      <p class="subline">
+        Three worlds, one URL, one person, and the technical decisions that let those
+        three live together without fighting.
+      </p>
+    </section>
+
+    {/* ── Body prose ───────────────────────────────────────── */}
+    <section class="body-section" aria-label="Colophon">
+      <p class="body">
+        This site is three distinct worlds (Build, Breathe, Be) sharing a single URL, a
+        single sigil, and a shared editorial membrane. The constraint was making each
+        world feel materially different to inhabit while preserving a coherent identity,
+        which turned out to be more about typography, motion, and rhythm than about
+        palette.
+      </p>
+
+      <p class="body">
+        The stack is <code class="package">Astro 5</code> with{' '}
+        <code class="package">TypeScript</code> for static-first generation,{' '}
+        <code class="package">Tailwind v4</code> with a CSS-first config for the design
+        system, <code class="package">GSAP</code> for the membrane animations and{' '}
+        <code class="package">View Transitions API</code> for inter-page motion, and{' '}
+        <code class="package">React</code> islands selectively where they earn their
+        weight. Content lives in <code class="package">MDX</code> collections with{' '}
+        <code class="package">Zod</code> schemas for type-safe authoring. The whole thing
+        deploys to <code class="package">Netlify</code>.
+      </p>
+
+      <p class="body">
+        Each world has its own typography pair: DM Sans + Fragment Mono for Build
+        (code-editor in spirit), Cormorant Garamond for Breathe (editorial serif, romantic
+        register), Lora for Be (quiet, grounded, mineral). One photo treatment pass,{' '}
+        <code class="package">saturate(0.88) sepia(0.04) contrast(1.03)</code>, runs
+        site-wide so fifteen years of cameras read as one body of work.
+      </p>
+
+      <p class="body">
+        The seasonal layer on Breathe swaps the hero photo and a botanical illustration
+        based on server-side date detection. The four botanicals are public-domain
+        hand-colored plates from Margaret Roscoe's <cite>Floral Illustrations of the Seasons</cite>, dropped in as tipped-in
+        marginalia rather than icons.
+      </p>
+
+      <p class="body">
+        Accessibility: WCAG 2.2 AA throughout. The site passes its own a11y test suite,
+        which was a priority.
+      </p>
+
+      <p class="body">
+        The hardest decision was the one the visitor first sees: the membrane that hands
+        off to the three worlds without making any of them subordinate. Three doors, same
+        person.
+      </p>
+    </section>
+
+    {/* ── Back CTA (SYSTEM-04) ─────────────────────────────── */}
+    <div class="cta-row">
+      <a class="back-cta" href="/build">back to work</a>
+    </div>
+
+  </div>
+</BuildLayout>
+
+<style>
+  /* ── page wrapper ─────────────────────── */
+  .page {
+    max-width: 720px;
+    margin-inline: auto;
+    padding: 6rem 2rem 5rem;
+  }
+  @media (max-width: 767px) {
+    .page { padding: 5rem 1.5rem 6rem; }
+  }
+
+  /* ── hero ─────────────────────────────── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-accent);
+    margin: 0;
+  }
+
+  .headline {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .subline {
+    font-family: var(--font-sans);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(17px, 2.2vw, 21px);
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 35rem;
+  }
+
+  /* ── body prose ───────────────────────── */
+  .body-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 0.5px solid var(--color-border);
+  }
+
+  .body {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-text-primary);
+    margin: 0 0 1.25em;
+    max-width: 35rem;
+  }
+  .body:last-child { margin-bottom: 0; }
+
+  /* ── inline package names ─────────────── */
+  code.package {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── back CTA (SYSTEM-04) ─────────────── */
+  .cta-row {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 0.5px solid var(--color-border);
+  }
+
+  .back-cta {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: opacity 200ms ease;
+  }
+  .back-cta::before { content: '[ '; }
+  .back-cta::after  { content: ' ]'; }
+  .back-cta:hover { opacity: 0.75; }
+</style>

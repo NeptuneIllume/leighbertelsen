@@ -3,26 +3,310 @@ import BuildLayout from '@/layouts/BuildLayout.astro';
 ---
 
 <BuildLayout title="Projects — Build — Leigh Bertelsen">
-  <div class="placeholder">
-    <h1>Projects</h1>
+  <div class="page">
+
+    {/* ── Hero ─────────────────────────────────────────────── */}
+    <section class="hero" aria-label="Case study header">
+      <p class="eyebrow">// featured work · netcompany banking services · 2023 to present</p>
+
+      <h1 class="headline">Accessibility implementation</h1>
+
+      <p class="subline">
+        How a large React codebase got automated accessibility enforcement, layer by
+        layer, without grinding the team to a halt.
+      </p>
+    </section>
+
+    {/* ── Stat block (BUILD-02) ────────────────────────────── */}
+    <dl class="stat-block" aria-label="Platform scale">
+      <div class="stat">
+        <dd class="stat-value">50+</dd>
+        <dt class="stat-label">nordic financial institutions</dt>
+      </div>
+      <div class="stat">
+        <dd class="stat-value">2M+</dd>
+        <dt class="stat-label">end users on the platform</dt>
+      </div>
+    </dl>
+
+    {/* ── Body prose ───────────────────────────────────────── */}
+    <section class="body-section" aria-label="Case study">
+      <p class="body">
+        I'm responsible for a large React codebase serving banking clients, where
+        accessibility compliance is a legal requirement under the EU Accessibility Act.
+        When I came on board, the project had thousands of existing accessibility
+        violations and no automated enforcement to prevent new ones from being introduced.
+        With a platform spanning 50+ Nordic financial institutions and over 2 million end
+        users, the cost of getting it wrong was real, and the cost of treating it as a
+        checkbox was steeper still.
+      </p>
+
+      <p class="body">
+        The constraint was that I couldn't just switch on linting and fail the entire CI
+        pipeline. That would have blocked every developer immediately. So I designed a
+        layered system that enforced quality on new and touched code without grinding work
+        to a halt.
+      </p>
+
+      <p class="body">
+        The first layer is IDE linting using <code class="package">eslint-plugin-jsx-a11y</code>,
+        which flags accessibility issues in native HTML elements as developers write code.
+        But linting alone has a gap: it analyses source code statically and doesn't know
+        what custom components like an image cropper actually render in the DOM, so it
+        can't catch issues inside them.
+      </p>
+
+      <p class="body">
+        To cover that gap, I wrote a script that auto-generates <code class="package">jest-axe</code> unit
+        tests for existing components, and updated the component scaffolding tool so new
+        components get accessibility test files by default. These tests render the full
+        component tree and inspect the actual DOM output, which catches issues inside
+        custom components the linter can never see.
+      </p>
+
+      <p class="body">
+        The third layer is a CI gulp task that runs accessibility linting specifically on
+        touched files and throws an error on violations. Untouched files with existing
+        errors are excluded for now, so the pipeline stays unblocked while new code is
+        held to a clean standard.
+      </p>
+
+      <p class="body">
+        Finally, I added <code class="package">@axe-core/react</code> to run runtime
+        accessibility checks in non-production environments, so developers get real-time
+        browser console feedback as they work, even after interactions or dynamic updates.
+      </p>
+
+      <p class="body">
+        My job was to ensure the platform met the standards defined by the EU
+        Accessibility Act. I kept current through sessions and conferences hosted by Dansk
+        Sikkerhedsstyrelsen and the IAAP, then translated all of it into something the
+        team could actually act on. Not the legalese version, the version that means
+        "this button needs a visible focus state" and "this color pair fails 4.5:1."
+      </p>
+
+      <p class="body">
+        The result is that new accessibility violations can no longer reach production
+        undetected, the existing backlog is being addressed incrementally, and the whole
+        thing is documented in a wiki so the team can maintain it without me.
+      </p>
+
+      <p class="body">
+        The part I'm most proud of is that none of this was a "campaign." There was no
+        accessibility week, no posters. The standards just got built into the work, the
+        way other quality concerns do. That's the version of accessibility that lasts.
+      </p>
+    </section>
+
+    {/* ── Pull-quote (BUILD-04) ────────────────────────────── */}
+    <div class="hero-pull-quote">
+      <span class="hero-quote-glyph" aria-hidden="true">&ldquo;</span>
+      <blockquote class="hero-quote-text">
+        Her passion for accessibility isn't just talk; she truly builds with everyone
+        in mind.
+      </blockquote>
+      <footer class="hero-quote-attr">
+        <span class="hero-quote-name">— Elvis Carlos</span>
+        <span class="hero-quote-role">developer, Netcompany Banking Services</span>
+      </footer>
+    </div>
+
+    {/* ── Back CTA (SYSTEM-04) ─────────────────────────────── */}
+    <div class="cta-row">
+      <a class="back-cta" href="/build">back to work</a>
+    </div>
+
   </div>
 </BuildLayout>
 
 <style>
-  .placeholder {
-    max-width: 860px;
+  /* ── page wrapper ─────────────────────── */
+  .page {
+    max-width: 720px;
     margin-inline: auto;
-    padding: 6rem 2rem 4rem;
+    padding: 6rem 2rem 5rem;
   }
   @media (max-width: 767px) {
-    .placeholder { padding: 5rem 1.5rem 6rem; }
+    .page { padding: 5rem 1.5rem 6rem; }
   }
-  h1 {
+
+  /* ── hero ─────────────────────────────── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-accent);
+    margin: 0;
+  }
+
+  .headline {
     font-family: var(--font-sans);
     font-weight: 300;
-    font-size: clamp(36px, 5vw, 56px);
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--color-text-primary);
     margin: 0;
   }
+
+  .subline {
+    font-family: var(--font-sans);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(17px, 2.2vw, 21px);
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 35rem;
+  }
+
+  /* ── stat block (BUILD-02) ────────────── */
+  .stat-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+    padding-top: 2rem;
+    margin: 2.5rem 0;
+    padding-left: 0;
+  }
+  @media (max-width: 640px) {
+    .stat-block {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .stat-value {
+    font-family: var(--font-sans);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--color-text-primary);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+    margin: 0;
+  }
+
+  /* ── body prose ───────────────────────── */
+  .body-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .body {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-text-primary);
+    margin: 0 0 1.25em;
+    max-width: 35rem;
+  }
+  .body:last-child { margin-bottom: 0; }
+
+  /* ── inline package names ─────────────── */
+  code.package {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+    padding: 0.05em 0.3em;
+    border-radius: 2px;
+  }
+
+  /* ── hero pull-quote (BUILD-04) ───────── */
+  .hero-pull-quote {
+    position: relative;
+    padding: 3.5rem 0;
+    margin-bottom: 2.5rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+  }
+
+  .hero-quote-glyph {
+    position: absolute;
+    top: 2.5rem;
+    left: -0.25rem;
+    font-family: var(--font-sans);
+    font-size: 120px;
+    line-height: 1;
+    color: var(--color-text);
+    opacity: 0.15;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .hero-quote-text {
+    font-family: var(--font-sans);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 44px);
+    line-height: 1.25;
+    color: var(--color-text);
+    max-width: 35rem;
+    margin: 0;
+    padding-left: 0.5rem;
+  }
+
+  .hero-quote-attr {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 1.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .hero-quote-name {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: lowercase;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+  }
+
+  .hero-quote-role {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: lowercase;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+  }
+
+  /* ── back CTA (SYSTEM-04) ─────────────── */
+  .cta-row {
+    padding-top: 2rem;
+    border-top: 0.5px solid var(--color-border);
+  }
+
+  .back-cta {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: opacity 200ms ease;
+  }
+  .back-cta::before { content: '[ '; }
+  .back-cta::after  { content: ' ]'; }
+  .back-cta:hover { opacity: 0.75; }
 </style>
