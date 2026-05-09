@@ -3,10 +3,11 @@ import { Image, getImage } from 'astro:assets';
 import BreatheLayout from '@/layouts/BreatheLayout.astro';
 import Sigil from '@/components/ui/Sigil.astro';
 import leighBali from '@/assets/images/breathe/leigh-bali-temple.jpg';
-import leighNepal from '@/assets/images/breathe/leigh-nepal-shiva.jpg';
-import leighTeaching from '@/assets/images/breathe/leigh-teaching-triangle.jpg';
 import leighWarrior from '@/assets/images/breathe/leigh-hi-warrior.jpg';
-import leighMeditationShrine from '@/assets/images/be/leigh-meditation-shrine.jpg';
+import leighHiKarma from '@/assets/images/breathe/leigh-hi-karma.png';
+import leighSunriseHimalayas from '@/assets/images/breathe/leigh-sunrise-himalayas.png';
+import gomde from '@/assets/images/breathe/gomde-prayer-flags.png';
+import altarGoddessAvalon from '@/assets/images/breathe/altar-goddess-avalon.png';
 import leighMekong from '@/assets/images/breathe/leigh-mekong-boat.jpg';
 import { getLastModified } from '@/utils/lastModified';
 
@@ -32,115 +33,164 @@ const quotes = [
   <div class="page">
 
     {/* 1. Hero — Bali temple ─────────────────────────────── */}
-    <Image
-      src={leighBali}
-      alt="Leigh Bertelsen sitting at a temple doorway in Bali with a koi pond in the foreground"
-      widths={[800, 1200, 1600]}
-      sizes="100vw"
-      class="hero-photo"
-    />
+    <figure class="hero-figure">
+      <Image
+        src={leighBali}
+        alt="Leigh Bertelsen sitting at a temple doorway in Bali with a koi pond in the foreground"
+        widths={[800, 1200, 1600]}
+        sizes="100vw"
+        class="hero-photo"
+      />
+      <figcaption class="hero-caption"><em>Pura Tirta Empul, Bali.</em></figcaption>
+    </figure>
 
     {/* ── Opening ────────────────────────────────────────── */}
     <section class="intro" aria-label="Introduction">
-      <p class="body">
+      <p class="body drop-cap">
         I've been practicing yoga for most of my adult life and teaching for over a decade.
         My path into it was never straight, which is probably why I teach the way I do.
       </p>
-      <p class="body">
-        I've taught in Denmark, Laos, Thailand, Nepal, Austria, India, and the US. In
-        studios, at universities, in corporate settings, and online. The common thread has
-        always been the same: meeting people where they are, and offering something that's
-        actually useful.
-      </p>
+      <div class="pull-anchor">
+        <p class="body">
+          I've taught in Denmark, Laos, Thailand, Nepal, Austria, India, and the US. In
+          studios, at universities, in corporate settings, and online. The common thread has
+          always been the same: meeting people where they are, and offering something that's
+          actually useful.
+        </p>
+        <aside class="pull-quote" aria-hidden="true">
+          "The common thread has always been the same: meeting people where they are, and offering something that's actually useful."
+        </aside>
+      </div>
     </section>
-
-    {/* 2. Nepal/Shiva — after opening ─────────────────────── */}
-    <Image
-      src={leighNepal}
-      alt="Leigh Bertelsen in Pokhara Nepal with the Annapurna range and a Shiva statue behind her"
-      widths={[400, 800]}
-      sizes="(max-width: 768px) 100vw, 560px"
-      class="section-photo"
-    />
 
     {/* ── The foundation ─────────────────────────────────── */}
     <section class="section" aria-label="Training">
       <p class="section-label">training</p>
       <h2 class="section-title">The foundation</h2>
-      <p class="body">
-        My formal training began with a 250-hour Vinyasa certification and a 40-hour Yin
-        training with Corina Benner at Wake Up Yoga in Philadelphia. I added an Ayurveda
-        Yoga Specialist certification with Kathryn Templeton, a Restorative Yoga Teacher
-        Training with Cyndi Lee, a Yoga Nidra Teacher Training with Hilary Jackendoff, and
-        a Reiki Level 1 attunement. In 2016 I completed the 500-hour Hatha yoga teacher
-        training with the Himalayan Institute faculty: Pandit Rajmani Tigunait, Rolf Sovik,
-        Sandra Anderson, Shari Friedrichsen, and Judy Moulton, along with separate
-        programmes in Yoga Nidra, Samkhya philosophy, and Ashtanga fundamentals with David
-        Swenson. I hold the Yoga Alliance RYT-500 certification.
-      </p>
-      <p class="body">
-        From 2025 to 2026 I completed the Priestess Facilitation Training with Sianna
-        Sherman, a nine-month container exploring the Wheel of the Year, dream temples,
-        sacred circles, ritual facilitation, moon and zodiac magic, and more. This training
-        is the direct source of the seasonal gatherings I offer.
-      </p>
-    </section>
 
-    {/* 3. Teaching pair — after training ──────────────────── */}
-    <div class="photo-pair">
-      <Image
-        src={leighTeaching}
-        alt="Leigh Bertelsen teaching triangle pose outdoors at the Himalayan Institute"
-        widths={[400, 700]}
-        sizes="(max-width: 768px) 100vw, 45vw"
-        class="pair-photo"
-      />
-      <Image
-        src={leighWarrior}
-        alt="Leigh Bertelsen and another teacher in warrior pose at the Himalayan Institute in autumn"
-        widths={[400, 700]}
-        sizes="(max-width: 768px) 100vw, 45vw"
-        class="pair-photo"
-      />
-    </div>
+      {/* PAIRING 1 — paired thumbs beside training paragraphs */}
+      <div class="photo-row photo-row--right">
+        <div class="text-col">
+          <p class="body drop-cap">
+            My formal training began with a 250-hour Vinyasa certification and a 40-hour Yin
+            training with Corina Benner at Wake Up Yoga in Philadelphia. I added an Ayurveda
+            Yoga Specialist certification with Kathryn Templeton, a Restorative Yoga Teacher
+            Training with Cyndi Lee, a Yoga Nidra Teacher Training with Hilary Jackendoff, and
+            a Reiki Level 1 attunement. In 2016 I completed the 500-hour Hatha yoga teacher
+            training with the Himalayan Institute faculty: Pandit Rajmani Tigunait, Rolf Sovik,
+            Sandra Anderson, Shari Friedrichsen, and Judy Moulton, along with separate
+            programmes in Yoga Nidra, Samkhya philosophy, and Ashtanga fundamentals with David
+            Swenson. I hold the Yoga Alliance RYT-500 certification.
+          </p>
+          <p class="body">
+            From 2025 to 2026 I completed the Priestess Facilitation Training with Sianna
+            Sherman, a nine-month container exploring the Wheel of the Year, dream temples,
+            sacred circles, ritual facilitation, moon and zodiac magic, and more. This training
+            is the direct source of the seasonal gatherings I offer.
+          </p>
+        </div>
+        <div class="photo-thumbs">
+          <figure class="thumb-figure">
+            <Image
+              src={leighWarrior}
+              alt="Leigh Bertelsen and another teacher in warrior pose at the Himalayan Institute in autumn"
+              widths={[300, 600]}
+              sizes="(max-width: 640px) 45vw, 22vw"
+              class="thumb-photo"
+            />
+            <figcaption class="thumb-caption"><em>Warrior pose, Himalayan Institute.</em></figcaption>
+          </figure>
+          <figure class="thumb-figure">
+            <Image
+              src={leighHiKarma}
+              alt="Karma yoga at the Himalayan Institute"
+              widths={[300, 600]}
+              sizes="(max-width: 640px) 45vw, 22vw"
+              class="thumb-photo"
+            />
+            <figcaption class="thumb-caption"><em>Karma yoga at Himalayan Institute.</em></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
     {/* ── Going further ──────────────────────────────────── */}
     <section class="section" aria-label="The study">
       <p class="section-label">the study</p>
       <h2 class="section-title">Going further</h2>
-      <p class="body">
-        The formal training was only the beginning. I've spent years in serious study of
-        contemplative practice across traditions: a three-month accredited summer course at
-        Gomde Germany-Austria through the Rangjung Yeshe Institute, where I studied with
-        Chökyi Nyima Rinpoche and faculty from Harvard, Oxford, and beyond; a 30-day course
-        at Kopan Monastery in Kathmandu taught by Venerable Robina Courtin; and courses at
-        Tushita Meditation Centre in Dharamshala with Venerable Drolma. I've also studied
-        Yoga and Shamanism with Ray Crist at Kripalu, and the Psychology of the Chakras
-        with Anodea Judith.
-      </p>
-      <p class="body">
-        I've been reading tarot for 25 years, and have studied witchcraft, paganism,
-        Gnosticism, Mahayana Buddhism, and Hindu Tantra in the Sri Vidya lineage. After
-        years of looking for the definitive teacher or the definitive practice, I eventually
-        stopped looking and started weaving. What I teach comes from everything I've
-        absorbed, filtered through what I've actually found to be true.
-      </p>
-    </section>
 
-    {/* 4. Meditation shrine — after going further ─────────── */}
-    <Image
-      src={leighMeditationShrine}
-      alt="Leigh Bertelsen sitting in meditation in front of a shrine"
-      widths={[400, 800]}
-      sizes="(max-width: 768px) 100vw, 560px"
-      class="section-photo"
-    />
+      {/* PAIRING 2 — paired thumbs beside Gomde/Kopan paragraph */}
+      <div class="photo-row photo-row--right">
+        <div class="text-col">
+          <p class="body drop-cap">
+            The formal training was only the beginning. I've spent years in serious study of
+            contemplative practice across traditions: a three-month accredited summer course at
+            Gomde Germany-Austria through the Rangjung Yeshe Institute, where I studied with
+            Chökyi Nyima Rinpoche and faculty from Harvard, Oxford, and beyond; a 30-day course
+            at Kopan Monastery in Kathmandu taught by Venerable Robina Courtin; and courses at
+            Tushita Meditation Centre in Dharamshala with Venerable Drolma. I've also studied
+            Yoga and Shamanism with Ray Crist at Kripalu, and the Psychology of the Chakras
+            with Anodea Judith.
+          </p>
+        </div>
+        <div class="photo-thumbs">
+          <figure class="thumb-figure">
+            <Image
+              src={leighSunriseHimalayas}
+              alt="New Year's Day sunrise over the Himalayas, Nepal"
+              widths={[300, 600]}
+              sizes="(max-width: 640px) 45vw, 22vw"
+              class="thumb-photo"
+            />
+            <figcaption class="thumb-caption"><em>New Year's Day sunrise over the Himalayas, Nepal.</em></figcaption>
+          </figure>
+          <figure class="thumb-figure">
+            <Image
+              src={gomde}
+              alt="Prayer flags at Gomde, Germany-Austria"
+              widths={[300, 600]}
+              sizes="(max-width: 640px) 45vw, 22vw"
+              class="thumb-photo"
+            />
+            <figcaption class="thumb-caption"><em>Prayer flags at Gomde, Germany-Austria.</em></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      {/* PAIRING 3 — single photo left, tarot paragraph right (alternates side) */}
+      <div class="photo-row photo-row--left">
+        <figure class="thumb-figure">
+          <Image
+            src={altarGoddessAvalon}
+            alt="Altar to Brighid at the Goddess Temple, Avalon"
+            widths={[400, 800]}
+            sizes="(max-width: 640px) 100vw, 38vw"
+            class="thumb-photo thumb-photo--tall"
+          />
+          <figcaption class="thumb-caption"><em>Altar to Brighid at the Goddess Temple, Avalon.</em></figcaption>
+        </figure>
+        <div class="text-col">
+          <div class="pull-anchor">
+            <p class="body">
+              I've been reading tarot for 25 years, and have studied witchcraft, paganism,
+              Gnosticism, Mahayana Buddhism, and Hindu Tantra in the Sri Vidya lineage. After
+              years of looking for the definitive teacher or the definitive practice, I eventually
+              stopped looking and started weaving. What I teach comes from everything I've
+              absorbed, filtered through what I've actually found to be true.
+            </p>
+            <aside class="pull-quote" aria-hidden="true">
+              "After years of looking for the definitive teacher or the definitive practice, I eventually stopped looking and started weaving."
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
 
     {/* ── What to expect ─────────────────────────────────── */}
     <section class="section" aria-label="How I work">
       <p class="section-label">how I work</p>
       <h2 class="section-title">What to expect</h2>
-      <p class="body">
+      <p class="body drop-cap">
         I work one-to-one, online, with people looking for something more personalised than
         a class setting offers. Some come for the physical practice. Some come for Yoga
         Nidra or meditation. Some want Ayurvedic guidance or tarot woven in. Some are at a
@@ -156,14 +206,17 @@ const quotes = [
       </p>
     </section>
 
-    {/* 5. Mekong atmospheric divider — before kind words ──── */}
-    <Image
-      src={leighMekong}
-      alt="View from the bow of a slow boat on the Mekong river in Laos, looking toward green mountains"
-      widths={[800, 1200]}
-      sizes="100vw"
-      class="wide-photo"
-    />
+    {/* ── Atmospheric divider — Mekong ──────────────────────── */}
+    <figure class="photo-divider">
+      <Image
+        src={leighMekong}
+        alt="View from the bow of a slow boat on the Mekong river in Laos, looking toward green mountains"
+        widths={[600, 1000]}
+        sizes="(max-width: 640px) 90vw, 60vw"
+        class="divider-photo"
+      />
+      <figcaption class="thumb-caption"><em>On the slow boat, Mekong River.</em></figcaption>
+    </figure>
 
     {/* ── Kind words ─────────────────────────────────────── */}
     <section class="section" aria-label="Kind words">
@@ -211,58 +264,118 @@ const quotes = [
     .page { padding: 5rem 1.5rem 6rem; }
   }
 
-  /* ── photos ──────────────────────────── */
+  /* ── hero ─────────────────────────────── */
+  .hero-figure {
+    margin: 0 0 3rem;
+  }
+
   .hero-photo {
     width: 100%;
     max-width: 760px;
     height: auto;
     border-radius: 8px;
     display: block;
-    margin: 0 auto 3rem;
+    margin: 0 auto;
     aspect-ratio: 4/3;
     object-fit: cover;
-    object-position: center 20%;
+    object-position: center;
   }
 
-  .section-photo {
-    width: 100%;
-    max-width: 560px;
-    height: auto;
-    border-radius: 8px;
-    display: block;
-    margin: 2rem auto;
-    aspect-ratio: 4/3;
-    object-fit: cover;
+  .hero-caption {
+    font-family: var(--font-serif-breathe);
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-top: 0.6rem;
   }
 
-  .photo-pair {
+  /* ── magazine-spread photo rows ────────── */
+  .photo-row {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-    margin: 2rem auto;
-    max-width: 760px;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    margin-top: 1.5rem;
+  }
+
+  @media (min-width: 641px) {
+    .photo-row--right {
+      /* text left (50fr), photos right (45fr) */
+      grid-template-columns: 50fr 45fr;
+    }
+    .photo-row--left {
+      /* photo left (45fr), text right (50fr) */
+      grid-template-columns: 45fr 50fr;
+    }
+  }
+
+  .text-col {
+    /* passthrough — content constrained by column width */
+  }
+
+  /* ── paired thumbnails ──────────────────── */
+  .photo-thumbs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.625rem;
+    align-items: start;
+  }
+
+  /* ── individual thumb ───────────────────── */
+  .thumb-figure {
+    margin: 0;
+  }
+
+  .thumb-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .thumb-photo--tall {
+    aspect-ratio: 3/4;
+  }
+
+  .thumb-caption {
+    font-family: var(--font-serif-breathe);
+    font-style: italic;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+    margin-top: 0.4rem;
+    display: block;
+  }
+
+  /* ── atmospheric divider ────────────────── */
+  .photo-divider {
+    margin: 3.5rem auto;
+    max-width: 60%;
+    text-align: center;
   }
   @media (max-width: 640px) {
-    .photo-pair { grid-template-columns: 1fr; }
-  }
-  .pair-photo {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    aspect-ratio: 4/3;
-    object-fit: cover;
+    .photo-divider { max-width: 90%; }
   }
 
-  .wide-photo {
+  .divider-photo {
     width: 100%;
-    max-width: 760px;
     height: auto;
     border-radius: 8px;
-    display: block;
-    margin: 2.5rem auto;
     aspect-ratio: 16/9;
     object-fit: cover;
     object-position: center 40%;
+    display: block;
+  }
+
+  /* ── mobile: collapse photo-row--left single photo ── */
+  @media (max-width: 640px) {
+    .photo-row--left .thumb-photo--tall {
+      aspect-ratio: 4/3;
+    }
   }
 
   /* ── body prose ───────────────────────── */
@@ -402,5 +515,45 @@ const quotes = [
     font-style: italic;
     color: var(--color-tab-dim);
     margin: 0;
+  }
+
+  /* ── drop caps ────────────────────────── */
+  .body.drop-cap::first-letter {
+    font-family: var(--font-serif-breathe);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 4em;
+    line-height: 1;
+    float: left;
+    padding-right: 0.08em;
+    padding-top: 0.05em;
+    color: color-mix(in srgb, var(--color-accent) 80%, var(--color-text-primary));
+  }
+
+  /* ── pull quotes ──────────────────────── */
+  .pull-anchor {
+    position: relative;
+  }
+
+  .pull-quote {
+    font-family: var(--font-serif-breathe);
+    font-style: italic;
+    font-size: 1.4em;
+    line-height: 1.3;
+    color: color-mix(in srgb, var(--color-text-primary) 80%, transparent);
+    width: 14rem;
+    position: absolute;
+    right: -16rem;
+    top: 0;
+    margin: 0;
+  }
+
+  @media (max-width: 1440px) {
+    .pull-quote {
+      position: static;
+      width: 100%;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
   }
 </style>

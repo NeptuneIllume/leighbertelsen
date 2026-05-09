@@ -4,11 +4,23 @@ import BreatheLayout from '@/layouts/BreatheLayout.astro';
 import SeasonalIllustration from '@/components/breathe/SeasonalIllustration.astro';
 import { getSeason, type Season } from '@/utils/season';
 import leighForestPath from '@/assets/images/breathe/leigh-forest-path.jpg';
+import leighAncientTree from '@/assets/images/breathe/leigh-ancient-tree.jpg';
+import leighBaliTemple from '@/assets/images/breathe/leigh-bali-temple.jpg';
+import leighWinterTree from '@/assets/images/breathe/leigh-winter-tree.jpg';
 import leighTeaching from '@/assets/images/breathe/leigh-teaching-triangle.jpg';
+import altarSummerSolstice from '@/assets/images/breathe/altar-summer-solstice.png';
 
 // Single source of truth for this page's season. Change this one line to
 // force a season (e.g. for testing): `const season: Season = 'winter';`
 const season: Season = getSeason();
+
+const seasonalHero = {
+  spring: { img: leighAncientTree, alt: 'Ancient tree beside a turquoise lake in Laos.' },
+  summer: { img: leighBaliTemple,  alt: 'Temple doorway at Pura Tirta Empul, Bali.' },
+  autumn: { img: leighForestPath,  alt: 'A forest path in autumn outside Copenhagen.' },
+  winter: { img: leighWinterTree,  alt: 'A bare winter tree against a pale sky.' },
+};
+const hero = seasonalHero[season];
 
 const sabbats = {
   spring: 'Beltane season',
@@ -31,8 +43,8 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
     {/* ── Hero image ───────────────────────────────────────── */}
     <div class="hero-image-wrap">
       <Image
-        src={leighForestPath}
-        alt="A forest path in autumn outside Copenhagen"
+        src={hero.img}
+        alt={hero.alt}
         widths={[800, 1200, 1600]}
         sizes="100vw"
         class="hero-image"
@@ -45,7 +57,7 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
       <span class="season-eyebrow" data-season-eyebrow>{initialLabel}</span>
 
       <div class="hero-illustration">
-        <SeasonalIllustration season={season} size={140} />
+        <SeasonalIllustration />
       </div>
 
       <div class="hero-text">
@@ -56,18 +68,19 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
       </div>
     </section>
 
-    <Image
-      src={leighTeaching}
-      alt="Leigh Bertelsen teaching triangle pose outdoors at the Himalayan Institute"
-      widths={[600, 1000]}
-      sizes="(max-width: 768px) 100vw, 700px"
-      class="practice-photo"
-    />
-
     <section class="offer" aria-label="Practice and gather">
       <h2 class="sr-only">Practice and gather</h2>
 
-      <article class="card">
+      <article class="card practice-together">
+        <figure class="card-photo">
+          <Image
+            src={leighTeaching}
+            alt="Leigh Bertelsen teaching triangle pose outdoors at the Himalayan Institute"
+            widths={[600, 1000]}
+            sizes="(max-width: 768px) 100vw, 400px"
+          />
+          <figcaption>Triangle pose, Himalayan Institute.</figcaption>
+        </figure>
         <span class="card-label">practice together</span>
         <h3 class="card-title">Private sessions</h3>
         <p class="card-body">
@@ -81,7 +94,16 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
         <a class="card-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#105;&#103;&#104;&#46;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">get in touch</a>
       </article>
 
-      <article class="card">
+      <article class="card gather">
+        <figure class="card-photo">
+          <Image
+            src={altarSummerSolstice}
+            alt="Summer solstice altar in Denmark."
+            widths={[600, 1000]}
+            sizes="(max-width: 768px) 100vw, 400px"
+          />
+          <figcaption>Summer solstice altar, Denmark.</figcaption>
+        </figure>
         <span class="card-label">gather</span>
         <h3 class="card-title">Seasonal circles</h3>
         <p class="card-body">
@@ -143,15 +165,25 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
     object-position: center 30%;
   }
 
-  .practice-photo {
+  .card-photo {
+    margin: calc(-1 * var(--card-padding)) -1.5rem 0;
+  }
+  .card-photo img {
     width: 100%;
-    max-width: 700px;
-    height: auto;
-    border-radius: 8px;
-    display: block;
-    margin: 2rem auto;
-    aspect-ratio: 4/3;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
+    display: block;
+  }
+  .card-photo figcaption {
+    padding: 0.625rem 1.5rem 0.5rem;
+    font-family: var(--font-serif-breathe);
+    font-style: italic;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: color-mix(in srgb, var(--color-text) 65%, transparent);
+  }
+  .card-photo + .card-label {
+    margin-top: 1rem;
   }
 
   .page {
@@ -208,7 +240,6 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
   }
 
   .hero-illustration {
-    opacity: 0.35;
     flex-shrink: 0;
     align-self: start;
     padding-top: 0.5rem;
@@ -223,13 +254,15 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
   }
 
   .card {
+    --card-padding: 1.25rem;
     background: var(--color-surface);
     border: 0.5px solid var(--color-border);
     border-radius: 8px;
-    padding: 1.25rem 1.5rem;
+    padding: var(--card-padding) 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    overflow: hidden;
   }
 
   .card-label {
@@ -372,8 +405,6 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
     }
     .hero-illustration {
       grid-area: illust;
-      /* Smaller, quieter on mobile — less visual noise. */
-      opacity: 0.25;
     }
     .season-eyebrow {
       grid-area: eyebrow;
@@ -384,9 +415,8 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
     .hero-text { grid-area: text; }
 
     /* Override the 140px size set via the SeasonalIllustration prop. */
-    .hero-illustration :global(svg) {
-      width: 80px;
-      height: 80px;
+    .hero-illustration :global(.botanical-plate) {
+      width: clamp(80px, 20vw, 140px);
     }
     .offer {
       grid-template-columns: 1fr;

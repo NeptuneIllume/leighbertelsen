@@ -1,82 +1,40 @@
 ---
-import type { Season } from '@/utils/season';
+import { Image } from 'astro:assets';
+import { getSeason, type Season } from '@/utils/season';
+import spring from '@/assets/images/breathe/botanical-spring-crocus.png';
+import summer from '@/assets/images/breathe/botanical-summer-peony.png';
+import autumn from '@/assets/images/breathe/botanical-autumn-rudbeckia.png';
+import winter from '@/assets/images/breathe/botanical-winter-hellebore.png';
 
 interface Props {
-  season: Season;
-  size?: number;
-  class?: string;
+  season?: Season;
 }
 
-const { season, size = 120, class: className } = Astro.props;
+const { season = getSeason() } = Astro.props;
+const plate = {
+  spring: { img: spring, label: 'Crocus mæsiacus' },
+  summer: { img: summer, label: 'Pæonia tenuifolia' },
+  autumn: { img: autumn, label: 'Rudbeckia hirta' },
+  winter: { img: winter, label: 'Helleborus niger' },
+}[season];
 ---
 
-<span class:list={['seasonal-illustration', className]} aria-hidden="true">
-  {season === 'spring' && (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width={size} height={size}
-         fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-      {/* unfurling fern frond — an expanding spiral with a tight curled tip */}
-      <path d="M 60 60
-               Q 66 58 65 64
-               Q 63 71 55 69
-               Q 45 66 47 54
-               Q 49 40 63 39
-               Q 80 38 82 56
-               Q 84 78 62 82
-               Q 36 84 34 58
-               Q 34 28 60 26" />
-      {/* small curled tip */}
-      <path d="M 60 26 Q 56 24 55 28 Q 54 32 58 32" />
-    </svg>
-  )}
-
-  {season === 'summer' && (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width={size} height={size}
-         fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-      {/* sun / flower — center circle plus 8 radiating petals */}
-      <circle cx="60" cy="60" r="9" />
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
-        <g transform={`rotate(${deg} 60 60)`}>
-          <ellipse cx="60" cy="34" rx="4" ry="12" />
-        </g>
-      ))}
-    </svg>
-  )}
-
-  {season === 'autumn' && (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width={size} height={size}
-         fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-      {/* leaf outline — elongated teardrop */}
-      <path d="M 60 14 C 82 34 82 86 60 106 C 38 86 38 34 60 14 Z" />
-      {/* center vein */}
-      <line x1="60" y1="18" x2="60" y2="102" />
-      {/* side veins — three each side, slightly curved */}
-      <path d="M 60 36 Q 66 40 72 44" />
-      <path d="M 60 52 Q 68 57 75 60" />
-      <path d="M 60 68 Q 67 73 73 75" />
-      <path d="M 60 36 Q 54 40 48 44" />
-      <path d="M 60 52 Q 52 57 45 60" />
-      <path d="M 60 68 Q 53 73 47 75" />
-    </svg>
-  )}
-
-  {season === 'winter' && (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width={size} height={size}
-         fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-      {/* bare branch — main stem with 4 side branches shortening upward */}
-      <path d="M 60 110 Q 61 70 60 14" />
-      <path d="M 60 86 Q 72 78 82 70" />
-      <path d="M 60 68 Q 48 60 40 52" />
-      <path d="M 60 52 Q 72 46 78 40" />
-      <path d="M 60 38 Q 50 32 44 28" />
-      <path d="M 60 26 Q 66 22 70 18" />
-    </svg>
-  )}
-</span>
+<figure class="botanical-plate" aria-hidden="true">
+  <Image src={plate.img} alt="" widths={[220, 360]} sizes="clamp(220px, 24vw, 360px)" />
+</figure>
 
 <style>
-  .seasonal-illustration {
-    display: inline-flex;
-    color: var(--color-accent);
-    line-height: 0;
+  .botanical-plate {
+    filter: none;
+    width: clamp(220px, 24vw, 360px);
+    margin: 0;
+    padding: 0;
+  }
+  .botanical-plate img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: none;
   }
 </style>
+

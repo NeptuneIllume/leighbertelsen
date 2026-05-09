@@ -142,6 +142,18 @@ const fmt = (d: Date) =>
     margin: 0 0 2.5rem;
   }
 
+  .breathe .body :global(p:first-of-type)::first-letter {
+    font-family: var(--font-serif-breathe);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 4em;
+    line-height: 1;
+    float: left;
+    padding-right: 0.08em;
+    padding-top: 0.05em;
+    color: color-mix(in srgb, var(--color-accent) 80%, var(--color-text-primary));
+  }
+
   .be .title {
     font-family: var(--font-serif-be);
     font-weight: 400;
