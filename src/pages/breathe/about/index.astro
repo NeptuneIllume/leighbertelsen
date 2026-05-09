@@ -250,7 +250,7 @@ const quotes = [
     {lastEdited && (
       <p class="last-updated">last edited {lastEdited}</p>
     )}
-    <button class="footer-signature" aria-label="Sigil" data-egg-sigil data-egg-target="/personal">
+    <button class="footer-signature" data-egg-sigil data-egg-target="/personal">
       <Sigil size={20} />
       <span class="footer-text">linger here a moment</span>
     </button>
@@ -491,17 +491,17 @@ const quotes = [
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    opacity: 0.6;
     background: none;
     border: none;
     padding: 0.5rem;
     margin: -0.5rem;
     cursor: pointer;
-    transition: opacity 200ms ease;
+    color: color-mix(in srgb, var(--color-text) 45%, transparent);
+    transition: color 200ms ease;
     transform-origin: center;
   }
   .footer-signature:hover {
-    opacity: 0.85;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
   }
   .footer-text {
     font-family: var(--font-sans);
@@ -509,7 +509,7 @@ const quotes = [
     font-weight: 300;
     font-style: italic;
     letter-spacing: 0.02em;
-    color: var(--color-text-secondary);
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
     user-select: none;
   }  .last-updated {
     font-family: var(--font-sans);

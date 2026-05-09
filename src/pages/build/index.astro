@@ -114,7 +114,6 @@ const experience = [
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 600 140"
                 width="100%"
-                height="auto"
                 role="presentation"
                 aria-hidden="true"
                 focusable="false"
@@ -578,9 +577,14 @@ const experience = [
 
   .inline-link {
     color: var(--color-accent);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+    text-underline-offset: 0.15em;
   }
-  .inline-link:hover { text-decoration: underline; }
+  .inline-link:hover {
+    text-decoration-color: currentColor;
+  }
 
   /* ── hero pull-quote ────────────────────── */
   .hero-pull-quote {

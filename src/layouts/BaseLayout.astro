@@ -89,7 +89,7 @@ const themeAttr = theme === 'membrane' ? undefined : theme;
 
     <slot name="footer">
       <footer class="site-footer">
-        <button class="footer-signature" aria-label="Sigil" data-egg-sigil data-egg-target={footerTarget}>
+        <button class="footer-signature" data-egg-sigil data-egg-target={footerTarget}>
           <Sigil size={20} />
           <span class="footer-text">{footerHint}</span>
         </button>
@@ -152,17 +152,17 @@ const themeAttr = theme === 'membrane' ? undefined : theme;
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        opacity: 0.6;
         background: none;
         border: none;
         padding: 0.5rem;
         margin: -0.5rem;
         cursor: pointer;
-        transition: opacity 200ms ease;
+        color: color-mix(in srgb, var(--color-text) 45%, transparent);
+        transition: color 200ms ease;
         transform-origin: center;
       }
       .footer-signature:hover {
-        opacity: 0.85;
+        color: color-mix(in srgb, var(--color-text) 70%, transparent);
       }
       .footer-text {
         font-family: var(--font-sans);
@@ -170,7 +170,7 @@ const themeAttr = theme === 'membrane' ? undefined : theme;
         font-weight: 300;
         font-style: italic;
         letter-spacing: 0.02em;
-        color: var(--color-text-secondary, var(--color-text));
+        color: color-mix(in srgb, var(--color-text) 70%, transparent);
         user-select: none;
       }
       .sr-only {

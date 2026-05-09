@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import BreatheLayout from '@/layouts/BreatheLayout.astro';
 import SeasonalIllustration from '@/components/breathe/SeasonalIllustration.astro';
 import { getSeason, type Season } from '@/utils/season';
@@ -31,6 +31,12 @@ const sabbats = {
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const initialLabel = `${cap(season)} · ${sabbats[season]}`;
+
+const heroPreload = await getImage({
+  src: hero.img,
+  widths: [800, 1200, 1600],
+  sizes: '100vw',
+});
 ---
 
 <BreatheLayout
@@ -38,6 +44,13 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
   description="Yoga, seasonal gatherings, and the turning of the year. Private sessions and Wheel of the Year circles, online."
   season={season}
 >
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    imagesrcset={heroPreload.srcSet.attribute}
+    imagesizes="100vw"
+  />
   <div class="page">
 
     {/* ── Hero image ───────────────────────────────────────── */}
@@ -48,6 +61,8 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
         widths={[800, 1200, 1600]}
         sizes="100vw"
         class="hero-image"
+        loading="eager"
+        fetchpriority="high"
       />
     </div>
 
@@ -119,14 +134,49 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
     <section class="newsletter" aria-label="Stay connected">
       <p class="news-heading">Want to know when the next circle is?</p>
       <p class="news-sub">I send word when something is happening, and occasionally write about the season we're in. No noise, just signal and seasons.</p>
-      <form class="news-form" onsubmit="event.preventDefault()">
+      <form
+        class="news-form"
+        action="https://buttondown.email/api/emails/embed-subscribe/leigh-bertelsen"
+        method="post"
+        target="popupwindow"
+        data-newsletter-form
+      >
         <label class="sr-only" for="news-email">Email address</label>
-        <input id="news-email" type="email" placeholder="your@email" autocomplete="email" />
+        <input id="news-email" type="email" name="email" placeholder="your@email" autocomplete="email" required />
         <button type="submit">subscribe</button>
       </form>
+      <p class="news-status" data-newsletter-status hidden></p>
     </section>
   </div>
 </BreatheLayout>
+
+<script>
+  // Newsletter form — Buttondown embed-subscribe (no-cors)
+  const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
+  const status = document.querySelector<HTMLElement>('[data-newsletter-status]');
+
+  if (form && status) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value;
+      try {
+        await fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `email=${encodeURIComponent(email)}`,
+        });
+        // Buttondown returns an opaque response in no-cors mode; assume success
+        status.textContent = 'Check your email to confirm.';
+        status.hidden = false;
+        form.reset();
+      } catch {
+        status.textContent = 'Something went wrong. Try again?';
+        status.hidden = false;
+      }
+    });
+  }
+</script>
 
 <script>
   // Re-sync the season eyebrow with <html data-season> on load and soft nav.
@@ -377,6 +427,15 @@ const initialLabel = `${cap(season)} · ${sabbats[season]}`;
     transition: background-size 350ms ease;
   }
   .news-form button:hover { background-size: 100% 100%; }
+
+  .news-status {
+    font-family: var(--font-serif-breathe);
+    font-style: italic;
+    font-size: 13px;
+    color: color-mix(in srgb, var(--color-text-secondary) 70%, transparent);
+    margin-top: 0.75rem;
+    text-align: center;
+  }
 
   .sr-only {
     position: absolute;
