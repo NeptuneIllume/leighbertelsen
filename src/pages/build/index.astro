@@ -100,6 +100,14 @@ const experience = [
         and then running with it from planning to execution, because that amount of
         ownership and responsibility is where I do my best work.
       </p>
+
+      <p class="hero-cta">
+        <span class="hero-cta__lead">For project enquiries:</span>
+        <a class="hero-cta__action"
+           href="mailto:hello@leighbertelsen.com?subject=Web%20development%20enquiry">
+          [ get in touch ]
+        </a>
+      </p>
     </section>
 
     {/* ── Featured cards ───────────────────────────────────── */}
@@ -574,6 +582,43 @@ const experience = [
     max-width: 65ch;
   }
   .section-body:last-child { margin-bottom: 0; }
+
+  /* ── hero cta ────────────────────────── */
+  .hero-cta {
+    margin: 1.5rem 0 0 0;
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 35rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-cta__lead {
+    font-family: var(--font-sans);
+    color: color-mix(in srgb, var(--color-text) 75%, transparent);
+  }
+
+  .hero-cta__action {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-accent);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: opacity 0.15s ease;
+  }
+
+  .hero-cta__action:hover {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 640px) {
+    .hero-cta {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
 
   .inline-link {
     color: var(--color-accent);
