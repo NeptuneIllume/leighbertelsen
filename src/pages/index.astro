@@ -45,9 +45,12 @@ const choices = [
   <Fragment slot="header" />
 
   <div class="page">
+    <div class="grain" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
     <span class="sigil-pill" aria-label="Leigh Bertelsen">
-      <Sigil size={22} />
+      <Sigil size={22} colorized />
     </span>
+    <p class="orientation">Leigh Bertelsen is a web developer, yoga teacher, and ICF-accredited coach based outside Copenhagen.</p>
 
     <section class="membrane" transition:name="membrane-content">
       <p class="prompt">— where would you like to go? —</p>
@@ -94,19 +97,26 @@ const choices = [
       console.log('[membrane] choices:', choices.length, 'seps:', seps.length);
 
       if (prefersReduced) {
-        gsap.set(['.sigil-pill', '.prompt', '.choice', '.sep'], { opacity: 1, y: 0, scale: 1 });
+        gsap.set(['.sigil-pill', '.prompt', '.orientation', '.choice', '.sep'], { opacity: 1, y: 0, scale: 1 });
       } else {
-        gsap.set('.sigil-pill', { opacity: 0, scale: 0.9, transformOrigin: '50% 50%' });
-        gsap.set('.prompt',     { opacity: 0, y: 8 });
-        gsap.set('.choice',     { opacity: 0, y: 16 });
-        gsap.set('.sep',        { opacity: 0 });
+        gsap.set('.sigil-pill',   { opacity: 0, scale: 0.9, transformOrigin: '50% 50%' });
+        gsap.set('.prompt',       { opacity: 0, y: 6 });
+        gsap.set('.orientation',  { opacity: 0, y: 6 });
+        gsap.set('.choice',       { opacity: 0, y: 20 });
+        gsap.set('.sep',          { opacity: 0 });
 
+        // Ceremonial arrival: sigil + orientation hold alone, then content blooms in stages.
         gsap.timeline()
-          .to('.sigil-pill', { opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' }, 0)
-          .to('.prompt',     { opacity: 1, y: 0,     duration: 0.5 },                    0.2)
-          .to('.choice',     { opacity: 1, y: 0,     duration: 0.6,
-                               stagger: 0.12, ease: 'power2.out' },                      0.4)
-          .to('.sep',        { opacity: 1, duration: 0.4 },                              0.52);
+          // 1. Sigil + orientation appear together, then hold alone for ~600ms
+          .to('.sigil-pill',  { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' }, 0)
+          .to('.orientation', { opacity: 0.85, y: 0,  duration: 0.6, ease: 'power1.out' }, 0)
+          // 2. Prompt fades in
+          .to('.prompt',      { opacity: 1, y: 0,     duration: 0.6, ease: 'power1.out' }, 1.1)
+          // 3. Worlds bloom in with generous stagger
+          .to('.choice',      { opacity: 1, y: 0,     duration: 1.1,
+                                stagger: 0.22, ease: 'power1.out' },                        1.7)
+          // 4. Tiny pause — seps appear just after the last choice settles
+          .to('.sep',         { opacity: 1, duration: 0.4 },                               1.88);
       }
 
       choices.forEach((clicked) => {
@@ -122,7 +132,7 @@ const choices = [
             .to(clicked, { scale: 1.04, opacity: 0, y: -20, duration: 0.4, ease: 'power2.out' }, 0)
             .to([...others, ...seps],
                 { opacity: 0, y: 20, scale: 0.96, duration: 0.3, stagger: 0.06 },                0)
-            .to('.prompt', { opacity: 0, duration: 0.2 },                                        0);
+            .to(['.prompt', '.orientation'], { opacity: 0, duration: 0.2 },                      0);
         });
       });
     }, root);
@@ -133,12 +143,136 @@ const choices = [
   init();
   document.addEventListener('astro:page-load', init);
   document.addEventListener('astro:before-swap', () => { ctx?.revert(); ctx = null; });
+
+  // ── Sparkles — animated twinkling dots ─────────────────────
+  const grainEl = document.querySelector<HTMLElement>('.grain');
+  if (grainEl) {
+    const canvas = document.createElement('canvas');
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    grainEl.appendChild(canvas);
+
+    const resize = () => {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const COLORS = [
+      [26, 111, 191],  // Build blue
+      [196, 90, 42],   // Breathe terracotta
+      [58, 96, 80],    // Be forest green
+    ];
+
+    const COUNT = 100;
+    const sparkles = Array.from({ length: COUNT }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      r: Math.random() * 1.4 + 0.5,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      alpha: 0,
+      target: Math.random() * 0.45 + 0.15,
+      speed: Math.random() * 0.008 + 0.003,
+      rising: Math.random() > 0.5,
+      delay: Math.random() * 200,
+    }));
+
+    const ctx2d = canvas.getContext('2d')!;
+    let frame = 0;
+    let animId: number;
+
+    const draw = () => {
+      animId = requestAnimationFrame(draw);
+      ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+      frame++;
+
+      for (const s of sparkles) {
+        if (frame < s.delay) continue;
+        if (s.rising) {
+          s.alpha = Math.min(s.alpha + s.speed, s.target);
+          if (s.alpha >= s.target) s.rising = false;
+        } else {
+          s.alpha = Math.max(s.alpha - s.speed * 0.7, 0);
+          if (s.alpha <= 0) {
+            s.x = Math.random();
+            s.y = Math.random();
+            s.target = Math.random() * 0.7 + 0.2;
+            s.speed = Math.random() * 0.008 + 0.003;
+            s.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+            s.delay = frame + Math.random() * 120;
+            s.rising = true;
+          }
+        }
+        const [r, g, b] = s.color;
+        ctx2d.beginPath();
+        ctx2d.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+        ctx2d.fillStyle = `rgba(${r},${g},${b},${s.alpha})`;
+        ctx2d.fill();
+      }
+    };
+    draw();
+
+    document.addEventListener('astro:before-swap', () => cancelAnimationFrame(animId));
+  }
+
+  // ── Ambient glow — lazy cursor follow ──────────────────────
+  const glow = document.querySelector<HTMLElement>('.glow');
+  if (glow) {
+    // Start glow centred
+    gsap.set(glow, { x: window.innerWidth / 2, y: window.innerHeight / 2 });
+
+    const onMove = (x: number, y: number) => {
+      gsap.to(glow, { x, y, duration: 2.2, ease: 'power1.out', overwrite: 'auto' });
+    };
+
+    window.addEventListener('mousemove', (e) => onMove(e.clientX, e.clientY));
+    window.addEventListener('touchmove', (e) => {
+      const t = e.touches[0];
+      if (t) onMove(t.clientX, t.clientY);
+    }, { passive: true });
+  }
 </script>
 
 <style>
   .page {
     position: relative;
     min-height: 100dvh;
+    overflow: hidden;
+  }
+
+  /* ── sparkle layer ─────────────────────────────────── */
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+  }
+  .grain canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── ambient glow ────────────────────────── */
+  .glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 700px;
+    margin-left: -350px;
+    margin-top: -350px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+      circle at center,
+      rgba(210, 120, 160, 0.10) 0%,
+      rgba(210, 120, 160, 0.04) 40%,
+      transparent 70%
+    );
+    will-change: transform;
   }
 
   /* Hide animated elements by default so there's no flash before GSAP's
@@ -146,6 +280,7 @@ const choices = [
      the prefers-reduced-motion branch restores them via clearProps. */
   .sigil-pill,
   .prompt,
+  .orientation,
   .choice,
   .sep {
     opacity: 0;
@@ -173,7 +308,7 @@ const choices = [
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.5rem 6rem;
     text-align: center;
     gap: 2rem;
   }
@@ -185,6 +320,21 @@ const choices = [
     letter-spacing: 0.06em;
     color: var(--color-text-muted);
     margin: 0;
+  }
+
+  .orientation {
+    position: absolute;
+    top: calc(2rem + 38px + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    opacity: 0.85;
+    margin: 0;
+    white-space: nowrap;
   }
 
   .choices {

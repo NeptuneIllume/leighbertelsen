@@ -4,12 +4,12 @@ export const personSchema = {
   name: 'Leigh Bertelsen',
   url: 'https://leighbertelsen.com',
   image: 'https://leighbertelsen.com/og/index.png',
-  // TODO (July content pass): update to 'Principal Web Developer' / 'Lead Web Developer'
+  // TODO (July content pass): update to 'Principal Web Developer'
   // and worksFor.name to 'Hobbii' when the role is announced.
   jobTitle: 'Senior Web Developer',
   worksFor: {
     '@type': 'Organization',
-    name: 'Netcompany Banking Services',
+    name: 'Skandinavisk Banking Services',
   },
   address: {
     '@type': 'PostalAddress',

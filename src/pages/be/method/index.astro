@@ -25,10 +25,13 @@ const tools = [
 
     {/* ── Opening ────────────────────────────────────────── */}
     <section class="intro" aria-label="Introduction">
+      <p class="be-hero-quote">
+        I’m not a “here’s your five-step plan” kind of coach.
+      </p>
       <p class="body">
-        I'm not a "here's your five-step plan" kind of coach. What I've found, both in my
-        own practice and working with clients, is that most of us already know what we need.
-        The work is in creating enough stillness to hear it.
+        What I’ve found, both in my own practice and working with clients,
+        is that most of us already know what we need. The work is in
+        creating enough stillness to hear it.
       </p>
     </section>
 
@@ -187,6 +190,18 @@ const tools = [
   .method-photo-landscape {
     aspect-ratio: 4/3;
     max-width: 600px;
+  }
+
+  /* ── opening pull-quote ──────────────── */
+  .be-hero-quote {
+    font-family: var(--font-serif-be);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 44px);
+    line-height: 1.25;
+    color: var(--color-text);
+    max-width: 35rem;
+    margin: 0 0 2rem 0;
   }
 
   /* ── body prose ───────────────────────── */
