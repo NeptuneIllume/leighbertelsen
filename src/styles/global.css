@@ -369,3 +369,16 @@ img {
   font-size: 0.75rem; /* 12px — mono reads larger */
   letter-spacing: 0.01em;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Mobile footer clearance — AUDIT-09
+   The fixed bottom tab bar (44px tall + iOS safe-area inset)
+   covers the .site-footer "linger here a moment" line on mobile.
+   Add enough bottom padding so the footer clears the tab bar.
+   Breakpoint mirrors the nav components (all switch at 768px).
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .site-footer {
+    padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 1rem);
+  }
+}

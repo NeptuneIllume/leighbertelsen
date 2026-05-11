@@ -105,8 +105,7 @@ const heroPreload = await getImage({
           with a conversation to work out what makes sense. Sessions can be combined with
           coaching if that feels useful.
         </p>
-        {/* Entity-encoded mailto link */}
-        <a class="card-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#108;&#111;&#64;&#108;&#101;&#105;&#103;&#104;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#46;&#99;&#111;&#109;">get in touch</a>
+        <a class="card-link" href="mailto:hello@leighbertelsen.com?subject=Private%20session%20enquiry">get in touch</a>
       </article>
 
       <article class="card gather">
@@ -126,12 +125,11 @@ const heroPreload = await getImage({
           solstices and equinoxes in between. Open to all. Rooted in ritual, held with care.
           Join the list to hear when the next one is coming.
         </p>
-        {/* Entity-encoded mailto link */}
-        <a class="card-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#108;&#111;&#64;&#108;&#101;&#105;&#103;&#104;&#98;&#101;&#114;&#116;&#101;&#108;&#115;&#101;&#110;&#46;&#99;&#111;&#109;">join the list</a>
+        <a class="card-link" href="#newsletter">join the list</a>
       </article>
     </section>
 
-    <section class="newsletter" aria-label="Stay connected">
+    <section id="newsletter" class="newsletter" aria-label="Stay connected">
       <p class="news-heading">Want to know when the next circle is?</p>
       <p class="news-sub">I send word when something is happening, and occasionally write about the season we're in. No noise, just signal and seasons.</p>
       <form
@@ -206,6 +204,16 @@ const heroPreload = await getImage({
   }
   syncEyebrow();
   document.addEventListener('astro:page-load', syncEyebrow);
+</script>
+
+<script>
+  // Focus the email input after scrolling to the newsletter section.
+  document.querySelector('[href="#newsletter"]')?.addEventListener('click', () => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(() => {
+      (document.querySelector('#newsletter input[type="email"]') as HTMLInputElement | null)?.focus();
+    }, reducedMotion ? 0 : 500);
+  });
 </script>
 
 <style>
