@@ -162,12 +162,12 @@ const themeAttr = theme === 'membrane' ? undefined : theme;
         padding: 0.5rem;
         margin: -0.5rem;
         cursor: pointer;
-        color: color-mix(in srgb, var(--color-text) 50%, transparent);
+        color: var(--color-tab-dim, var(--color-text-muted));
         transition: color 200ms ease;
         transform-origin: center;
       }
       .footer-signature:hover {
-        color: color-mix(in srgb, var(--color-text) 70%, transparent);
+        color: var(--color-text-secondary, var(--color-text-muted));
       }
       .footer-signature:focus-visible {
         outline: 2px solid color-mix(in srgb, var(--color-text) 70%, transparent);
@@ -180,7 +180,7 @@ const themeAttr = theme === 'membrane' ? undefined : theme;
         font-weight: 300;
         font-style: italic;
         letter-spacing: 0.02em;
-        color: color-mix(in srgb, var(--color-text) 70%, transparent);
+        color: var(--color-tab-dim, var(--color-text-muted));
         user-select: none;
       }
       .sr-only {
