@@ -410,10 +410,12 @@ const choices = [
      separators won't fit horizontally below ~640px without crowding. */
   @media (max-width: 640px) {
     .membrane {
-      /* Reserve room at the top for the absolute sigil pill (sits at
-         top: 2rem and is ~44px tall) so vertically centered content
-         doesn't ride up underneath it on short viewports. */
-      padding: 6rem 1.5rem 4rem;
+      /* Reserve room at the top for:
+           - sigil pill (top: 2rem, ~38px tall)
+           - orientation text below it (up to 2 lines, ~32px)
+           - a comfortable gap before the prompt
+         6rem was enough before orientation could wrap; 9rem clears it. */
+      padding: 9rem 1.5rem 4rem;
       justify-content: flex-start;
       gap: 3rem;
     }
