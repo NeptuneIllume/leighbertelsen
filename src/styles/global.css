@@ -26,34 +26,7 @@
   --color-border-dark: #3c3c38;
 }
 
-/* Auto-swap membrane tokens to their -dark counterparts under dark mode.
-   Worlds ([data-theme]) get the same treatment below. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #141412;
-    --color-text: #f0f0ec;
-    --color-text-muted: #a0a09c;
-    --color-border: #3c3c38;
-  }
 
-  /* Swap each world's active tokens to their -dark counterparts,
-     mirroring the :root swap above. Seasonal breathe variants are
-     covered by their own -dark values defined on each selector. */
-  [data-theme='build'],
-  [data-theme='breathe'],
-  [data-theme='breathe'][data-season='spring'],
-  [data-theme='breathe'][data-season='summer'],
-  [data-theme='breathe'][data-season='winter'],
-  [data-theme='be'] {
-    --color-bg: var(--color-bg-dark);
-    --color-surface: var(--color-surface-dark);
-    --color-text-primary: var(--color-text-primary-dark);
-    --color-text-secondary: var(--color-text-secondary-dark);
-    --color-accent: var(--color-accent-dark);
-    --color-border: var(--color-border-dark);
-    --color-tab-dim: var(--color-tab-dim-dark);
-  }
-}
 
 /* ─────────────────────────────────────────────────────────────
    Build — focused, analytical, blue-cool
@@ -173,6 +146,35 @@
   --color-accent-dark: #6aaa88;
   --color-border-dark: #283228;
   --color-tab-dim-dark: #6a8573;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Dark mode — must come after ALL light-mode theme and seasonal
+   overrides so equal-specificity rules don't win by source order.
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #141412;
+    --color-text: #f0f0ec;
+    --color-text-muted: #a0a09c;
+    --color-border: #3c3c38;
+  }
+
+  [data-theme='build'],
+  [data-theme='breathe'],
+  [data-theme='breathe'][data-season='spring'],
+  [data-theme='breathe'][data-season='summer'],
+  [data-theme='breathe'][data-season='autumn'],
+  [data-theme='breathe'][data-season='winter'],
+  [data-theme='be'] {
+    --color-bg: var(--color-bg-dark);
+    --color-surface: var(--color-surface-dark);
+    --color-text-primary: var(--color-text-primary-dark);
+    --color-text-secondary: var(--color-text-secondary-dark);
+    --color-accent: var(--color-accent-dark);
+    --color-border: var(--color-border-dark);
+    --color-tab-dim: var(--color-tab-dim-dark);
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
