@@ -4,8 +4,6 @@ import BeLayout from '@/layouts/BeLayout.astro';
 import Sigil from '@/components/ui/Sigil.astro';
 import leighPortrait from '@/assets/images/be/leigh-forest-portrait.jpg';
 import { getLastModified } from '@/utils/lastModified';
-import JsonLd from '@/components/ui/JsonLd.astro';
-import { personSchema } from '@/utils/personSchema';
 
 const preloadPortrait = await getImage({ src: leighPortrait, width: 800, format: 'webp' });
 
@@ -39,10 +37,9 @@ const quotes = [
 <link rel="preload" as="image" href={preloadPortrait.src} slot="head" />
 
 <BeLayout
-  title="About | Be | Leigh Bertelsen"
-  description="I came to coaching the long way round: 17 years as a developer, two decades of contemplative practice, and the place where they meet."
+  title="About Leigh — ICF Coach for Women in Tech"
+  description="Leigh Bertelsen is an ICF-accredited coach, 500-hour yoga teacher, and senior web developer based outside Copenhagen, working with women in tech worldwide."
 >
-  <JsonLd schema={personSchema} />
   <div class="page">
 
     {/* ── Opening ────────────────────────────────────────── */}

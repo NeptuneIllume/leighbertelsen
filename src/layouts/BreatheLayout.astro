@@ -1,7 +1,23 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import BreatheNav from '@/components/breathe/BreatheNav.astro';
+import JsonLd from '@/components/ui/JsonLd.astro';
 import { getSeason, type Season } from '@/utils/season';
+
+const breatheServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Leigh Bertelsen — Yoga Teacher',
+  url: 'https://leighbertelsen.com/breathe',
+  description:
+    'Private yoga sessions online. Yin, Yoga Nidra, Hatha, Ayurveda, and tarot with a 500-hour certified teacher based near Copenhagen.',
+  areaServed: ['Copenhagen', 'Denmark', 'Online'],
+  serviceType: ['Yoga Instruction', 'Yoga Nidra', 'Ayurveda'],
+  provider: {
+    '@type': 'Person',
+    name: 'Leigh Bertelsen',
+  },
+};
 
 interface Props {
   title: string;
@@ -14,7 +30,10 @@ const season: Season = seasonOverride ?? getSeason();
 ---
 
 <BaseLayout title={title} description={description} theme="breathe" world="breathe" season={season}>
-  <slot name="head" slot="head" />
+  <Fragment slot="head">
+    <JsonLd schema={breatheServiceSchema} />
+    <slot name="head" />
+  </Fragment>
   <BreatheNav slot="header" />
   <div transition:name="breathe-content">
     <slot />

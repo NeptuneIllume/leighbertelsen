@@ -1,6 +1,8 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import Sigil from '@/components/ui/Sigil.astro';
+import JsonLd from '@/components/ui/JsonLd.astro';
+import { personSchema } from '@/utils/personSchema';
 import '@/styles/global.css';
 
 interface Props {
@@ -69,6 +71,7 @@ const themeAttr = theme === 'membrane' ? undefined : theme;
     <meta name="twitter:image" content={ogImageURL} />
 
     <ClientRouter />
+    <JsonLd schema={personSchema} />
     <slot name="head" />
   </head>
   <body>

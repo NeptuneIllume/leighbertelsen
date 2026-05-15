@@ -1,6 +1,22 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import BeNav from '@/components/be/BeNav.astro';
+import JsonLd from '@/components/ui/JsonLd.astro';
+
+const beServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Leigh Bertelsen — Life Coach',
+  url: 'https://leighbertelsen.com/be',
+  description:
+    'ICF-accredited coaching for women in tech. Online sessions worldwide. Based outside Copenhagen.',
+  areaServed: ['Copenhagen', 'Denmark', 'Worldwide'],
+  serviceType: 'Life Coaching',
+  provider: {
+    '@type': 'Person',
+    name: 'Leigh Bertelsen',
+  },
+};
 
 interface Props {
   title: string;
@@ -10,7 +26,10 @@ const { title, description } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} theme="be" world="be">
-  <slot name="head" slot="head" />
+  <Fragment slot="head">
+    <JsonLd schema={beServiceSchema} />
+    <slot name="head" />
+  </Fragment>
   <BeNav slot="header" />
   <div transition:name="be-content">
     <slot />

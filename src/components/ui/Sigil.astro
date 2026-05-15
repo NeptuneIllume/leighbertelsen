@@ -22,10 +22,10 @@ const { size = 32, class: className, title = 'Leigh Bertelsen', colorized = fals
   <title>{title}</title>
   {/* Placeholder sigil: overlapping mark hinting at three worlds + a hidden fourth.
       Replace with final artwork; keep [data-sigil] hook for the easter-egg interaction. */}
-  <circle cx="32" cy="32" r="28" fill="none" stroke={colorized ? 'currentColor' : 'currentColor'} stroke-width="1" opacity="0.55" />
-  <path d="M32 8 L54 44 L10 44 Z" fill="none" stroke={colorized ? '#1A6FBF' : 'currentColor'} stroke-width="1" opacity="0.85" />
-  <circle cx="32" cy="34" r="10" fill="none" stroke={colorized ? '#C45A2A' : 'currentColor'} stroke-width="1" />
-  <circle cx="32" cy="34" r="1.6" fill={colorized ? '#3A6050' : 'currentColor'} data-sigil-core />
+  <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="1" opacity="0.55" />
+  <path d="M32 8 L54 44 L10 44 Z" fill="none" stroke="currentColor" stroke-width="1" opacity="0.85" />
+  <circle cx="32" cy="34" r="10" fill="none" stroke="currentColor" stroke-width="1" />
+  <circle cx="32" cy="34" r="1.6" fill="currentColor" data-sigil-core />
 </svg>
 
 <style>
