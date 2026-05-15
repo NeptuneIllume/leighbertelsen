@@ -229,7 +229,7 @@ const templates: Record<string, object> = {
       fontFamily: 'DM Sans',
     },
     [
-      text('// senior web developer · accessibility · fintech', {
+      text('// principal web developer · accessibility · fintech', {
         fontFamily: 'Fragment Mono',
         fontSize: 20,
         color: BUILD_ACCENT,
